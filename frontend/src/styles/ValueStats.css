@@ -1,0 +1,25 @@
+.valuestats {
+  padding: 60px 0;
+  background: white;
+}
+
+.valuestats__inner {
+  max-width: 100%;
+  margin: 0;
+}
+
+.valuestats__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fade in animation */
+.valuestats__inner {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.valuestats__inner--visible {
+  opacity: 1;
+}

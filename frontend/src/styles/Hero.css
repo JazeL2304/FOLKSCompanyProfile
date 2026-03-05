@@ -1,0 +1,170 @@
+.hero {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 5% 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* LEFT CONTENT */
+.hero__content {
+  opacity: 0;
+  animation: fadeInLeft 0.8s ease 0.1s forwards;
+  padding-bottom: 20px;
+}
+
+.hero__title {
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.hero__title-accent {
+  color: var(--accent);
+}
+
+.hero__desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  max-width: 340px;
+}
+
+.hero__checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+  list-style: none;
+}
+
+.hero__checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero__check-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero__check-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-dark);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* RIGHT VISUAL */
+.hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: calc(100vh - 72px);
+  min-height: 650px;
+  align-self: stretch;
+  opacity: 0;
+  animation: fadeInRight 0.8s ease 0.3s forwards;
+}
+
+.hero__student {
+  height: 100%;
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0;
+  display: block;
+}
+
+/* Floating icons */
+.hero__floating {
+  position: absolute;
+  z-index: 3;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 📚 book — kanan atas */
+.hero__floating--book {
+  width: 159px;
+  top: 10px;
+  right: -10px;
+  animation-delay: 0.3s;
+}
+
+/* ⭐ star besar — tepat di atas kepala cowok (tengah visual) */
+.hero__floating--star1 {
+  width: 160px;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-120%);
+  animation-delay: 0s;
+}
+
+/* ⭐ star kecil — kanan tengah */
+.hero__floating--star2 {
+  width: 89px;
+  top: 210px;
+  right: -20px;
+  animation-delay: 0.6s;
+}
+
+/* 🎤 mic — kiri tengah */
+.hero__floating--mic {
+  width: 223px;
+  top: 140px;
+  left: -100px;
+  animation-delay: 0.8s;
+}
+
+/* 🎓 cap — bawah kiri, lebih ke kiri dari foto */
+.hero__floating--cap {
+  width: 150px;
+  bottom: 80px;
+  left: -110px;
+  animation-delay: 0.5s;
+}
