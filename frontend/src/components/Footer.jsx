@@ -65,7 +65,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="footer__bottom">
-        <p>© 2025 Intelligence Corp. All Rights Reserved.</p>
+        <p>© 2025 FOLKS. All Rights Reserved.</p>
       </div>
     </footer>
   )

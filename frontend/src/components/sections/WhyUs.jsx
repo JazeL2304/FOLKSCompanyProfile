@@ -44,7 +44,7 @@ const WhyUs = () => {
     <section className="whyus" ref={sectionRef}>
       <div className="whyus__inner">
         <div className={`whyus__header ${triggered ? 'whyus__header--visible' : ''}`}>
-          <h2 className="whyus__title">KENAPA HARUS INTELLIGENCE <span>CORP</span> ?</h2>
+          <h2 className="whyus__title">KENAPA HARUS <span>FOLKS</span> ?</h2>
           <p className="whyus__subtitle">Solusi pembelajaran dan pengembangan berbasis metode modern dan standard global</p>
         </div>
         <div className="whyus__grid">
