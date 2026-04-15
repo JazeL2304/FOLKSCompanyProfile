@@ -1,0 +1,113 @@
+/* ===== ABOUT MISSION ===== */
+.about-mission {
+  padding: 100px 80px;
+  background: #ffffff;
+}
+
+.about-mission__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.about-mission__header {
+  text-align: center;
+  margin-bottom: 56px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.about-mission__header.am-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-mission__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: #1a2744;
+  margin-bottom: 10px;
+}
+
+.about-mission__subtitle {
+  font-size: 14px;
+  color: var(--primary, #1a3a6b);
+  font-weight: 600;
+}
+
+/* ---- Grid ---- */
+.about-mission__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ---- Card ---- */
+.about-mission__card {
+  background: #ffffff;
+  border: 1px solid #e8eef8;
+  border-radius: 16px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 12px rgba(26,58,107,0.06);
+}
+.about-mission__card.am-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.about-mission__card:hover {
+  box-shadow: 0 16px 48px rgba(26,58,107,0.14);
+  transform: translateY(-6px);
+}
+
+/* ---- Icon ---- */
+.about-mission__icon-wrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-mission__icon-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.about-mission__card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2744;
+}
+
+.about-mission__card-desc {
+  font-size: 14px;
+  color: #6b7a99;
+  line-height: 1.7;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .about-mission__grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .about-mission {
+    padding: 60px 24px;
+  }
+  .about-mission__title {
+    font-size: 28px;
+  }
+}

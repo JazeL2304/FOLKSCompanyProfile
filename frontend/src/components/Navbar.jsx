@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react'
-import '../styles/Navbar.css'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/FOLKS Group Logo No Bakcground.png'
+import '../styles/Navbar.css'
+
+const navLinks = [
+  { label: 'Beranda', path: '/' },
+  { label: 'Tentang', path: '/tentang' },
+  { label: 'Program', path: '/program' },
+  { label: 'Promo', path: '/promo' },
+]
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -11,26 +20,29 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = ['Beranda', 'Tentang', 'Program', 'Promo']
-
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__inner">
-
-        <a href="#beranda" className="navbar__logo">
-          <img src={logo} alt="Intelligence Corp Logo" className="navbar__logo-img" />
-        </a>
+        <Link to="/" className="navbar__logo">
+          <img src={logo} alt="FOLKS Group" className="navbar__logo-img" />
+        </Link>
 
         <ul className="navbar__links">
           {navLinks.map((link) => (
-            <li key={link}>
-              <a href={`#${link.toLowerCase()}`}>{link}</a>
+            <li key={link.label}>
+              <Link
+                to={link.path}
+                className={`navbar__link ${location.pathname === link.path ? 'navbar__link--active' : ''}`}
+              >
+                {link.label}
+              </Link>
             </li>
           ))}
         </ul>
 
-        <button className="btn-primary navbar__login">Login</button>
-
+        <Link to="/login" className="btn-primary navbar__login">
+          Login
+        </Link>
       </div>
     </nav>
   )
