@@ -198,3 +198,46 @@
   box-shadow: 0 12px 36px rgba(0,0,0,0.18);
   outline: 2px solid rgba(255,255,255,0.5);
 }
+
+@media (max-width: 900px) {
+  .testimonials__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Sembunyikan card ketiga di tablet */
+  .testimonials__card:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials {
+    padding: 60px 5% 80px;
+  }
+
+  .testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tampilkan hanya 1 card di mobile */
+  .testimonials__card:not(:first-child) {
+    display: none;
+  }
+
+  .testimonials__card {
+    padding: 24px 20px 24px 100px;
+    min-height: 180px;
+  }
+
+  .testimonials__photo-col {
+    width: 90px;
+    height: 130px;
+    left: -5px;
+    top: -20px;
+  }
+
+  .testimonials__title {
+    margin-bottom: 50px;
+  }
+}

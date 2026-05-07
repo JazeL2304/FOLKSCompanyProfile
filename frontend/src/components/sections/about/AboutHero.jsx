@@ -28,10 +28,10 @@ const AboutHero = () => {
         {/* Left Content */}
         <div className="about-hero__left">
           <p className="about-hero__label ah-animate">Why FOLKS?</p>
-          <h1 className="about-hero__title ah-animate">
-            Empowering <br />
-            Innovation Together
-          </h1>
+        <h1 className="about-hero__title ah-animate">
+          Empowering <br />
+          Innovation <span style={{ color: '#EF6D60' }}>Together</span>
+        </h1>
           <p className="about-hero__subtitle ah-animate">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
@@ -54,28 +54,6 @@ const AboutHero = () => {
               alt="FOLKS Team"
               className="about-hero__photo"
             />
-            {/* Stats overlay card */}
-            <div className="about-hero__stats-card">
-              <div className="about-hero__stat">
-                <span className="about-hero__stat-value">+1</span>
-                <span className="about-hero__stat-label">Years Experience</span>
-              </div>
-              <div className="about-hero__stat-divider" />
-              <div className="about-hero__stat">
-                <span className="about-hero__stat-value">+50</span>
-                <span className="about-hero__stat-label">Project Completed</span>
-              </div>
-              <div className="about-hero__stat-divider" />
-              <div className="about-hero__stat">
-                <span className="about-hero__stat-value-small">Lorem ipsum</span>
-                <span className="about-hero__stat-label">dolor Si</span>
-              </div>
-              <div className="about-hero__stat-divider" />
-              <div className="about-hero__stat">
-                <span className="about-hero__stat-value-small">Global</span>
-                <span className="about-hero__stat-label">Clients</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

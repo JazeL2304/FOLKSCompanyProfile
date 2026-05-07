@@ -151,3 +151,43 @@
   opacity: 0.4;
   display: block;
 }
+
+@media (max-width: 900px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  /* Brand full width di baris pertama */
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 48px 5% 0;
+  }
+
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .footer__brand {
+    grid-column: auto;
+  }
+
+  .footer__logo {
+    height: 60px;
+  }
+
+  .footer__world {
+    width: 300px;
+  }
+
+  .footer__world-wrap {
+    bottom: -40px;
+    right: -40px;
+  }
+}

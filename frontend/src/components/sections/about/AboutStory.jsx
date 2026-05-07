@@ -55,8 +55,8 @@ const AboutStory = () => {
                   onError={(e) => { e.target.src = `https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg` }}
                 />
                 <button className="about-story__play-btn" aria-label="Play video">
-                 <svg viewBox="0 0 24 24" fill="#1a3a6b" width="32" height="32">  {/* ← fill jadi navy */}
-                    <path d="M8 5v14l11-7z" />
+                 <svg viewBox="0 0 24 24" fill="var(--primary)" width="32" height="32">
+                  <path d="M8 5v14l11-7z" />
                 </svg>
                 </button>
               </div>

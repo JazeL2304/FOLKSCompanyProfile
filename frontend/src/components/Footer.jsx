@@ -1,5 +1,5 @@
 import '../styles/Footer.css'
-import logo from '../assets/FOLKS Group Word Only No Background.png'
+import logo from '../assets/FOLKS Institute Logo Word Only No Background.png'
 import worldpic from '../assets/worldpicture.png'
 import { Mail, Phone, MapPin, Instagram, Linkedin, Facebook, MessageCircle, Globe } from 'lucide-react'
 
@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="footer__nav">
           <h4 className="footer__heading">Navigasi</h4>
           <ul className="footer__links">
-            {['Beranda', 'Tentang', 'Program', 'Promo'].map(link => (
+            {['Beranda', 'Tentang', 'Program', 'Blog'].map(link => (
               <li key={link}>
                 <a href={`#${link.toLowerCase()}`}>{link}</a>
               </li>

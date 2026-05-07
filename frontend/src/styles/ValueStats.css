@@ -23,3 +23,9 @@
 .valuestats__inner--visible {
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .valuestats {
+    padding: 40px 0;
+  }
+}

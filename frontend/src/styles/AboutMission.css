@@ -26,13 +26,13 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 38px;
   font-weight: 800;
-  color: #1a2744;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
   margin-bottom: 10px;
 }
 
 .about-mission__subtitle {
   font-size: 14px;
-  color: var(--primary, #1a3a6b);
+  color: #EF6D60;     /* ← ganti dari var(--text-muted) */
   font-weight: 600;
 }
 
@@ -46,7 +46,7 @@
 /* ---- Card ---- */
 .about-mission__card {
   background: #ffffff;
-  border: 1px solid #e8eef8;
+  border: 1px solid var(--border);   /* ← ganti dari #e8eef8 */
   border-radius: 16px;
   padding: 36px 28px;
   display: flex;
@@ -56,14 +56,14 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 12px rgba(26,58,107,0.06);
+  box-shadow: 0 2px 12px rgba(var(--primary-rgb), 0.06);  /* ← ganti */
 }
 .about-mission__card.am-card-visible {
   opacity: 1;
   transform: translateY(0);
 }
 .about-mission__card:hover {
-  box-shadow: 0 16px 48px rgba(26,58,107,0.14);
+  box-shadow: 0 16px 48px rgba(var(--primary-rgb), 0.14); /* ← ganti */
   transform: translateY(-6px);
 }
 
@@ -88,12 +88,12 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #1a2744;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
 }
 
 .about-mission__card-desc {
   font-size: 14px;
-  color: #6b7a99;
+  color: var(--text-muted);     /* ← ganti dari #6b7a99 */
   line-height: 1.7;
 }
 

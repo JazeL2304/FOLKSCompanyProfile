@@ -29,7 +29,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: var(--primary, #1a3a6b);
+  color: var(--primary);        /* ← hapus fallback #1a3a6b */
   letter-spacing: 0.5px;
   margin-bottom: 16px;
 }
@@ -38,28 +38,28 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 42px;
   font-weight: 800;
-  color: #1a2744;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
   line-height: 1.2;
   margin-bottom: 16px;
 }
 
 .about-hero__subtitle {
   font-size: 15px;
-  color: #6b7a99;
+  color: #1a1a1a;  /* ← ganti dari var(--text-muted) */
   margin-bottom: 20px;
   font-style: italic;
 }
 
 .about-hero__desc {
   font-size: 14px;
-  color: #4a5568;
+  color: #1a1a1a;  /* ← ganti dari var(--text-muted) */
   line-height: 1.8;
 }
 
 /* ---- Right Photo ---- */
 .about-hero__right {
   position: relative;
-  padding-bottom: 60px; /* ← beri ruang untuk stats card yang overflow ke bawah */
+  padding-bottom: 60px;
 }
 
 .about-hero__photo-wrapper {
@@ -76,19 +76,19 @@
   display: block;
 }
 
-/* ---- Stats Card — pojok kiri bawah, 2x2 grid ---- */
+/* ---- Stats Card ---- */
 .about-hero__stats-card {
   position: absolute;
-  bottom: -50px;             /* ← keluar ke bawah */
-  left: -10px;               /* ← keluar sedikit ke kiri */
-  width: 260px;              /* ← tidak full width */
-  background: var(--primary, #1a3a6b);
+  bottom: -50px;
+  left: -10px;
+  width: 260px;
+  background: var(--primary);   /* ← hapus fallback #1a3a6b */
   border-radius: 16px;
   padding: 20px 24px;
   display: grid;
-  grid-template-columns: 1fr 1fr;  /* ← 2 kolom */
+  grid-template-columns: 1fr 1fr;
   gap: 16px 20px;
-  box-shadow: 0 16px 48px rgba(26, 58, 107, 0.4);
+  box-shadow: 0 16px 48px rgba(var(--primary-rgb), 0.4); /* ← pakai --primary-rgb */
   z-index: 2;
 }
 
@@ -120,7 +120,6 @@
   line-height: 1.4;
 }
 
-/* sembunyikan divider karena sudah pakai grid */
 .about-hero__stat-divider {
   display: none;
 }

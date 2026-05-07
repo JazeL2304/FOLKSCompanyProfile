@@ -40,7 +40,7 @@
 .hero__title {
   font-weight: 800;
   font-size: clamp(2rem, 4vw, 3.2rem);
-  color: var(--text-dark);
+  color: var(--primary); /* ← sudah pakai --primary (#105647), harusnya sudah hijau */
   line-height: 1.2;
   margin-bottom: 12px;
 }
@@ -167,4 +167,67 @@
   bottom: 80px;
   left: -110px;
   animation-delay: 0.5s;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 90px 5% 0;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .hero__content {
+    text-align: center;
+    padding-bottom: 0;
+  }
+
+  .hero__desc {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__checklist {
+    align-items: flex-start;
+    display: inline-flex;
+    text-align: left;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__visual {
+    height: 380px;
+    min-height: unset;
+    width: 100%;
+  }
+
+  .hero__floating--book  { width: 90px;  top: 0;    right: 0; }
+  .hero__floating--star1 { width: 90px;  top: 10px; left: 50%; transform: translateX(-160%); }
+  .hero__floating--star2 { width: 55px;  top: 120px; right: 0; }
+  .hero__floating--mic   { width: 120px; top: 80px;  left: -20px; }
+  .hero__floating--cap   { width: 90px;  bottom: 20px; left: -10px; }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 80px 4% 0;
+  }
+
+  .hero__visual {
+    height: 300px;
+  }
+
+  .hero__floating--book  { width: 70px; }
+  .hero__floating--star1 { width: 70px; }
+  .hero__floating--star2 { width: 44px; }
+  .hero__floating--mic   { width: 90px; }
+  .hero__floating--cap   { width: 70px; }
 }

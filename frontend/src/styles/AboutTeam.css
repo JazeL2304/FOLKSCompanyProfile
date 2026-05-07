@@ -26,13 +26,13 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 38px;
   font-weight: 800;
-  color: #1a2744;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
   margin-bottom: 10px;
 }
 
 .about-team__subtitle {
   font-size: 14px;
-  color: #6b7a99;
+  color: #EF6D60;     /* ← ganti dari var(--text-muted) */
 }
 
 /* ---- Grid ---- */
@@ -47,18 +47,18 @@
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #e8eef8;
+  border: 1px solid var(--border);   /* ← ganti dari #e8eef8 */
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 12px rgba(26,58,107,0.06);
+  box-shadow: 0 2px 12px rgba(var(--primary-rgb), 0.06);  /* ← ganti */
 }
 .about-team__card.at-card-visible {
   opacity: 1;
   transform: translateY(0);
 }
 .about-team__card:hover {
-  box-shadow: 0 16px 40px rgba(26,58,107,0.14);
+  box-shadow: 0 16px 40px rgba(var(--primary-rgb), 0.14); /* ← ganti */
   transform: translateY(-6px);
 }
 
@@ -94,12 +94,12 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: #1a2744;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
 }
 
 .about-team__role {
   font-size: 13px;
-  color: #6b7a99;
+  color: #EF6D60;     /* ← ganti dari var(--text-muted) */
   margin-bottom: 6px;
 }
 
@@ -118,12 +118,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a3a6b;
+  color: var(--primary);        /* ← ganti dari #1a2744 */
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 .about-team__social-link:hover {
-  background: var(--primary, #1a3a6b);
+  background: var(--primary);   /* ← hapus fallback #1a3a6b */
   color: #ffffff;
   transform: translateY(-2px);
 }

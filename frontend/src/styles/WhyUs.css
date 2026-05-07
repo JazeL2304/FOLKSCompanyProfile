@@ -120,3 +120,28 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (max-width: 900px) {
+  .whyus__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .whyus {
+    padding: 60px 5%;
+  }
+
+  .whyus__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .whyus__header {
+    margin-bottom: 40px;
+  }
+
+  .whyus__card {
+    padding: 24px 24px 32px;
+  }
+}

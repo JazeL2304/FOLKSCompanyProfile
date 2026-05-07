@@ -17,7 +17,7 @@ const teamMembers = [
   },
   {
     photo: foto2,
-    name: 'Kevin WijayaA',
+    name: 'Kevin Wijaya',
     role: 'Head of Operations',
     facebook: 'https://www.facebook.com/',
     linkedin: 'https://www.linkedin.com/',
@@ -62,7 +62,7 @@ const AboutTeam = () => {
     <section className="about-team" ref={sectionRef}>
       <div className="about-team__container">
         <div className={`about-team__header ${isVisible ? 'at-visible' : ''}`}>
-          <h2 className="about-team__title">Meet Our Tutor</h2>
+          <h2 className="about-team__title">Meet Our <span style={{ color: '#EF6D60' }}>Tutor</span></h2>
           <p className="about-team__subtitle">The Dynamic Minds Behind FOLKS</p>
         </div>
 

@@ -38,7 +38,7 @@ const Testimonials = () => {
   const visible = [0, 1, 2].map(i => testimonials[(startIndex + i) % n])
 
   return (
-    <section id="promo" className="testimonials">
+    <section id="blog" className="testimonials">
       <div className="testimonials__deco-circle testimonials__deco-circle--tl" />
       <div className="testimonials__deco-circle testimonials__deco-circle--br" />
 

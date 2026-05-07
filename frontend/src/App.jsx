@@ -2,8 +2,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useEffect } from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
+import Program from './pages/Program'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Payment from './pages/Payment'
 import './styles/global.css'
 import './App.css'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
+import Admin from './pages/Admin'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -13,14 +20,29 @@ const ScrollToTop = () => {
   return null
 }
 
-function App() {
+const AppRoutes = () => {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tentang" element={<About />} />
+        <Route path="/program" element={<Program />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <AppRoutes />
     </Router>
   )
 }
