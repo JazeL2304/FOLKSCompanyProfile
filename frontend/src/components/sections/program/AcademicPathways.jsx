@@ -92,7 +92,7 @@ const programData = {
 }
 
 // =====================================================
-// PROGRAM CARD — sekarang terima props level & category
+// PROGRAM CARD
 // =====================================================
 const ProgramCard = ({ card, level, category }) => {
   const navigate = useNavigate()
@@ -108,12 +108,15 @@ const ProgramCard = ({ card, level, category }) => {
     }).toString()
 
     if (!isLoggedIn) {
-      // Belum login → ke halaman login dulu, dengan redirect setelah login
       navigate(`/login?redirect=/payment&${params}`)
     } else {
-      // Sudah login → langsung ke payment
       navigate(`/payment?${params}`)
     }
+  }
+
+  // ← TAMBAHAN: navigate ke halaman detail berdasarkan level
+  const handleLearnMore = () => {
+    navigate(`/program/${level.toLowerCase()}`)
   }
 
   return (
@@ -143,7 +146,8 @@ const ProgramCard = ({ card, level, category }) => {
               </li>
             ))}
           </ul>
-          <button className="ap-card__btn-learn">Learn More</button>
+          {/* ← onClick ditambahkan di sini */}
+          <button className="ap-card__btn-learn" onClick={handleLearnMore}>Learn More</button>
         </div>
       </div>
     </div>
@@ -151,7 +155,7 @@ const ProgramCard = ({ card, level, category }) => {
 }
 
 // =====================================================
-// CAROUSEL PER LEVEL — sekarang terima props activeTab
+// CAROUSEL PER LEVEL
 // =====================================================
 const LevelCarousel = ({ levelName, cards, activeTab }) => {
   const [index, setIndex] = useState(0)
@@ -189,7 +193,6 @@ const LevelCarousel = ({ levelName, cards, activeTab }) => {
           >
             {cards.map((card, i) => (
               <div className="ap-carousel__slide" key={i}>
-                {/* ← pass level dan category ke ProgramCard */}
                 <ProgramCard card={card} level={levelName} category={activeTab} />
               </div>
             ))}
@@ -254,7 +257,7 @@ const AcademicPathways = () => {
               key={`${activeTab}-${level}`}
               levelName={level}
               cards={currentData[level] || []}
-              activeTab={activeTab} 
+              activeTab={activeTab}
             />
           ))}
         </div>

@@ -11,6 +11,8 @@ import './App.css'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Admin from './pages/Admin'
+import AdminLogin from './pages/AdminLogin'
+import ProgramDetail from './pages/ProgramDetail'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -34,6 +36,8 @@ const AppRoutes = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/program/:level" element={<ProgramDetail />} />
       </Routes>
     </>
   )

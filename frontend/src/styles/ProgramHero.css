@@ -36,19 +36,12 @@
   align-items: center;
 }
 
-/* ---- Animate ---- */
+/* ---- No animation, always visible ---- */
 .program-hero__left {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  opacity: 1;
+  transform: translateX(0);
 }
 .program-hero__right {
-  opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
-}
-.program-hero__left.ph-visible,
-.program-hero__right.ph-visible {
   opacity: 1;
   transform: translateX(0);
 }
@@ -145,29 +138,6 @@
   font-size: 12px;
   color: #6b7a99;
   font-weight: 400;
-}
-.program-hero__photo-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: #105647;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  box-shadow: 0 8px 24px rgba(16,86,71,0.3);
-}
-.program-hero__photo-badge-num {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-}
-.program-hero__photo-badge-label {
-  font-size: 11px;
-  color: rgba(255,255,255,0.75);
 }
 
 /* ---- Responsive ---- */

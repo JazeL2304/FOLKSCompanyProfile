@@ -119,7 +119,7 @@ export default function ProgramManager() {
         ))}
       </div>
 
-      {/* Header */}
+      {/* Tombol Tambah */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
         <button className="btn btn-accent" onClick={openCreate}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -129,8 +129,12 @@ export default function ProgramManager() {
         </button>
       </div>
 
-      {/* Program Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 16 }}>
+      {/* Program Cards — minmax diubah dari 340px → 280px supaya muat di mobile */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))',
+        gap: 16
+      }}>
         {programs.map(prog => (
           <div
             key={prog.id}
@@ -138,10 +142,10 @@ export default function ProgramManager() {
             style={{ opacity: prog.active ? 1 : 0.65, transition: 'opacity 0.2s' }}
           >
             <div style={{ padding: '20px 20px 0' }}>
-              {/* Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                <div>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-main)', marginBottom: 4 }}>
+              {/* Header card */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12, gap: 10 }}>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-main)', marginBottom: 4, wordBreak: 'break-word' }}>
                     {prog.name}
                   </h3>
                   <span className={`badge ${prog.active ? 'badge-active' : 'badge-inactive'}`}>
@@ -150,20 +154,20 @@ export default function ProgramManager() {
                 </div>
                 <div style={{
                   background: 'rgba(239,109,96,0.1)', color: 'var(--accent)',
-                  padding: '6px 12px', borderRadius: 'var(--radius-sm)',
-                  fontWeight: 800, fontSize: 15
+                  padding: '6px 10px', borderRadius: 'var(--radius-sm)',
+                  fontWeight: 800, fontSize: 13, flexShrink: 0, whiteSpace: 'nowrap'
                 }}>
                   {formatRupiah(prog.price)}
                 </div>
               </div>
 
-              {/* Desc */}
+              {/* Deskripsi */}
               <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 16 }}>
                 {prog.description}
               </p>
 
               {/* Info pills */}
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+              <div className="program-info-pills" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
                 {[
                   { icon: '🎓', text: prog.level },
                   { icon: '⏱️', text: prog.duration },
@@ -184,7 +188,8 @@ export default function ProgramManager() {
             <div style={{
               padding: '12px 20px',
               borderTop: '1px solid var(--border)',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              flexWrap: 'wrap', gap: 8
             }}>
               <label className="toggle-wrap" style={{ gap: 8 }}>
                 <label className="toggle">
@@ -274,7 +279,7 @@ export default function ProgramManager() {
                 <span className="toggle-label">Program aktif (tampil di website)</span>
               </div>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer has-multiple">
               <button className="btn btn-ghost" onClick={() => setModal(null)}>Batal</button>
               <button className="btn btn-accent" onClick={handleSave}>
                 {modal === 'create' ? 'Tambah Program' : 'Simpan Perubahan'}

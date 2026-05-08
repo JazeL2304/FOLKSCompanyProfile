@@ -63,12 +63,7 @@
   color: var(--primary);
 }
 
-.navbar__link--active {
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.navbar__link--active::after {
+.navbar__link::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -77,6 +72,30 @@
   height: 2px;
   background: var(--primary);
   border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar__link--active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.navbar__link--active::after {
+  transform: scaleX(1);
+  transition: transform 0.2s ease;
+}
+
+.navbar__links:hover .navbar__link--active::after {
+  transform: scaleX(0);
+}
+
+.navbar__links:hover .navbar__link:hover::after {
+  transform: scaleX(1);
 }
 
 /* ---- Right side ---- */
@@ -153,17 +172,14 @@
     height: 64px;
   }
 
-  /* Hamburger muncul */
   .navbar__hamburger {
     display: flex;
   }
 
-  /* Login button desktop disembunyikan */
   .navbar__login {
     display: none !important;
   }
 
-  /* Dropdown menu mobile */
   .navbar__links {
     display: flex;
     flex-direction: column;
@@ -177,8 +193,6 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     border-top: 1px solid var(--border);
     z-index: 1000;
-
-    /* Hidden by default */
     opacity: 0;
     pointer-events: none;
     transform: translateY(-8px);
@@ -202,6 +216,11 @@
     border-bottom: 1px solid var(--border);
   }
 
+  /* Di mobile, nonaktifkan underline hover effect */
+  .navbar__link::after {
+    display: none;
+  }
+
   .navbar__link--active::after {
     display: none;
   }
@@ -212,7 +231,6 @@
     border-left: 3px solid var(--primary);
   }
 
-  /* Login button di dalam mobile menu */
   .navbar__login-mobile {
     display: flex;
     justify-content: center;

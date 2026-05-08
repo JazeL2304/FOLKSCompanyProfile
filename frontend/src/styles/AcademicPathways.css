@@ -9,15 +9,7 @@
   margin: 0 auto;
 }
 
-/* ---- Animate ---- */
-.ap-header,
-.ap-tabs {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.ap-header.ap-visible { opacity: 1; transform: translateY(0); }
-.ap-tabs.ap-visible { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+
 
 /* ---- Header ---- */
 .ap-title {

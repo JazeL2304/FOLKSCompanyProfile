@@ -77,8 +77,6 @@ const PROGRAM_LIST = [
   'UTBK Intensif',
 ]
 
-const WA_NUMBER = '6281234567890'
-
 // ── SVG Icons ─────────────────────────────────────────────
 const IconUsers = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -146,6 +144,13 @@ const IconTrash = () => (
   </svg>
 )
 
+const IconEye = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+)
+
 // ── WA Message Builder ─────────────────────────────────────
 function buildWAMessage(reg, action) {
   if (action === 'confirmed') {
@@ -164,7 +169,6 @@ function buildWAMessage(reg, action) {
   )
 }
 
-// ── Empty form template ────────────────────────────────────
 const emptyForm = {
   name: '',
   phone: '',
@@ -185,7 +189,7 @@ export default function RegistrationManager() {
   const [filterStatus, setFilterStatus] = useState('all')
   const [filterProgram, setFilterProgram] = useState('all')
   const [selectedReg, setSelectedReg] = useState(null)
-  const [modal, setModal] = useState(null) // null | 'detail' | 'proof' | 'reject' | 'add'
+  const [modal, setModal] = useState(null)
   const [rejectNote, setRejectNote] = useState('')
   const [form, setForm] = useState(emptyForm)
   const [deleteTarget, setDeleteTarget] = useState(null)
@@ -260,7 +264,6 @@ export default function RegistrationManager() {
   const openProof  = (reg) => { setSelectedReg(reg); setModal('proof')  }
   const closeModal = ()    => setModal(null)
 
-  // ── Avatar color ─────────────────────────────────────────
   const avatarBg = (reg) => {
     if (reg.status === 'confirmed') return 'var(--success)'
     if (reg.status === 'rejected')  return 'var(--danger)'
@@ -273,10 +276,10 @@ export default function RegistrationManager() {
       {/* ── Stat Cards ── */}
       <div className="stats-grid" style={{ marginBottom: 20 }}>
         {[
-          { label: 'Total Pendaftar',      value: stats.total,     color: 'blue',  Icon: IconUsers      },
-          { label: 'Menunggu Konfirmasi',  value: stats.pending,   color: 'amber', Icon: IconClock      },
-          { label: 'Terkonfirmasi',        value: stats.confirmed, color: 'green', Icon: IconCheckCircle},
-          { label: 'Ditolak',              value: stats.rejected,  color: 'coral', Icon: IconXCircle    },
+          { label: 'Total Pendaftar',     value: stats.total,     color: 'blue',  Icon: IconUsers       },
+          { label: 'Menunggu Konfirmasi', value: stats.pending,   color: 'amber', Icon: IconClock       },
+          { label: 'Terkonfirmasi',       value: stats.confirmed, color: 'green', Icon: IconCheckCircle },
+          { label: 'Ditolak',             value: stats.rejected,  color: 'coral', Icon: IconXCircle     },
         ].map(s => (
           <div className="stat-card" key={s.label}>
             <div className={`stat-icon ${s.color}`}><s.Icon /></div>
@@ -288,11 +291,9 @@ export default function RegistrationManager() {
         ))}
       </div>
 
-
-
       <div className="admin-card">
 
-        {/* ── Toolbar: filter + tombol tambah ── */}
+        {/* ── Toolbar ── */}
         <div className="filter-bar">
           <div className="search-input-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -317,11 +318,12 @@ export default function RegistrationManager() {
             {programs.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
           <button
-            className="btn btn-primary btn-sm"
-            style={{ marginLeft: 'auto', gap: 6 }}
+            className="btn btn-admin-primary btn-sm"
+            style={{ gap: 6 }}
             onClick={() => { setForm(emptyForm); setModal('add') }}
           >
-            <IconPlus /> Input Manual
+            <IconPlus /> <span className="btn-label-mobile-hide">Input Manual</span>
+            <span className="btn-label-mobile-only">+ Tambah</span>
           </button>
         </div>
 
@@ -342,10 +344,11 @@ export default function RegistrationManager() {
                 <tr>
                   <th>Pendaftar</th>
                   <th>Program</th>
-                  <th>No. WhatsApp</th>
-                  <th>Bukti Bayar</th>
+                  {/* Kolom WA disembunyikan di mobile, bisa dilihat di detail */}
+                  <th className="col-hide-mobile">No. WhatsApp</th>
+                  <th className="col-hide-mobile">Bukti Bayar</th>
                   <th>Status</th>
-                  <th>Tanggal</th>
+                  <th className="col-hide-mobile">Tanggal</th>
                   <th style={{ textAlign: 'right' }}>Aksi</th>
                 </tr>
               </thead>
@@ -364,9 +367,13 @@ export default function RegistrationManager() {
                         }}>
                           {reg.name.charAt(0)}
                         </div>
-                        <div>
-                          <div style={{ fontWeight: 600, fontSize: 13 }}>{reg.name}</div>
-                          <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{reg.email}</div>
+                        <div style={{ minWidth: 0 }}>
+                          <div style={{ fontWeight: 600, fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>
+                            {reg.name}
+                          </div>
+                          <div style={{ fontSize: 11, color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>
+                            {reg.email}
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -377,26 +384,27 @@ export default function RegistrationManager() {
                         fontSize: 12, padding: '3px 8px',
                         background: 'rgba(16,86,71,0.08)',
                         color: 'var(--primary)', borderRadius: 20,
+                        whiteSpace: 'nowrap',
                       }}>
                         {reg.program}
                       </span>
                     </td>
 
-                    {/* WA */}
-                    <td>
+                    {/* WA — disembunyikan di mobile */}
+                    <td className="col-hide-mobile">
                       <a
                         href={`https://wa.me/${reg.phone.replace(/^0/, '62')}`}
                         target="_blank"
                         rel="noreferrer"
-                        style={{ color: '#25D366', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}
+                        style={{ color: '#25D366', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap' }}
                       >
                         <IconWhatsapp />
                         {reg.phone}
                       </a>
                     </td>
 
-                    {/* Bukti Bayar */}
-                    <td>
+                    {/* Bukti Bayar — disembunyikan di mobile */}
+                    <td className="col-hide-mobile">
                       {reg.proofUrl ? (
                         <button onClick={() => openProof(reg)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                           <img src={reg.proofUrl} alt="Bukti bayar" className="payment-proof-thumb" />
@@ -409,38 +417,57 @@ export default function RegistrationManager() {
                     {/* Status */}
                     <td>
                       <span className={`badge badge-${reg.status}`}>
-                        {reg.status === 'pending' ? 'Pending' : reg.status === 'confirmed' ? 'Dikonfirmasi' : 'Ditolak'}
+                        {reg.status === 'pending' ? 'Pending' : reg.status === 'confirmed' ? 'Konfirmasi' : 'Ditolak'}
                       </span>
                     </td>
 
-                    {/* Tanggal */}
-                    <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>{reg.date}</td>
+                    {/* Tanggal — disembunyikan di mobile */}
+                    <td className="col-hide-mobile" style={{ fontSize: 12, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                      {reg.date}
+                    </td>
 
                     {/* Aksi */}
                     <td>
-                      <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
-                        <button className="btn btn-ghost btn-sm" onClick={() => openDetail(reg)}>Detail</button>
+                      <div className="action-btn-group">
+                        {/* Detail selalu tampil */}
+                        <button
+                          className="btn btn-ghost btn-sm"
+                          onClick={() => openDetail(reg)}
+                          title="Lihat detail"
+                          style={{ display: 'flex', alignItems: 'center', gap: 4 }}
+                        >
+                          <IconEye />
+                          <span className="btn-label-mobile-hide">Detail</span>
+                        </button>
+
+                        {/* Konfirmasi & Tolak hanya untuk pending */}
                         {reg.status === 'pending' && (
                           <>
                             <button
                               className="btn btn-success btn-sm"
                               style={{ display: 'flex', alignItems: 'center', gap: 4 }}
                               onClick={() => handleConfirm(reg)}
+                              title="Konfirmasi"
                             >
-                              <IconCheck /> Konfirmasi
+                              <IconCheck />
+                              <span className="btn-label-mobile-hide">Konfirmasi</span>
                             </button>
                             <button
                               className="btn btn-danger btn-sm"
                               style={{ display: 'flex', alignItems: 'center', gap: 4 }}
                               onClick={() => { setSelectedReg(reg); setModal('reject') }}
+                              title="Tolak"
                             >
-                              <IconX /> Tolak
+                              <IconX />
+                              <span className="btn-label-mobile-hide">Tolak</span>
                             </button>
                           </>
                         )}
+
+                        {/* Hapus selalu tampil */}
                         <button
-                          className="btn btn-sm"
-                          title="Hapus pendaftar"
+                          className="btn btn-sm btn-hapus-mobile"
+                          title="Hapus"
                           style={{
                             background: 'rgba(239,68,68,0.08)',
                             color: 'var(--danger)',
@@ -449,7 +476,8 @@ export default function RegistrationManager() {
                           }}
                           onClick={() => setDeleteTarget(reg)}
                         >
-                          <IconTrash /> Hapus
+                          <IconTrash />
+                          <span className="btn-label-mobile-hide">Hapus</span>
                         </button>
                       </div>
                     </td>
@@ -462,9 +490,7 @@ export default function RegistrationManager() {
         )}
       </div>
 
-      {/* ════════════════════════════════════════
-          MODAL — Input Manual Pendaftar
-      ════════════════════════════════════════ */}
+      {/* ════ MODAL — Input Manual ════ */}
       {modal === 'add' && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
           <div className="modal-box" style={{ maxWidth: 580 }}>
@@ -474,7 +500,6 @@ export default function RegistrationManager() {
             </div>
             <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
 
-              {/* Section: Data Siswa */}
               <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>
                 Data Siswa
               </p>
@@ -508,7 +533,6 @@ export default function RegistrationManager() {
                 />
               </div>
 
-              {/* Section: Detail Kelas */}
               <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: 1, margin: '8px 0 12px' }}>
                 Detail Kelas
               </p>
@@ -542,7 +566,6 @@ export default function RegistrationManager() {
                 />
               </div>
 
-              {/* Section: Pembayaran */}
               <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: 1, margin: '8px 0 12px' }}>
                 Info Pembayaran
               </p>
@@ -582,7 +605,6 @@ export default function RegistrationManager() {
                 </div>
               </div>
 
-              {/* Catatan */}
               <div className="form-group">
                 <label>Catatan Tambahan</label>
                 <textarea
@@ -594,10 +616,10 @@ export default function RegistrationManager() {
               </div>
 
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer has-multiple">
               <button className="btn btn-ghost" onClick={closeModal}>Batal</button>
               <button
-                className="btn btn-primary"
+                className="btn btn-admin-primary"
                 onClick={handleAddSubmit}
                 disabled={!form.name || !form.phone}
                 style={{ opacity: (!form.name || !form.phone) ? 0.5 : 1 }}
@@ -609,9 +631,7 @@ export default function RegistrationManager() {
         </div>
       )}
 
-      {/* ════════════════════════════════════════
-          MODAL — Detail
-      ════════════════════════════════════════ */}
+      {/* ════ MODAL — Detail ════ */}
       {modal === 'detail' && selectedReg && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
           <div className="modal-box">
@@ -636,11 +656,12 @@ export default function RegistrationManager() {
                 <div key={row.label} style={{
                   display: 'flex', paddingBottom: 12, marginBottom: 12,
                   borderBottom: '1px solid var(--border)',
+                  flexWrap: 'wrap', gap: 4,
                 }}>
-                  <span style={{ width: 150, fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, flexShrink: 0 }}>
+                  <span style={{ width: 140, fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, flexShrink: 0 }}>
                     {row.label}
                   </span>
-                  <span style={{ fontSize: 13, color: 'var(--text-main)', fontWeight: row.label === 'Nama' ? 700 : 400 }}>
+                  <span style={{ fontSize: 13, color: 'var(--text-main)', fontWeight: row.label === 'Nama' ? 700 : 400, flex: 1, minWidth: 120 }}>
                     {row.value}
                   </span>
                 </div>
@@ -652,7 +673,7 @@ export default function RegistrationManager() {
                 </div>
               )}
             </div>
-            <div className="modal-footer">
+            <div className={`modal-footer ${selectedReg.status === 'pending' ? 'has-multiple' : 'has-single'}`}>
               {selectedReg.status === 'pending' && (
                 <>
                   <button className="btn btn-danger" onClick={() => setModal('reject')}>
@@ -669,9 +690,7 @@ export default function RegistrationManager() {
         </div>
       )}
 
-      {/* ════════════════════════════════════════
-          MODAL — Bukti Bayar
-      ════════════════════════════════════════ */}
+      {/* ════ MODAL — Bukti Bayar ════ */}
       {modal === 'proof' && selectedReg && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
           <div className="modal-box" style={{ maxWidth: 480 }}>
@@ -683,7 +702,7 @@ export default function RegistrationManager() {
               <img src={selectedReg.proofUrl} alt="Bukti bayar" className="proof-modal-img" />
             </div>
             {selectedReg.status === 'pending' && (
-              <div className="modal-footer">
+              <div className="modal-footer has-multiple">
                 <button className="btn btn-danger" onClick={() => setModal('reject')}>
                   <IconX /> Tolak
                 </button>
@@ -696,9 +715,7 @@ export default function RegistrationManager() {
         </div>
       )}
 
-      {/* ════════════════════════════════════════
-          MODAL — Tolak
-      ════════════════════════════════════════ */}
+      {/* ════ MODAL — Tolak ════ */}
       {modal === 'reject' && selectedReg && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
           <div className="modal-box" style={{ maxWidth: 420 }}>
@@ -708,7 +725,7 @@ export default function RegistrationManager() {
             </div>
             <div className="modal-body">
               <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 16, lineHeight: 1.6 }}>
-                Pendaftaran <strong>{selectedReg.name}</strong> akan ditolak. WhatsApp otomatis akan terbuka untuk mengirim notifikasi.
+                Pendaftaran <strong>{selectedReg.name}</strong> akan ditolak. WhatsApp otomatis akan terbuka.
               </p>
               <div className="form-group">
                 <label>Alasan Penolakan (opsional)</label>
@@ -720,7 +737,7 @@ export default function RegistrationManager() {
                 />
               </div>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer has-multiple">
               <button className="btn btn-ghost" onClick={closeModal}>Batal</button>
               <button
                 className="btn"
@@ -734,9 +751,7 @@ export default function RegistrationManager() {
         </div>
       )}
 
-      {/* ════════════════════════════════════════
-          MODAL — Konfirmasi Hapus
-      ════════════════════════════════════════ */}
+      {/* ════ MODAL — Konfirmasi Hapus ════ */}
       {deleteTarget && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setDeleteTarget(null)}>
           <div className="modal-box" style={{ maxWidth: 400 }}>
@@ -751,7 +766,7 @@ export default function RegistrationManager() {
                 Data yang dihapus tidak bisa dikembalikan.
               </p>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer has-multiple">
               <button className="btn btn-ghost" onClick={() => setDeleteTarget(null)}>Batal</button>
               <button
                 className="btn"

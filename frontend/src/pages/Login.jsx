@@ -110,7 +110,7 @@ const Login = () => {
           </p>
         </div>
 
-        <p className="auth-footer">© 2024 Folks Education. All rights reserved.</p>
+        <p className="auth-footer">© 2025 FOLKS. All Rights Reserved.</p>
       </div>
 
       {/* Right Panel */}

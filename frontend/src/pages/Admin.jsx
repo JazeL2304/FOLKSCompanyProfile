@@ -1,18 +1,18 @@
 // src/pages/Admin.jsx
 // Route: /admin
-// TODO production: tambahkan auth guard (cek session Supabase sebelum render)
+// Auth guard: cek sessionStorage, redirect ke /admin/login kalau belum login
+// TODO production: ganti sessionStorage dengan Supabase session check
 
 import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import '../styles/Admin.css'
 
-// ─── Components ───────────────────────────────────────────
 import Dashboard from '../components/admin/Dashboard'
 import BlogManager from '../components/admin/BlogManager'
 import RegistrationManager from '../components/admin/RegistrationManager'
 import ProgramManager from '../components/admin/ProgramManager'
 import folksLogo from '../assets/FOLKS Institute Logo No Background.png'
 
-// ─── Icons ────────────────────────────────────────────────
 const IconGrid = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <rect x="3" y="3" width="7" height="7" rx="1"/>
@@ -63,8 +63,14 @@ const IconMenu = () => (
     <line x1="3" y1="18" x2="21" y2="18"/>
   </svg>
 )
+const IconLogout = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+    <polyline points="16 17 21 12 16 7"/>
+    <line x1="21" y1="12" x2="9" y2="12"/>
+  </svg>
+)
 
-// ─── Nav Config ───────────────────────────────────────────
 const NAV = [
   {
     section: 'Overview',
@@ -90,13 +96,21 @@ const PAGE_META = {
   registrations: { title: 'Pendaftaran', desc: 'Konfirmasi pembayaran & kelola pendaftar' }
 }
 
-// ─── Mock pending count — ganti dengan Supabase query ─────
 const PENDING_COUNT = 3
 
-// ─── Main Component ───────────────────────────────────────
 export default function Admin() {
   const [activePage, setActivePage] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const isLoggedIn = sessionStorage.getItem('admin_logged_in') === 'true'
+  if (!isLoggedIn) {
+    return <Navigate to="/admin/login" replace />
+  }
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_logged_in')
+    window.location.href = '/admin/login'
+  }
 
   const meta = PAGE_META[activePage] || PAGE_META.dashboard
 
@@ -118,7 +132,7 @@ export default function Admin() {
   return (
     <div className="admin-layout">
 
-      {/* ── Mobile Backdrop ── */}
+      {/* Mobile Backdrop */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
@@ -130,21 +144,12 @@ export default function Admin() {
         />
       )}
 
-      {/* ════════════════════════════════════════
-          SIDEBAR
-      ════════════════════════════════════════ */}
+      {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
-
-        {/* Logo */}
         <div className="sidebar-logo">
-          <img
-            src={folksLogo}
-            alt="FOLKS Institute"
-            className="sidebar-logo-img"
-          />
+          <img src={folksLogo} alt="FOLKS Institute" className="sidebar-logo-img" />
         </div>
 
-        {/* Nav */}
         <nav className="sidebar-nav">
           {NAV.map(section => (
             <div key={section.section}>
@@ -166,7 +171,6 @@ export default function Admin() {
           ))}
         </nav>
 
-        {/* User footer */}
         <div className="sidebar-footer">
           <div className="sidebar-user">
             <div className="sidebar-user-avatar">A</div>
@@ -175,15 +179,19 @@ export default function Admin() {
               <span>admin@folks.id</span>
             </div>
           </div>
+          <button
+            onClick={handleLogout}
+            className="sidebar-nav-item"
+            style={{ marginTop: 4, color: 'rgba(255,255,255,0.4)' }}
+          >
+            <IconLogout />
+            Logout
+          </button>
         </div>
       </aside>
 
-      {/* ════════════════════════════════════════
-          MAIN
-      ════════════════════════════════════════ */}
+      {/* MAIN */}
       <main className="admin-main">
-
-        {/* Topbar */}
         <div className="admin-topbar">
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
@@ -212,16 +220,14 @@ export default function Admin() {
               style={{ fontSize: 12, gap: 5 }}
             >
               <IconExternal />
-              Lihat Website
+              <span className="topbar-website-label">Lihat Website</span>
             </a>
           </div>
         </div>
 
-        {/* Page Content */}
         <div className="admin-content">
           {renderPage()}
         </div>
-
       </main>
     </div>
   )

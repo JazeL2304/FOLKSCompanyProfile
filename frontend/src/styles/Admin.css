@@ -69,7 +69,6 @@ body {
   overflow: hidden;
 }
 
-/* ── Logo: background hijau tua, logo di-filter putih ── */
 .sidebar-logo {
   padding: 20px 24px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -219,6 +218,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 0;
 }
 
 /* ============================================================
@@ -236,6 +236,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
+  gap: 12px;
 }
 
 .topbar-left h1 {
@@ -254,6 +255,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .topbar-btn {
@@ -287,6 +289,10 @@ body {
   border: 2px solid white;
 }
 
+.topbar-website-label {
+  display: inline;
+}
+
 /* ============================================================
    PAGE CONTENT
    ============================================================ */
@@ -294,15 +300,16 @@ body {
 .admin-content {
   padding: 28px;
   flex: 1;
+  min-width: 0;
 }
 
 /* ============================================================
-   STAT CARDS (base — dipakai juga di tempat lain)
+   STAT CARDS
    ============================================================ */
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 28px;
 }
@@ -340,6 +347,7 @@ body {
 
 .stat-info {
   flex: 1;
+  min-width: 0;
 }
 
 .stat-info h3 {
@@ -381,11 +389,13 @@ body {
 }
 
 .admin-card-header {
-  padding: 18px 20px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .admin-card-header h2 {
@@ -406,12 +416,14 @@ body {
 
 .admin-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  min-width: 500px;
 }
 
 .admin-table thead th {
@@ -424,6 +436,7 @@ body {
   letter-spacing: 0.5px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
+  white-space: nowrap;
 }
 
 .admin-table tbody tr {
@@ -455,6 +468,11 @@ body {
   margin-top: 2px;
 }
 
+/* Kolom yang disembunyikan di mobile */
+.col-hide-mobile {
+  /* dipakai di Dashboard table & Registration table */
+}
+
 /* ============================================================
    BADGES / STATUS
    ============================================================ */
@@ -467,6 +485,7 @@ body {
   border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .badge::before {
@@ -475,6 +494,7 @@ body {
   height: 6px;
   border-radius: 50%;
   background: currentColor;
+  flex-shrink: 0;
 }
 
 .badge-pending   { background: rgba(245, 158, 11, 0.12); color: #b45309;        }
@@ -504,12 +524,12 @@ body {
   white-space: nowrap;
 }
 
-.btn-primary {
+.btn-admin-primary {
   background: var(--primary);
   color: white;
 }
 
-.btn-primary:hover {
+.btn-admin-primary:hover {
   background: var(--primary-light);
 }
 
@@ -570,8 +590,8 @@ body {
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
+  gap: 10px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
@@ -579,7 +599,7 @@ body {
 .search-input-wrap {
   position: relative;
   flex: 1;
-  min-width: 200px;
+  min-width: 160px;
 }
 
 .search-input-wrap svg {
@@ -618,10 +638,16 @@ body {
   color: var(--text-main);
   outline: none;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .filter-select:focus {
   border-color: var(--primary);
+}
+
+/* Tombol di filter bar tidak boleh shrink */
+.filter-bar .btn {
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -637,7 +663,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
   animation: fadeIn 0.15s ease;
 }
 
@@ -653,7 +679,7 @@ body {
   max-width: 540px;
   box-shadow: var(--shadow-lg);
   animation: slideUp 0.2s ease;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
 }
 
@@ -668,6 +694,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 1;
 }
 
 .modal-header h3 {
@@ -688,6 +718,7 @@ body {
   color: var(--text-muted);
   font-size: 18px;
   transition: all var(--transition);
+  flex-shrink: 0;
 }
 
 .modal-close:hover {
@@ -705,6 +736,10 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
+  position: sticky;
+  bottom: 0;
+  background: var(--card-bg);
 }
 
 /* ============================================================
@@ -922,11 +957,8 @@ body {
    DASHBOARD — Layout & Components
    ============================================================ */
 
-.dashboard-root {
-  /* wrapper kosong, grid dihandle di dalam */
-}
+.dashboard-root {}
 
-/* ── Page Header ── */
 .dash-header {
   display: flex;
   align-items: flex-start;
@@ -970,7 +1002,6 @@ body {
   white-space: nowrap;
 }
 
-/* ── Stat Cards Grid ── */
 .dash-stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -987,7 +1018,6 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 0;
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition);
 }
@@ -1037,10 +1067,8 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  border-radius: 0;
 }
 
-/* ── Middle Grid: Chart + Programs ── */
 .dash-mid-grid {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -1048,12 +1076,12 @@ body {
   margin-bottom: 16px;
 }
 
-/* ── Chart Legend ── */
 .dash-legend {
   display: flex;
   align-items: center;
   gap: 14px;
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .dash-legend-item {
@@ -1072,15 +1100,12 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Program Progress ── */
 .dash-program-list {
   padding: 4px 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
-.dash-program-item {}
 
 .dash-program-meta {
   display: flex;
@@ -1113,7 +1138,6 @@ body {
   transition: width 0.6s ease;
 }
 
-/* ── Bottom Grid: Table + Right Col ── */
 .dash-bottom-grid {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -1126,7 +1150,6 @@ body {
   gap: 16px;
 }
 
-/* ── Gender Chart ── */
 .dash-gender-body {
   display: flex;
   flex-direction: column;
@@ -1168,7 +1191,23 @@ body {
 }
 
 /* ============================================================
-   RESPONSIVE — mobile sidebar toggle
+   PROGRAM CARDS (ProgramManager)
+   ============================================================ */
+
+.program-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+/* Teks yang hanya muncul di mobile (disembunyikan di desktop) */
+.btn-label-mobile-only {
+  display: none;
+}
+
+/* ============================================================
+   SIDEBAR TOGGLE BUTTON
    ============================================================ */
 
 .sidebar-toggle-btn {
@@ -1182,7 +1221,24 @@ body {
   background: var(--card-bg);
   cursor: pointer;
   color: var(--text-muted);
+  flex-shrink: 0;
 }
+
+/* ============================================================
+   ACTION BUTTONS — Registration table
+   Tombol aksi di tabel, bisa wrap di mobile
+   ============================================================ */
+
+.action-btn-group {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+/* ============================================================
+   RESPONSIVE — 1100px (tablet landscape)
+   ============================================================ */
 
 @media (max-width: 1100px) {
   .dash-stat-grid {
@@ -1203,7 +1259,13 @@ body {
   }
 }
 
+/* ============================================================
+   RESPONSIVE — 768px (tablet portrait / mobile)
+   ============================================================ */
+
 @media (max-width: 768px) {
+
+  /* ── Sidebar ── */
   .admin-sidebar {
     transform: translateX(-100%);
   }
@@ -1212,45 +1274,235 @@ body {
     transform: translateX(0);
   }
 
+  /* ── Main ── */
   .admin-main {
     margin-left: 0;
   }
 
+  /* ── Topbar ── */
+  .admin-topbar {
+    padding: 0 16px;
+  }
+
+  .topbar-left h1 {
+    font-size: 15px;
+  }
+
+  .topbar-left p {
+    display: none;
+  }
+
+  .topbar-website-label {
+    display: none;
+  }
+
+  /* ── Sidebar toggle ── */
   .sidebar-toggle-btn {
     display: flex;
   }
 
+  /* ── Content ── */
   .admin-content {
     padding: 16px;
   }
 
+  /* ── Stat cards ── */
   .stats-grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
   .dash-stat-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .dash-right-col {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 480px) {
-  .dash-stat-grid {
-    grid-template-columns: 1fr;
   }
 
   .dash-stat-number {
     font-size: 28px;
   }
 
+  /* ── Dashboard header ── */
   .dash-header {
     flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .dash-title {
+    font-size: 20px;
+  }
+
+  /* ── Dashboard right col ── */
+  .dash-right-col {
+    flex-direction: column;
+  }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  /* Search full width */
+  .search-input-wrap {
+    flex: unset;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  /* Select pair berdampingan */
+  .filter-select {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Tombol tambah/baru full width di bawah filter */
+  .filter-bar .btn-accent,
+  .filter-bar .btn-admin-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── Card header ── */
+  .admin-card-header {
+    padding: 14px 16px;
+  }
+
+  /* ── Modal — bottom sheet di mobile ── */
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal-box {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-height: 95vh;
+    max-width: 100%;
+  }
+
+  /* ── Form ── */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── Program cards ── */
+  .program-cards-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  /* ── Modal footer ── */
+  .modal-footer {
+    padding: 14px 16px;
+  }
+
+  /* Footer dengan 2+ tombol: equal width */
+  .modal-footer.has-multiple .btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Footer dengan 1 tombol: natural width saja */
+  .modal-footer.has-single .btn {
+    width: auto;
+  }
+
+  /* ── Dashboard table: sembunyikan kolom ID di mobile ── */
+  .col-hide-mobile {
+    display: none;
+  }
+
+  /* ── Registration table: action buttons lebih compact ── */
+  .action-btn-group {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  /* Sembunyikan teks tombol di mobile, tampilkan icon saja */
+  .btn-label-mobile-hide {
+    display: none;
+  }
+
+  /* Teks alternatif yang hanya muncul di mobile */
+  .btn-label-mobile-only {
+    display: inline;
+  }
+
+  /* Hapus button di registration table: icon only */
+  .btn-hapus-mobile {
+    padding: 5px 8px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 480px (small mobile)
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  /* ── Stat cards jadi 1 kolom ── */
+  .dash-stat-grid {
+    grid-template-columns: 1fr 1fr; /* tetap 2 kolom, angka cukup besar */
+  }
+
+  .dash-stat-number {
+    font-size: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ── Topbar compact ── */
+  .admin-topbar {
+    padding: 0 12px;
+    height: 56px;
+  }
+
+  .topbar-left h1 {
+    font-size: 14px;
+  }
+
+  /* ── Content padding lebih kecil ── */
+  .admin-content {
+    padding: 12px;
+  }
+
+  /* ── Modal body padding lebih kecil ── */
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-header {
+    padding: 16px 16px 12px;
+  }
+
+  .modal-footer {
+    padding: 12px 16px;
+  }
+
+  /* ── Program card info pills wrap ── */
+  .program-info-pills {
+    flex-wrap: wrap;
+  }
+
+  /* ── Stat card padding lebih kecil ── */
+  .stat-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .stat-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .stat-info h3 {
+    font-size: 20px;
+  }
+
+  /* ── Filter bar: select jadi full width ── */
+  .filter-select {
+    width: 100%;
+    flex: unset;
   }
 }

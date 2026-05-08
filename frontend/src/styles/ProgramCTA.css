@@ -4,16 +4,6 @@
   background: #f8faff;
 }
 
-/* ---- Animate ---- */
-.program-cta__card {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.program-cta__card.pcta-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ---- Card ---- */
 .program-cta__card {
