@@ -50,7 +50,7 @@ const ProgramCTA = () => {
               <div className="program-cta__avatar program-cta__avatar--3">M</div>
               <div className="program-cta__avatar program-cta__avatar--more">+</div>
             </div>
-            <span className="program-cta__trust-label">Trusted by students worldwide</span>
+            <span className="program-cta__trust-label">Trusted by many stundents</span>
           </div>
         </div>
       </div>
