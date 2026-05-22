@@ -1,4 +1,3 @@
-import '../styles/About.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
@@ -9,15 +8,24 @@ import AboutTeam from '../components/sections/about/AboutTeam'
 
 const About = () => {
   return (
-    <div className="about-page">
-      <Navbar />
-      <AboutHero />
-      <AboutStory />
-      <AboutMission />
-      <AboutTeam />
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    <>
+      <style>{`
+        .about-page {
+          width: 100%;
+          min-height: 100vh;
+          overflow-x: hidden;
+        }
+      `}</style>
+      <div className="about-page">
+        <Navbar />
+        <AboutHero />
+        <AboutStory />
+        <AboutMission />
+        <AboutTeam />
+        <Footer />
+        <WhatsAppFloat />
+      </div>
+    </>
   )
 }
 

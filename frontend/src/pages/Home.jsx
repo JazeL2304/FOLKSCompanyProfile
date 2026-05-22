@@ -1,4 +1,3 @@
-import '../styles/Home.css'
 import Navbar from '../components/Navbar'
 import Hero from '../components/sections/Hero'
 import ValueStats from '../components/sections/ValueStats'
@@ -10,16 +9,24 @@ import WhatsAppFloat from '../components/WhatsAppFloat'
 
 const Home = () => {
   return (
-    <div className="home">
-      <Navbar />
-      <Hero />
-      <WhyUs />
-      <Programs />
-      <ValueStats />
-      <Testimonials />
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    <>
+      <style>{`
+        .home {
+          width: 100%;
+          min-height: 100vh;
+        }
+      `}</style>
+      <div className="home">
+        <Navbar />
+        <Hero />
+        <WhyUs />
+        <Programs />
+        <ValueStats />
+        <Testimonials />
+        <Footer />
+        <WhatsAppFloat />
+      </div>
+    </>
   )
 }
 

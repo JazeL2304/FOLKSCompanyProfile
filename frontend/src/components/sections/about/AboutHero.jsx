@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Zap, GraduationCap, Users } from 'lucide-react'
 import teamPhoto1 from '../../../assets/TeamFOLKS.jpg'
 import teamPhoto2 from '../../../assets/TeamFOLKS2.jpg'
 import teamPhoto3 from '../../../assets/TeamFOLKS3.jpg'
@@ -6,11 +7,16 @@ import teamPhoto4 from '../../../assets/TeamFOLKS4.jpg'
 
 const photos = [teamPhoto1, teamPhoto2, teamPhoto3, teamPhoto4]
 
-const AboutHero = () => {
-  const sectionRef = useRef(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+const pillars = [
+  { Icon: Zap, text: 'Metode Interaktif' },
+  { Icon: GraduationCap, text: 'SD · SMP · SMA' },
+  { Icon: Users, text: 'Guru Berpengalaman' },
+]
 
-  // Auto-slide every 4 seconds
+const AboutHero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % photos.length)
@@ -18,22 +24,9 @@ const AboutHero = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Scroll animation
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.ah-animate').forEach((el, i) => {
-              setTimeout(() => el.classList.add('ah-visible'), i * 140)
-            })
-          }
-        })
-      },
-      { threshold: 0.15 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
+    const t = setTimeout(() => setLoaded(true), 100)
+    return () => clearTimeout(t)
   }, [])
 
   return (
@@ -48,212 +41,212 @@ const AboutHero = () => {
           overflow: hidden;
         }
 
-        /* Slideshow */
-        .about-hero__bg {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
+        .about-hero__bg { position: absolute; inset: 0; z-index: 0; }
 
         .about-hero__slide {
-          position: absolute;
-          inset: 0;
-          opacity: 0;
-          transition: opacity 1.2s ease-in-out;
+          position: absolute; inset: 0;
+          opacity: 0; transform: scale(1.06);
+          transition: opacity 1.2s ease, transform 6s ease;
         }
-
-        .about-hero__slide.active {
-          opacity: 1;
-        }
-
+        .about-hero__slide.active { opacity: 1; transform: scale(1); }
         .about-hero__slide img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          display: block;
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: center; display: block;
         }
 
-        /* Overlay */
-        .about-hero__overlay {
-          position: absolute;
-          inset: 0;
-          background: #000000;
-          opacity: 0.72;
-          z-index: 1;
+        .about-hero__overlay-left {
+          position: absolute; inset: 0; z-index: 1;
+          background: linear-gradient(
+            100deg,
+            rgba(255,255,255,0.82) 0%,
+            rgba(255,255,255,0.72) 45%,
+            rgba(255,255,255,0.40) 70%,
+            rgba(255,255,255,0.10) 100%
+          );
         }
 
-        /* Dots */
-        .about-hero__dots {
+        .about-hero__accent-line {
           position: absolute;
-          bottom: 36px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 8px;
+          top: 0; left: 88px;
+          width: 3px; height: 0;
+          background: linear-gradient(to bottom, #EF6D60, transparent);
           z-index: 3;
+          transition: height 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
         }
+        .about-hero.hero-loaded .about-hero__accent-line { height: 60%; }
 
-        .about-hero__dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.35);
-          border: none;
-          cursor: pointer;
-          padding: 0;
-          transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .about-hero__dot.active {
-          background: #EF6D60;
-          transform: scale(1.25);
-        }
-
-        /* Container */
         .about-hero__container {
-          position: relative;
-          z-index: 2;
-          max-width: 1200px;
-          width: 100%;
+          position: relative; z-index: 2;
+          max-width: 1200px; width: 100%;
           margin: 0 auto;
-          padding: 140px 80px;
+          padding: 160px 80px 140px 96px;
         }
 
-        .about-hero__content {
-          max-width: 620px;
-        }
+        .about-hero__content { max-width: 580px; }
 
-        /* Animate */
-        .ah-animate {
-          opacity: 0;
-          transform: translateY(24px);
-          transition: opacity 0.65s ease, transform 0.65s ease;
+        .ah-fade {
+          opacity: 0; transform: translateY(28px);
+          transition: opacity 0.75s ease, transform 0.75s ease;
         }
-        .ah-animate.ah-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        .hero-loaded .ah-fade { opacity: 1; transform: translateY(0); }
+        .hero-loaded .ah-fade:nth-child(1) { transition-delay: 0.10s; }
+        .hero-loaded .ah-fade:nth-child(2) { transition-delay: 0.22s; }
+        .hero-loaded .ah-fade:nth-child(3) { transition-delay: 0.34s; }
+        .hero-loaded .ah-fade:nth-child(4) { transition-delay: 0.46s; }
+        .hero-loaded .ah-fade:nth-child(5) { transition-delay: 0.58s; }
 
-        /* Label */
         .about-hero__label {
-          display: inline-block;
-          background: #EF6D60;
-          color: #ffffff;
+          display: inline-flex; align-items: center; gap: 8px;
+          background: rgba(239,109,96,0.10);
+          border: 1px solid rgba(239,109,96,0.40);
+          color: #EF6D60;
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 0.5px;
-          padding: 5px 14px;
-          border-radius: 20px;
-          margin-bottom: 20px;
+          font-size: 11px; font-weight: 700;
+          letter-spacing: 2px; text-transform: uppercase;
+          padding: 6px 16px; border-radius: 40px; margin-bottom: 24px;
+        }
+        .about-hero__label-dot {
+          width: 6px; height: 6px; border-radius: 50%; background: #EF6D60;
+          animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+          0%,100% { opacity:1; transform:scale(1); }
+          50% { opacity:0.4; transform:scale(0.65); }
         }
 
-        /* Title */
         .about-hero__title {
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 48px;
-          font-weight: 800;
-          color: #ffffff;
-          line-height: 1.15;
-          margin-bottom: 20px;
+          font-size: 58px; font-weight: 800;
+          color: #105647; line-height: 1.08;
+          margin-bottom: 8px; letter-spacing: -1.5px;
         }
-
-        .about-hero__title .title-main {
-          color: #ffffff;
-          font-style: normal;
-        }
-
         .about-hero__title em {
-          font-style: italic;
+          font-style: italic; font-weight: 800;
           color: #EF6D60;
         }
 
-        /* Subtitle */
+        .about-hero__divider {
+          width: 56px; height: 3px;
+          background: linear-gradient(90deg, #105647, transparent);
+          border-radius: 2px; margin: 28px 0;
+        }
+
         .about-hero__subtitle {
-          font-size: 15px;
-          color: rgba(255, 255, 255, 0.75);
-          font-style: italic;
-          margin-bottom: 16px;
-          line-height: 1.6;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 16px; font-weight: 600;
+          color: #105647;
+          margin-bottom: 14px; line-height: 1.65;
         }
 
-        /* Desc */
         .about-hero__desc {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.75);
-          line-height: 1.85;
+          font-size: 14px; color: #444444;
+          line-height: 1.95; max-width: 500px;
+          margin-bottom: 40px;
         }
 
-        /* Responsive */
+        /* ── Pills ── */
+        .about-hero__pillars {
+          display: flex; gap: 10px; flex-wrap: wrap;
+        }
+
+        .about-hero__pill {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: rgba(16,86,71,0.07);
+          border: 1px solid rgba(16,86,71,0.25);
+          border-radius: 40px;
+          padding: 8px 18px;
+          font-size: 13px; font-weight: 600;
+          color: #105647;
+          cursor: default;
+          opacity: 0;
+          /* transition-delay 0s saat hover agar langsung berubah */
+          transition: background 0s, border-color 0s, color 0s, box-shadow 0s;
+        }
+
+        .about-hero__pill:hover {
+          background: #105647 !important;
+          border-color: #105647 !important;
+          color: #ffffff !important;
+          box-shadow: 0 6px 20px rgba(16,86,71,0.30);
+          transition-delay: 0s !important;
+        }
+
+        .about-hero__pill:hover svg {
+          stroke: #ffffff;
+        }
+
+        /* entrance — opacity saja, delay hanya untuk masuk pertama kali */
+        .hero-loaded .about-hero__pill:nth-child(1) { opacity: 1; transition: opacity 0.5s ease 0.70s, background 0s, border-color 0s, color 0s, box-shadow 0s; }
+        .hero-loaded .about-hero__pill:nth-child(2) { opacity: 1; transition: opacity 0.5s ease 0.82s, background 0s, border-color 0s, color 0s, box-shadow 0s; }
+        .hero-loaded .about-hero__pill:nth-child(3) { opacity: 1; transition: opacity 0.5s ease 0.94s, background 0s, border-color 0s, color 0s, box-shadow 0s; }
+
+        /* setelah muncul, hover langsung tanpa delay */
+        .hero-loaded .about-hero__pill:nth-child(1):hover,
+        .hero-loaded .about-hero__pill:nth-child(2):hover,
+        .hero-loaded .about-hero__pill:nth-child(3):hover {
+          transition: background 0s, border-color 0s, color 0s, box-shadow 0s !important;
+        }
+
         @media (max-width: 768px) {
-          .about-hero {
-            min-height: 100vh;
-          }
-          .about-hero__container {
-            padding: 120px 24px 80px;
-          }
-          .about-hero__title {
-            font-size: 32px;
-          }
-          .about-hero__content {
-            max-width: 100%;
-          }
+          .about-hero__container { padding: 120px 24px 90px; }
+          .about-hero__title { font-size: 36px; }
+          .about-hero__accent-line { left: 24px; }
+          .about-hero__content { max-width: 100%; }
         }
       `}</style>
 
-      <section className="about-hero" ref={sectionRef}>
-        {/* Slideshow background */}
+      <section className={`about-hero ${loaded ? 'hero-loaded' : ''}`}>
+
         <div className="about-hero__bg">
           {photos.map((photo, index) => (
-            <div
-              key={index}
-              className={`about-hero__slide ${index === currentSlide ? 'active' : ''}`}
-            >
+            <div key={index} className={`about-hero__slide ${index === currentSlide ? 'active' : ''}`}>
               <img src={photo} alt="" aria-hidden="true" />
             </div>
           ))}
         </div>
 
-        {/* Dark overlay */}
-        <div className="about-hero__overlay" />
+        <div className="about-hero__overlay-left" />
+        <div className="about-hero__accent-line" />
 
-        {/* Content */}
         <div className="about-hero__container">
           <div className="about-hero__content">
-            <span className="about-hero__label ah-animate">Why FOLKS?</span>
 
-            <h1 className="about-hero__title ah-animate">
-              <span className="title-main">Belajar bahasa Inggris <br />
-                seharusnya </span><em>menyenangkan.</em>
+            <div className="ah-fade">
+              <span className="about-hero__label">
+                <span className="about-hero__label-dot" />
+                KENAPA HARUS FOLKS?
+              </span>
+            </div>
+
+            <h1 className="about-hero__title ah-fade">
+              Belajar bahasa Inggris<br />
+              seharusnya <em>menyenangkan.</em>
             </h1>
 
-            <p className="about-hero__subtitle ah-animate">
+            <div className="about-hero__divider ah-fade" />
+
+            <p className="about-hero__subtitle ah-fade">
               FOLKS hadir untuk membuktikan bahwa setiap anak bisa fasih berbahasa Inggris.
             </p>
 
-            <p className="about-hero__desc ah-animate">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              dapibus dapibus porttitor. Maecenas est libero, varius a augue sed,
-              malesuada malesuada erat. In hac habitasse platea dictumst. Praesent
-              at diam sed quam aliquet posuere. Duis quis velit ullamcorper,
-              porttitor leo at, mattis tortor. Donec tristique nunc a ipsum iaculis
-              convallis.
+            <p className="about-hero__desc ah-fade">
+              Kami percaya bahwa lingkungan belajar yang tepat adalah kunci keberhasilan.
+              Dengan metode yang menyenangkan dan guru berpengalaman, FOLKS Institute
+              mendampingi setiap siswa untuk tumbuh percaya diri — dari SD hingga SMA.
             </p>
+
+            <div className="about-hero__pillars">
+              {pillars.map(({ Icon, text }, i) => (
+                <span key={i} className="about-hero__pill">
+                  <Icon size={14} strokeWidth={2.2} />
+                  {text}
+                </span>
+              ))}
+            </div>
+
           </div>
         </div>
 
-        {/* Slide dots indicator */}
-        <div className="about-hero__dots">
-          {photos.map((_, index) => (
-            <button
-              key={index}
-              className={`about-hero__dot ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </section>
     </>
   )

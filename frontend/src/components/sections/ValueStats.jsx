@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import '../../styles/ValueStats.css'
 import valuePage from '../../assets/ValuePage.png'
 
 const ValueStats = () => {
@@ -19,11 +18,46 @@ const ValueStats = () => {
   }, [visible])
 
   return (
-    <section id="tentang" className="valuestats" ref={sectionRef}>
-      <div className={`valuestats__inner ${visible ? 'valuestats__inner--visible' : ''}`}>
-        <img src={valuePage} alt="Value Stats" className="valuestats__img" />
-      </div>
-    </section>
+    <>
+      <style>{`
+        .valuestats {
+          padding: 60px 0;
+          background: white;
+        }
+
+        .valuestats__inner {
+          max-width: 100%;
+          margin: 0;
+        }
+
+        .valuestats__img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        /* Fade in animation */
+        .valuestats__inner {
+          opacity: 0;
+          transition: opacity 0.8s ease;
+        }
+
+        .valuestats__inner--visible {
+          opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+          .valuestats {
+            padding: 40px 0;
+          }
+        }
+      `}</style>
+      <section id="tentang" className="valuestats" ref={sectionRef}>
+        <div className={`valuestats__inner ${visible ? 'valuestats__inner--visible' : ''}`}>
+          <img src={valuePage} alt="Value Stats" className="valuestats__img" />
+        </div>
+      </section>
+    </>
   )
 }
 

@@ -5,7 +5,6 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
-import '../styles/ProgramDetail.css'
 
 // ─── SVG ICONS ────────────────────────────────────────────────────────────────
 const icons = {
@@ -269,126 +268,598 @@ const ProgramDetail = () => {
   }
 
   return (
-    <div className="pd-page">
-      <Navbar />
+    <>
+      <style>{`
+        /* ============================================================
+           ProgramDetail.css — FOLKS Institute
+           Halaman detail program SD / SMP / SMA
+           ============================================================ */
 
-      {/* ── HERO ── */}
-      <section className="pd-hero">
-        <div className="pd-hero__inner">
-          <div className="pd-hero__text">
-            <span className="pd-hero__label">{data.levelLabel}</span>
-            <h1 className="pd-hero__title">{data.heroTitle}</h1>
-            <p className="pd-hero__subtitle">{data.heroSubtitle}</p>
-            <div className="pd-hero__ctas">
-              <button className="pd-btn pd-btn--primary" onClick={handleWa}>
-                {data.heroCtaEnroll}
-              </button>
-            </div>
-          </div>
-          <div className="pd-hero__visual">
-            <div className="pd-hero__img-wrap">
-              <div className="pd-hero__img-placeholder">
-                <Icon name="book" className="pd-hero__img-icon" />
+        .pd-page {
+          width: 100%;
+          min-height: 100vh;
+          background: #ffffff;
+        }
+
+        /* ── ICON ── */
+        .pd-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .pd-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        /* ── BUTTONS ── */
+        .pd-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 28px;
+          border-radius: 50px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          cursor: pointer;
+          border: none;
+          transition: all 0.2s ease;
+        }
+        .pd-btn--primary {
+          background: var(--accent, #EF6D60);
+          color: #fff;
+        }
+        .pd-btn--primary:hover {
+          background: #d85c50;
+          transform: translateY(-2px);
+        }
+        .pd-btn--cta {
+          background: #fff;
+          color: var(--primary, #105647);
+          font-weight: 700;
+          width: 100%;
+          justify-content: center;
+          margin-top: 8px;
+          border: none;
+        }
+        .pd-btn--cta:hover {
+          background: #f0faf7;
+        }
+
+        /* ── HERO ── */
+        .pd-hero {
+          padding: 100px 0 60px;
+          background: #fff;
+        }
+        .pd-hero__inner {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+        .pd-hero__label {
+          display: inline-block;
+          background: #e8f5f1;
+          color: var(--primary, #105647);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 5px 14px;
+          border-radius: 20px;
+          margin-bottom: 18px;
+        }
+        .pd-hero__title {
+          font-size: 2.4rem;
+          font-weight: 800;
+          color: #1a1a1a;
+          line-height: 1.15;
+          margin-bottom: 16px;
+        }
+        .pd-hero__subtitle {
+          font-size: 1rem;
+          color: #555;
+          line-height: 1.7;
+          margin-bottom: 32px;
+          max-width: 440px;
+        }
+        .pd-hero__ctas {
+          display: flex;
+          gap: 14px;
+        }
+
+        /* Hero visual */
+        .pd-hero__visual {
+          display: flex;
+          justify-content: center;
+        }
+        .pd-hero__img-wrap {
+          position: relative;
+          width: 100%;
+          max-width: 420px;
+        }
+        .pd-hero__img-placeholder {
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #e8f5f1 0%, #d0ede6 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .pd-hero__img-icon svg {
+          width: 80px;
+          height: 80px;
+          color: var(--primary, #105647);
+          opacity: 0.3;
+        }
+        .pd-hero__badge {
+          position: absolute;
+          bottom: -16px;
+          left: 20px;
+          background: #fff;
+          border-radius: 14px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+          padding: 10px 18px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .pd-hero__badge-svg svg {
+          width: 24px;
+          height: 24px;
+          color: var(--primary, #105647);
+        }
+        .pd-hero__badge-num {
+          font-size: 1rem;
+          font-weight: 800;
+          color: #1a1a1a;
+        }
+        .pd-hero__badge-sub {
+          font-size: 0.72rem;
+          color: #888;
+        }
+
+        /* ── DETAIL + ADVANTAGE ── */
+        .pd-detail {
+          padding: 80px 0;
+          background: #f9fafb;
+        }
+        .pd-detail__inner {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: start;
+        }
+        .pd-detail__left {
+          display: flex;
+          flex-direction: column;
+        }
+        .pd-detail__title {
+          font-size: 1.9rem;
+          font-weight: 800;
+          color: #1a1a1a;
+          margin-bottom: 16px;
+          line-height: 1.25;
+        }
+        .pd-detail__desc {
+          font-size: 0.97rem;
+          color: #555;
+          line-height: 1.8;
+          margin-bottom: 28px;
+        }
+        .pd-detail__img-wrap {
+          position: relative;
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        .pd-detail__img-placeholder {
+          width: 100%;
+          aspect-ratio: 4/3;
+          background: linear-gradient(135deg, #105647 0%, #1a7a64 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 16px;
+        }
+        .pd-detail__img-icon svg {
+          width: 72px;
+          height: 72px;
+          color: #fff;
+          opacity: 0.25;
+        }
+        .pd-detail__img-caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(255,255,255,0.95);
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .pd-detail__caption-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--accent, #EF6D60);
+          flex-shrink: 0;
+        }
+        .pd-detail__caption-title {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #1a1a1a;
+        }
+        .pd-detail__caption-sub {
+          font-size: 0.75rem;
+          color: #888;
+        }
+
+        /* Advantage card */
+        .pd-advantage {
+          background: #fff;
+          border-radius: 20px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+          padding: 32px;
+        }
+        .pd-advantage__title {
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #1a1a1a;
+          margin-bottom: 24px;
+        }
+        .pd-advantage__list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+        .pd-advantage__item {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+        }
+        .pd-advantage__icon {
+          width: 36px;
+          height: 36px;
+          background: #e8f5f1;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: var(--primary, #105647);
+        }
+        .pd-advantage__icon svg {
+          width: 18px;
+          height: 18px;
+        }
+        .pd-advantage__name {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin-bottom: 3px;
+        }
+        .pd-advantage__desc {
+          font-size: 0.82rem;
+          color: #666;
+          line-height: 1.5;
+        }
+        .pd-advantage__cta {
+          background: var(--primary, #105647);
+          border-radius: 14px;
+          padding: 20px;
+          color: #fff;
+        }
+        .pd-advantage__cta-label {
+          font-size: 0.75rem;
+          opacity: 0.8;
+          margin-bottom: 4px;
+        }
+        .pd-advantage__cta-title {
+          font-size: 1.05rem;
+          font-weight: 700;
+          margin-bottom: 12px;
+        }
+
+        /* ── FEATURES ── */
+        .pd-features {
+          padding: 80px 0;
+          background: #fff;
+        }
+        .pd-features__inner {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 64px;
+        }
+        .pd-feature {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+        .pd-feature--img-left .pd-feature__img-wrap { order: 1; }
+        .pd-feature--img-left .pd-feature__text     { order: 2; }
+        .pd-feature--img-right .pd-feature__img-wrap { order: 2; }
+        .pd-feature--img-right .pd-feature__text    { order: 1; }
+
+        .pd-feature__img-wrap {
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        .pd-feature__img-placeholder {
+          width: 100%;
+          aspect-ratio: 4/3;
+          background: linear-gradient(135deg, #105647 0%, #1e9e7a 100%);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .pd-feature__placeholder-icon svg {
+          width: 80px;
+          height: 80px;
+          color: #fff;
+          opacity: 0.25;
+        }
+        .pd-feature__text {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .pd-feature__icon-badge {
+          width: 44px;
+          height: 44px;
+          background: #e8f5f1;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--primary, #105647);
+        }
+        .pd-feature__icon-badge svg {
+          width: 22px;
+          height: 22px;
+        }
+        .pd-feature__title {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: #1a1a1a;
+          line-height: 1.2;
+        }
+        .pd-feature__desc {
+          font-size: 0.97rem;
+          color: #555;
+          line-height: 1.8;
+        }
+
+        /* ── FAQ ── */
+        .pd-faq {
+          padding: 80px 0;
+          background: #f9fafb;
+        }
+        .pd-faq__inner {
+          max-width: 780px;
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+        .pd-faq__title {
+          font-size: 1.6rem;
+          font-weight: 800;
+          color: #1a1a1a;
+          text-align: center;
+          margin-bottom: 40px;
+        }
+        .pd-faq__list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .pd-faq__item {
+          background: #fff;
+          border-radius: 12px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+          overflow: hidden;
+          transition: box-shadow 0.2s;
+        }
+        .pd-faq__item--open {
+          box-shadow: 0 4px 20px rgba(16,86,71,0.12);
+        }
+        .pd-faq__question {
+          width: 100%;
+          background: none;
+          border: none;
+          padding: 18px 24px;
+          text-align: left;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+        }
+        .pd-faq__question:hover { color: var(--primary, #105647); }
+        .pd-faq__icon {
+          font-size: 1.2rem;
+          color: var(--accent, #EF6D60);
+          flex-shrink: 0;
+          font-weight: 400;
+        }
+        .pd-faq__answer {
+          padding: 14px 24px 18px;
+          font-size: 0.9rem;
+          color: #555;
+          line-height: 1.7;
+          border-top: 1px solid #f0f0f0;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+          .pd-hero__inner,
+          .pd-detail__inner {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .pd-hero { padding: 80px 0 48px; }
+          .pd-hero__title { font-size: 1.9rem; }
+          .pd-hero__visual { order: -1; }
+          .pd-feature {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .pd-feature--img-right .pd-feature__img-wrap { order: 1; }
+          .pd-feature--img-right .pd-feature__text     { order: 2; }
+        }
+
+        @media (max-width: 600px) {
+          .pd-hero__inner,
+          .pd-detail__inner,
+          .pd-features__inner,
+          .pd-faq__inner {
+            padding: 0 20px;
+          }
+          .pd-hero__title { font-size: 1.6rem; }
+          .pd-hero__ctas { flex-direction: column; }
+          .pd-hero__ctas .pd-btn { width: 100%; justify-content: center; }
+          .pd-faq__title { font-size: 1.3rem; }
+          .pd-advantage { padding: 24px; }
+        }
+      `}</style>
+      <div className="pd-page">
+        <Navbar />
+
+        {/* ── HERO ── */}
+        <section className="pd-hero">
+          <div className="pd-hero__inner">
+            <div className="pd-hero__text">
+              <span className="pd-hero__label">{data.levelLabel}</span>
+              <h1 className="pd-hero__title">{data.heroTitle}</h1>
+              <p className="pd-hero__subtitle">{data.heroSubtitle}</p>
+              <div className="pd-hero__ctas">
+                <button className="pd-btn pd-btn--primary" onClick={handleWa}>
+                  {data.heroCtaEnroll}
+                </button>
               </div>
-              <div className="pd-hero__badge">
-                <Icon name="users" className="pd-hero__badge-svg" />
-                <div>
-                  <div className="pd-hero__badge-num">2,000+</div>
-                  <div className="pd-hero__badge-sub">Students joined this year</div>
+            </div>
+            <div className="pd-hero__visual">
+              <div className="pd-hero__img-wrap">
+                <div className="pd-hero__img-placeholder">
+                  <Icon name="book" className="pd-hero__img-icon" />
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── DETAIL + ADVANTAGE ── */}
-      <section className="pd-detail">
-        <div className="pd-detail__inner">
-          <div className="pd-detail__left">
-            <span className="pd-hero__label" style={{ marginBottom: 12 }}>{data.levelLabel}</span>
-            <h2 className="pd-detail__title">{data.detailTitle}</h2>
-            <p className="pd-detail__desc">{data.detailDesc}</p>
-            <div className="pd-detail__img-wrap">
-              <div className="pd-detail__img-placeholder">
-                <Icon name="teacher" className="pd-detail__img-icon" />
-              </div>
-              <div className="pd-detail__img-caption">
-                <span className="pd-detail__caption-dot" />
-                <div>
-                  <div className="pd-detail__caption-title">{data.detailImageCaption}</div>
-                  <div className="pd-detail__caption-sub">{data.detailImageSub}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="pd-advantage">
-            <h3 className="pd-advantage__title">Folks Advantage</h3>
-            <ul className="pd-advantage__list">
-              {data.advantages.map((adv, i) => (
-                <li key={i} className="pd-advantage__item">
-                  <span className="pd-advantage__icon">
-                    <Icon name={adv.iconKey} />
-                  </span>
+                <div className="pd-hero__badge">
+                  <Icon name="users" className="pd-hero__badge-svg" />
                   <div>
-                    <div className="pd-advantage__name">{adv.title}</div>
-                    <div className="pd-advantage__desc">{adv.desc}</div>
+                    <div className="pd-hero__badge-num">2,000+</div>
+                    <div className="pd-hero__badge-sub">Students joined this year</div>
                   </div>
-                </li>
-              ))}
-            </ul>
-            <div className="pd-advantage__cta">
-              <div className="pd-advantage__cta-label">{data.ctaLabel}</div>
-              <div className="pd-advantage__cta-title">{data.ctaTitle}</div>
-              <button className="pd-btn pd-btn--cta" onClick={handleWa}>
-                {data.ctaButton}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURES ── */}
-      <section className="pd-features">
-        <div className="pd-features__inner">
-          {data.features.map((feat, i) => (
-            <div
-              key={i}
-              className={`pd-feature ${feat.imageLeft ? 'pd-feature--img-left' : 'pd-feature--img-right'}`}
-            >
-              <div className="pd-feature__img-wrap">
-                <div className="pd-feature__img-placeholder">
-                  <Icon name={feat.iconKey} className="pd-feature__placeholder-icon" />
                 </div>
               </div>
-              <div className="pd-feature__text">
-                <span className="pd-feature__icon-badge">
-                  <Icon name={feat.iconKey} />
-                </span>
-                <h3 className="pd-feature__title">{feat.title}</h3>
-                <p className="pd-feature__desc">{feat.desc}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── DETAIL + ADVANTAGE ── */}
+        <section className="pd-detail">
+          <div className="pd-detail__inner">
+            <div className="pd-detail__left">
+              <span className="pd-hero__label" style={{ marginBottom: 12 }}>{data.levelLabel}</span>
+              <h2 className="pd-detail__title">{data.detailTitle}</h2>
+              <p className="pd-detail__desc">{data.detailDesc}</p>
+              <div className="pd-detail__img-wrap">
+                <div className="pd-detail__img-placeholder">
+                  <Icon name="teacher" className="pd-detail__img-icon" />
+                </div>
+                <div className="pd-detail__img-caption">
+                  <span className="pd-detail__caption-dot" />
+                  <div>
+                    <div className="pd-detail__caption-title">{data.detailImageCaption}</div>
+                    <div className="pd-detail__caption-sub">{data.detailImageSub}</div>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ── FAQ ── */}
-      <section className="pd-faq">
-        <div className="pd-faq__inner">
-          <h2 className="pd-faq__title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
-          <div className="pd-faq__list">
-            {data.faqItems.map((item, i) => (
-              <FaqItem key={i} q={item.q} a={item.a} />
+            <div className="pd-advantage">
+              <h3 className="pd-advantage__title">Folks Advantage</h3>
+              <ul className="pd-advantage__list">
+                {data.advantages.map((adv, i) => (
+                  <li key={i} className="pd-advantage__item">
+                    <span className="pd-advantage__icon">
+                      <Icon name={adv.iconKey} />
+                    </span>
+                    <div>
+                      <div className="pd-advantage__name">{adv.title}</div>
+                      <div className="pd-advantage__desc">{adv.desc}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="pd-advantage__cta">
+                <div className="pd-advantage__cta-label">{data.ctaLabel}</div>
+                <div className="pd-advantage__cta-title">{data.ctaTitle}</div>
+                <button className="pd-btn pd-btn--cta" onClick={handleWa}>
+                  {data.ctaButton}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FEATURES ── */}
+        <section className="pd-features">
+          <div className="pd-features__inner">
+            {data.features.map((feat, i) => (
+              <div
+                key={i}
+                className={`pd-feature ${feat.imageLeft ? 'pd-feature--img-left' : 'pd-feature--img-right'}`}
+              >
+                <div className="pd-feature__img-wrap">
+                  <div className="pd-feature__img-placeholder">
+                    <Icon name={feat.iconKey} className="pd-feature__placeholder-icon" />
+                  </div>
+                </div>
+                <div className="pd-feature__text">
+                  <span className="pd-feature__icon-badge">
+                    <Icon name={feat.iconKey} />
+                  </span>
+                  <h3 className="pd-feature__title">{feat.title}</h3>
+                  <p className="pd-feature__desc">{feat.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+        {/* ── FAQ ── */}
+        <section className="pd-faq">
+          <div className="pd-faq__inner">
+            <h2 className="pd-faq__title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+            <div className="pd-faq__list">
+              {data.faqItems.map((item, i) => (
+                <FaqItem key={i} q={item.q} a={item.a} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+        <WhatsAppFloat />
+      </div>
+    </>
   )
 }
 
