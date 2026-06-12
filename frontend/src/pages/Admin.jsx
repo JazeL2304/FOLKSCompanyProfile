@@ -95,7 +95,7 @@ const PAGE_META = {
   registrations: { title: 'Pendaftaran', desc: 'Konfirmasi pembayaran & kelola pendaftar' }
 }
 
-const PENDING_COUNT = 3
+const PENDING_COUNT = 0
 
 export default function Admin() {
   const [activePage, setActivePage] = useState('dashboard')
