@@ -1,18 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { CheckCircle } from 'lucide-react'
-
-const checklistItems = [
-  'Kurikulum terstruktur & terakreditasi',
-  'Guru berpengalaman & bersertifikat',
-  'Metode belajar interaktif & fun',
-  'Program untuk SD, SMP, dan SMA',
-  'Suasana belajar yang nyaman & supportif',
-  'Progres siswa terpantau setiap bulan',
-]
+import { useLanguage } from '../../../context/LanguageContext'
 
 const YOUTUBE_VIDEO_ID = 'Pz6esoyf454'
 
 const AboutStory = () => {
+  const { t } = useLanguage()
+  const checklistItems = t.about_story.checklist
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -222,23 +216,20 @@ const AboutStory = () => {
           <div className={`about-story__right ${isVisible ? 'as-visible' : ''}`}>
             <div className="about-story__eyebrow">
               <span className="about-story__eyebrow-line" />
-              Tentang Kami
+              {t.about_story.eyebrow}
             </div>
 
-            <h2 className="about-story__title">Our Story</h2>
+            <h2 className="about-story__title">{t.about_story.title}</h2>
 
             <p className="about-story__highlight">
-              FOLKS Institute lahir dari keyakinan bahwa setiap anak berhak belajar
-              bahasa Inggris dengan cara yang menyenangkan dan efektif.
+              {t.about_story.highlight}
             </p>
 
             <p className="about-story__desc">
-              Berlokasi di Jakarta Selatan, kami hadir untuk mendampingi siswa SD, SMP,
-              dan SMA dalam perjalanan mereka menguasai bahasa Inggris. Bukan sekadar
-              menghafal — tapi benar-benar paham, percaya diri, dan berani berbicara.
+              {t.about_story.desc}
             </p>
 
-            <p className="about-story__checklist-title">Yang membuat kami berbeda</p>
+            <p className="about-story__checklist-title">{t.about_story.checklist_title}</p>
 
             <div className="about-story__checklist">
               {checklistItems.map((item, i) => (

@@ -11,10 +11,10 @@ const getAll = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    const { student_name, phone, program_id, notes } = req.body
+    const { student_name, phone, program_id, notes, gender } = req.body
     const { data, error } = await supabase
         .from('registrations')
-        .insert([{ student_name, phone, program_id, notes, status: 'pending' }])
+        .insert([{ student_name, phone, program_id, notes, gender, status: 'pending' }])
         .select()
 
     if (error) return res.status(500).json({ message: error.message })

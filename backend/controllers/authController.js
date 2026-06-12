@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const supabase = require('../db/supabase')
 
 const ADMIN_EMAIL = 'admin@folks.id'
-const ADMIN_PASSWORD = 'folks2024'
+const ADMIN_PASSWORD = 'folks2026'
 
 const login = async (req, res) => {
     const { email, password } = req.body

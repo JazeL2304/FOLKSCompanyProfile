@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState } from 'react'
+import { useLanguage } from '../../../context/LanguageContext'
 
 const ProgramCTA = () => {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [visible, setVisible] = useState(false)
 
@@ -175,19 +177,18 @@ const ProgramCTA = () => {
           <div className="program-cta__deco program-cta__deco--2" />
 
           <div className="program-cta__content">
-            <h2 className="program-cta__title">Ready to Start Your Journey?</h2>
+            <h2 className="program-cta__title">{t.program_cta.title}</h2>
             <p className="program-cta__desc">
-              Join hundreds of professionals and students who have redefined their
-              future through English fluency at FOLKS Academic.
+              {t.program_cta.desc}
             </p>
 
             <a
-              href="https://wa.me/628228999365"
+              href="https://api.whatsapp.com/send?phone=6287886180776"
               target="_blank"
               rel="noopener noreferrer"
               className="program-cta__btn"
             >
-              Contact Me
+              {t.program_cta.btn_contact}
             </a>
 
             {/* Avatars + trust */}
@@ -199,7 +200,7 @@ const ProgramCTA = () => {
                 <div className="program-cta__avatar program-cta__avatar--3">M</div>
                 <div className="program-cta__avatar program-cta__avatar--more">+</div>
               </div>
-              <span className="program-cta__trust-label">Trusted by many students</span>
+              <span className="program-cta__trust-label">{t.program_cta.trust_label}</span>
             </div>
           </div>
         </div>

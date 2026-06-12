@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import SEO from '../components/SEO'
 import Hero from '../components/sections/Hero'
 import ValueStats from '../components/sections/ValueStats'
 import WhyUs from '../components/sections/WhyUs'
@@ -10,6 +11,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat'
 const Home = () => {
   return (
     <>
+      <SEO title="Beranda | FOLKS" description="Selamat datang di FOLKS. Temukan program-program terbaik kami." />
       <style>{`
         .home {
           width: 100%;

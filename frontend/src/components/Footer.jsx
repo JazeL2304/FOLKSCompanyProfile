@@ -1,8 +1,10 @@
 import logo from '../assets/FOLKS Institute Logo Word Only No Background.png'
 import worldpic from '../assets/worldpicture.png'
 import { Mail, Phone, MapPin, Instagram, Linkedin, Facebook, MessageCircle } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Footer = () => {
+  const { t } = useLanguage()
   return (
     <>
       <style>{`
@@ -213,7 +215,7 @@ const Footer = () => {
               Selatan, Daerah Khusus Ibukota Jakarta 12760
             </p>
             <div className="footer__socials">
-              <a href="#" className="footer__social-btn" aria-label="WhatsApp"><MessageCircle size={18} /></a>
+              <a href="https://api.whatsapp.com/send?phone=6287886180776" className="footer__social-btn" aria-label="WhatsApp"><MessageCircle size={18} /></a>
               <a href="#" className="footer__social-btn" aria-label="Instagram"><Instagram size={18} /></a>
               <a href="#" className="footer__social-btn" aria-label="LinkedIn"><Linkedin size={18} /></a>
               <a href="#" className="footer__social-btn" aria-label="Facebook"><Facebook size={18} /></a>
@@ -222,27 +224,26 @@ const Footer = () => {
 
           {/* CENTER - Navigasi */}
           <div className="footer__nav">
-            <h4 className="footer__heading">Navigasi</h4>
+            <h4 className="footer__heading">{t.footer.nav_heading}</h4>
             <ul className="footer__links">
-              {['Beranda', 'Tentang', 'Program', 'Blog'].map(link => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase()}`}>{link}</a>
-                </li>
-              ))}
+              <li><a href="/">{t.nav.home}</a></li>
+              <li><a href="/tentang">{t.nav.about}</a></li>
+              <li><a href="/program">{t.nav.program}</a></li>
+              <li><a href="/blog">{t.nav.blog}</a></li>
             </ul>
           </div>
 
           {/* RIGHT - Hubungi Kami */}
           <div className="footer__contact">
-            <h4 className="footer__heading">Hubungi Kami</h4>
+            <h4 className="footer__heading">{t.footer.contact_heading}</h4>
             <ul className="footer__contact-list">
               <li>
                 <span className="footer__contact-icon"><Mail size={16} /></span>
-                jastinlim2304@gmail.com
+                mailus.folks@gmail.com
               </li>
               <li>
                 <span className="footer__contact-icon"><Phone size={16} /></span>
-                +62 822 8999 3655
+                +62 878 8618 0776
               </li>
               <li>
                 <span className="footer__contact-icon"><MapPin size={16} /></span>
@@ -260,7 +261,7 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="footer__bottom">
-          <p>© 2025 FOLKS. All Rights Reserved.</p>
+          <p>{t.footer.rights}</p>
         </div>
       </footer>
     </>

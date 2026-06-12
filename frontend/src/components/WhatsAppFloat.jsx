@@ -63,7 +63,7 @@ const WhatsAppFloat = () => {
 
   return (
     <a
-      href="https://wa.me/6282289993655"
+      href="https://api.whatsapp.com/send?phone=6287886180776"
       target="_blank"
       rel="noopener noreferrer"
       style={styles.container}

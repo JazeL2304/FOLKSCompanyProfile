@@ -4,8 +4,22 @@ import iconStar from '../../assets/icon-star.png'
 import iconBook from '../../assets/icon-book.png'
 import iconMic from '../../assets/icon-mic.png'
 import iconCap from '../../assets/icon-cap.png'
+import { useLanguage } from '../../context/LanguageContext'
 
 const Hero = () => {
+  const { t } = useLanguage()
+
+  const handleRegisterClick = () => {
+    window.open('https://api.whatsapp.com/send?phone=6287886180776&text=Halo%20FOLKS,%20saya%20ingin%20mendaftar.', '_blank')
+  }
+
+  const handleViewProgramsClick = () => {
+    const el = document.getElementById('program')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <>
       <style>{`
@@ -251,17 +265,16 @@ const Hero = () => {
           {/* Left Content */}
           <div className="hero__content">
             <h1 className="hero__title">
-              Mahir Bahasa English<br />
-              dalam <span className="hero__title-accent">30 hari</span>
+              {t.hero.title_1}<br />
+              {t.hero.title_2} <span className="hero__title-accent">{t.hero.title_3}</span>
             </h1>
 
             <p className="hero__desc">
-              Best Online English Course & Programs - Belajar Bahasa Inggris dari 0,
-              secara terstruktur dengan tutor professional & friendly
+              {t.hero.desc}
             </p>
 
             <ul className="hero__checklist">
-              {['Program Intensif 30 Hari', 'Tutor Bersertifikat', 'Live Session & Rekaman'].map((item, i) => (
+              {t.hero.checks.map((item, i) => (
                 <li key={i}>
                   <div className="hero__check-icon">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -274,8 +287,8 @@ const Hero = () => {
             </ul>
 
             <div className="hero__actions">
-              <button className="btn-primary">Daftar Sekarang</button>
-              <button className="btn-outline">Lihat Program</button>
+              <button className="btn-primary" onClick={handleRegisterClick}>{t.hero.btn_register}</button>
+              <button className="btn-outline" onClick={handleViewProgramsClick}>{t.hero.btn_program}</button>
             </div>
           </div>
 

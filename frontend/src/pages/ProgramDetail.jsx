@@ -5,8 +5,45 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
+import { useLanguage } from '../context/LanguageContext'
 
 // ─── SVG ICONS ────────────────────────────────────────────────────────────────
+import imgSD1 from '../assets/Program/sd/LearnMoreSD1.jpeg'
+import imgSD2 from '../assets/Program/sd/LearnMoreSD2.jpeg'
+import imgSD3 from '../assets/Program/sd/LearnMoreSD3.jpeg'
+import imgSD4 from '../assets/Program/sd/LearnMoreSD4.jpeg'
+import imgSD5 from '../assets/Program/sd/LearnMoreSD5.jpeg'
+
+import imgSMP1 from '../assets/Program/smp/LearnMoreSMP1.jpeg'
+import imgSMP2 from '../assets/Program/smp/LearnMoreSMP2.jpeg'
+import imgSMP3 from '../assets/Program/smp/LearnMoreSMP3.jpeg'
+import imgSMP4 from '../assets/Program/smp/LearnMoreSMP4.jpeg'
+import imgSMP5 from '../assets/Program/smp/LearnMoreSMP5.jpeg'
+
+import imgSMA1 from '../assets/Program/sma/LearnMoreSMA1.jpeg'
+import imgSMA2 from '../assets/Program/sma/LearnMoreSMA2.jpeg'
+import imgSMA3 from '../assets/Program/sma/LearnMoreSMA3.jpeg'
+import imgSMA4 from '../assets/Program/sma/LearnMoreSMA4.jpeg'
+import imgSMA5 from '../assets/Program/sma/LearnMoreSMA5.jpeg'
+
+import imgConv1 from '../assets/Program/conversation/LearnMoreCONVERSATION1.jpeg'
+import imgConv2 from '../assets/Program/conversation/LearnMoreCONVERSATION2.jpeg'
+import imgConv3 from '../assets/Program/conversation/LearnMoreCONVERSATION3.jpeg'
+import imgConv4 from '../assets/Program/conversation/LearnMoreCONVERSATION4.jpeg'
+import imgConv5 from '../assets/Program/conversation/LearnMoreCONVERSATION5.jpeg'
+
+import imgESP1 from '../assets/Program/esp/LearnMoreESP1.jpeg'
+import imgESP2 from '../assets/Program/esp/LearnMoreESP2.jpeg'
+import imgESP3 from '../assets/Program/esp/LearnMoreESP3.jpeg'
+import imgESP4 from '../assets/Program/esp/LearnMoreESP4.jpeg'
+import imgESP5 from '../assets/Program/esp/LearnMoreESP5.jpeg'
+
+import imgProf1 from '../assets/Program/professional/LearnMoreProfessional1.jpeg'
+import imgProf2 from '../assets/Program/professional/LearnMoreProfessional2.jpeg'
+import imgProf3 from '../assets/Program/professional/LearnMoreProfessional3.jpeg'
+import imgProf4 from '../assets/Program/professional/LearnMoreProfessional4.jpeg'
+import imgProf5 from '../assets/Program/professional/LearnMoreProfessional5.jpeg'
+
 const icons = {
   gamepad: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -134,10 +171,12 @@ const levelData = {
     heroTitle: 'English Program for Kids',
     heroSubtitle: 'Fun and interactive learning for the next generation. Join our joyful classes where every lesson is an adventure.',
     heroCtaEnroll: 'Enroll Now',
+    heroImage: imgSD1,
     detailTitle: 'Learning That Feels Like Play',
     detailDesc: "We believe that children learn best when they're having fun. Our curriculum blends engaging storytelling, interactive games, and guided play to make mastering English a joyful journey rather than a chore.",
     detailImageCaption: 'Learning is Fun',
     detailImageSub: 'Interactive & Joyful Methods',
+    detailImage: imgSD2,
     advantages: [
       { iconKey: 'gamepad', title: 'Play-based Learning',  desc: 'Interactive games that teach without feeling like lessons.' },
       { iconKey: 'music',   title: 'Storytelling & Songs', desc: 'Memorable adventures and catchy tunes for natural language acquisition.' },
@@ -148,9 +187,9 @@ const levelData = {
     ctaTitle: 'Free Consultation',
     ctaButton: 'Contact Us',
     features: [
-      { iconKey: 'monitor', title: 'Live Online Classes',     desc: 'Fun sessions with friends and teachers. Our small group sizes ensure every child gets the attention they need to speak up confidently.',                    imageLeft: true  },
-      { iconKey: 'zap',     title: 'Fun Learning Activities', desc: 'Quizzes, games, and storytelling adventures. Learning vocabulary and grammar happens naturally while completing exciting missions.',                        imageLeft: false },
-      { iconKey: 'users',   title: 'Cheerful Support',        desc: 'Friendly teachers who help you every step of the way. We focus on building self-esteem alongside language skills.',                                         imageLeft: true  },
+      { iconKey: 'monitor', title: 'Live Online Classes',     desc: 'Fun sessions with friends and teachers. Our small group sizes ensure every child gets the attention they need to speak up confidently.',                    imageLeft: true,  image: imgSD3 },
+      { iconKey: 'zap',     title: 'Fun Learning Activities', desc: 'Quizzes, games, and storytelling adventures. Learning vocabulary and grammar happens naturally while completing exciting missions.',                        imageLeft: false, image: imgSD4 },
+      { iconKey: 'users',   title: 'Cheerful Support',        desc: 'Friendly teachers who help you every step of the way. We focus on building self-esteem alongside language skills.',                                         imageLeft: true,  image: imgSD5 },
     ],
     faqItems: [
       { q: 'Bagaimana cara mendaftarkan anak saya?',         a: "Pendaftaran dapat dilakukan langsung melalui tombol 'Enroll Now' di website kami atau dengan mengunjungi cabang terdekat untuk konsultasi gratis." },
@@ -165,10 +204,12 @@ const levelData = {
     heroTitle: 'Academic English for SMP Students',
     heroSubtitle: 'Bridge the gap to academic excellence. Master communication, grammar, and critical thinking with our comprehensive English program designed specifically for middle schoolers.',
     heroCtaEnroll: 'Enroll Now',
+    heroImage: imgSMP1,
     detailTitle: 'Interactive Academic English',
     detailDesc: 'Our methodology shifts the focus from basic literacy to advanced comprehension and expression, equipping SMP students with the linguistic tools they need for academic success.',
     detailImageCaption: 'Learning is Fun',
     detailImageSub: 'Immersive & Methodology',
+    detailImage: imgSMP2,
     advantages: [
       { iconKey: 'chat',  title: 'Communication',      desc: 'Develop fluent speaking and active listening skills essential for academic discussions.' },
       { iconKey: 'book',  title: 'Grammar Mastery',    desc: 'Solidify structural understanding through practical application rather than rote memorization.' },
@@ -179,9 +220,9 @@ const levelData = {
     ctaTitle: 'Daftar Konsultasi Gratis',
     ctaButton: 'Hubungi Kami',
     features: [
-      { iconKey: 'monitor',    title: 'Live Online Classes',   desc: 'Join dynamic, real-time video sessions where students actively collaborate. Participate in lively group discussions, debates, and breakout rooms that mirror the energy of a physical classroom.',  imageLeft: true  },
-      { iconKey: 'zap',        title: 'Interactive Activities', desc: "Learning doesn't stop at lectures. Engage with digital quizzes, collaborative online games, and interactive exercises designed specifically to keep teenagers focused and motivated while mastering English.", imageLeft: false },
-      { iconKey: 'trendingUp', title: 'Progress & Feedback',   desc: 'Stay on track with our intuitive digital dashboard that monitors performance. Receive direct, personalized guidance from experienced teachers to target areas for improvement and celebrate academic wins.', imageLeft: true  },
+      { iconKey: 'monitor',    title: 'Live Online Classes',   desc: 'Join dynamic, real-time video sessions where students actively collaborate. Participate in lively group discussions, debates, and breakout rooms that mirror the energy of a physical classroom.',  imageLeft: true,  image: imgSMP3 },
+      { iconKey: 'zap',        title: 'Interactive Activities', desc: "Learning doesn't stop at lectures. Engage with digital quizzes, collaborative online games, and interactive exercises designed specifically to keep teenagers focused and motivated while mastering English.", imageLeft: false, image: imgSMP4 },
+      { iconKey: 'trendingUp', title: 'Progress & Feedback',   desc: 'Stay on track with our intuitive digital dashboard that monitors performance. Receive direct, personalized guidance from experienced teachers to target areas for improvement and celebrate academic wins.', imageLeft: true,  image: imgSMP5 },
     ],
     faqItems: [
       { q: 'Bagaimana cara mendaftarkan anak saya?',         a: "Pendaftaran dapat dilakukan langsung melalui tombol 'Enroll Now' di website kami atau dengan mengunjungi cabang terdekat untuk konsultasi gratis." },
@@ -196,10 +237,12 @@ const levelData = {
     heroTitle: 'Advanced English for SMA Students',
     heroSubtitle: 'Prepare for university, international exams, and global opportunities. Our advanced English program builds the skills you need to stand out.',
     heroCtaEnroll: 'Enroll Now',
+    heroImage: imgSMA1,
     detailTitle: 'University-Ready English',
     detailDesc: 'Our SMA program focuses on advanced academic writing, critical analysis, and presentation skills — everything needed to excel in national exams, scholarship applications, and international settings.',
     detailImageCaption: 'Learning is Fun',
     detailImageSub: 'Academic & Career-Ready',
+    detailImage: imgSMA2,
     advantages: [
       { iconKey: 'pen',    title: 'Academic Writing',  desc: 'Master essay structures, argumentative writing, and research paper techniques for university entrance.' },
       { iconKey: 'mic',    title: 'Public Speaking',   desc: 'Build confidence to present ideas clearly in English, from class presentations to debate competitions.' },
@@ -210,15 +253,114 @@ const levelData = {
     ctaTitle: 'Daftar Konsultasi Gratis',
     ctaButton: 'Hubungi Kami',
     features: [
-      { iconKey: 'monitor',   title: 'Live Online Classes',  desc: 'Intensive live sessions focused on discussion, debate, and collaborative problem-solving. Real academic scenarios prepare you for university-level discourse.',                                    imageLeft: true  },
-      { iconKey: 'clipboard', title: 'Exam Preparation',     desc: 'Structured modules for IELTS, TOEFL, and SNBT. Practice under exam conditions with timed drills and detailed feedback from expert instructors.',                                                  imageLeft: false },
-      { iconKey: 'award',     title: 'Achievement Tracking', desc: 'Detailed progress reports every month, personalized study plans, and 1-on-1 coaching sessions to ensure you hit your target scores and goals.',                                                    imageLeft: true  },
+      { iconKey: 'monitor',   title: 'Live Online Classes',  desc: 'Intensive live sessions focused on discussion, debate, and collaborative problem-solving. Real academic scenarios prepare you for university-level discourse.',                                    imageLeft: true,  image: imgSMA3 },
+      { iconKey: 'clipboard', title: 'Exam Preparation',     desc: 'Structured modules for IELTS, TOEFL, and SNBT. Practice under exam conditions with timed drills and detailed feedback from expert instructors.',                                                  imageLeft: false, image: imgSMA4 },
+      { iconKey: 'award',     title: 'Achievement Tracking', desc: 'Detailed progress reports every month, personalized study plans, and 1-on-1 coaching sessions to ensure you hit your target scores and goals.',                                                    imageLeft: true,  image: imgSMA5 },
     ],
     faqItems: [
       { q: 'Bagaimana cara mendaftarkan anak saya?',         a: "Pendaftaran dapat dilakukan langsung melalui tombol 'Enroll Now' di website kami atau dengan mengunjungi cabang terdekat untuk konsultasi gratis." },
       { q: 'Apa metode pengajaran yang digunakan?',          a: "Kami menggunakan metode 'Interactive Narrative' di mana anak-anak belajar melalui cerita yang melibatkan karakter Folks dalam lingkungan dua arah yang aktif." },
       { q: 'Apakah ada tes penempatan sebelum masuk?',       a: 'Ya, kami menyediakan sesi trial dan asesmen singkat yang menyenangkan untuk memastikan anak berada di kelas yang sesuai dengan kemampuan mereka.' },
       { q: 'Berapa jumlah maksimal siswa dalam satu kelas?', a: 'Demi menjaga kualitas interaksi, setiap kelas dibatasi maksimal 8–10 siswa saja.' },
+    ],
+  },
+  
+  conversation: {
+    levelLabel: 'CONVERSATION',
+    heroTitle: 'Master Spoken English with Confidence',
+    heroSubtitle: 'Speak naturally, fluently, and confidently in any situation. From casual small talk to deep philosophical discussions, express yourself without hesitation.',
+    heroCtaEnroll: 'Enroll Now',
+    heroImage: imgConv1,
+    detailTitle: 'Fluent, Dynamic & Expressive',
+    detailDesc: 'Our Conversation program focuses on practical speaking skills, idioms, and cultural nuances. You will engage in storytelling, debates, and role-plays designed to mirror real-life interactions.',
+    detailImageCaption: 'Speak Up',
+    detailImageSub: 'Interactive Dialogue Sessions',
+    detailImage: imgConv2,
+    advantages: [
+      { iconKey: 'mic',    title: 'Impromptu Speaking',  desc: 'Learn to think on your feet and articulate thoughts clearly without preparation.' },
+      { iconKey: 'users',  title: 'Group Discussions',   desc: 'Participate in lively debates and roundtable discussions on popular topics.' },
+      { iconKey: 'chat',   title: 'Idioms & Slang',      desc: 'Master the informal expressions and vocabulary native speakers actually use.' },
+      { iconKey: 'globe',  title: 'Accent & Pronunciation', desc: 'Refine your intonation and understand various global English accents.' },
+    ],
+    ctaLabel: 'Siap untuk berbicara?',
+    ctaTitle: 'Daftar Konsultasi Gratis',
+    ctaButton: 'Hubungi Kami',
+    features: [
+      { iconKey: 'monitor',   title: 'Live Speaking Practice',  desc: 'Interactive sessions focusing 80% on student speaking time. Overcome the fear of making mistakes in a supportive environment.', imageLeft: true,  image: imgConv3 },
+      { iconKey: 'music',     title: 'Podcast & Film Analysis', desc: 'Learn conversational context by analyzing popular media, improving both listening comprehension and conversational responses.', imageLeft: false, image: imgConv4 },
+      { iconKey: 'award',     title: 'CEFR Aligned Progress',   desc: 'Structured progression from CEFR B1 (Intermediate) up to C2 (Mastery), ensuring your fluency constantly evolves.', imageLeft: true,  image: imgConv5 },
+    ],
+    faqItems: [
+      { q: 'Apakah program ini cocok untuk pemula?', a: 'Program ini direkomendasikan untuk peserta yang sudah memiliki dasar bahasa Inggris (minimal level A2/B1) dan ingin fokus pada kelancaran berbicara.' },
+      { q: 'Berapa banyak siswa dalam kelas Conversation?', a: 'Untuk memaksimalkan waktu bicara setiap peserta, kelas dibatasi maksimal 6-8 orang.' },
+      { q: 'Apakah diajarkan grammar juga?', a: 'Grammar diajarkan secara kontekstual melalui koreksi langsung (feedback) saat berlatih berbicara, bukan melalui teori tertulis.' },
+      { q: 'Bagaimana saya tahu level speaking saya saat ini?', a: 'Kami akan melakukan speaking assessment singkat di awal untuk menempatkan Anda di kelas yang paling sesuai.' },
+    ],
+  },
+
+  esp: {
+    levelLabel: 'ENGLISH FOR SPECIFIC PURPOSES (ESP)',
+    heroTitle: 'English Tailored for Your Industry',
+    heroSubtitle: 'Accelerate your career with industry-specific English. Whether you are in IT, Medical, Legal, or Hospitality, master the exact vocabulary you need.',
+    heroCtaEnroll: 'Enroll Now',
+    heroImage: imgESP1,
+    detailTitle: 'Industry-Focused Language Mastery',
+    detailDesc: 'General English is often not enough in professional specialized fields. Our ESP program provides targeted language training based on your specific occupational needs and jargon.',
+    detailImageCaption: 'Career Booster',
+    detailImageSub: 'Specialized Vocabulary',
+    detailImage: imgESP2,
+    advantages: [
+      { iconKey: 'book',     title: 'Industry Jargon',      desc: 'Learn the exact terminologies and phrasing used by professionals in your specific field.' },
+      { iconKey: 'search',   title: 'Case Studies',         desc: 'Analyze real-world scenarios, documents, and reports relevant to your profession.' },
+      { iconKey: 'clipboard',title: 'Role-Play Scenarios',  desc: 'Simulate workplace situations like patient consultations, client meetings, or technical support.' },
+      { iconKey: 'award',    title: 'Professional Standards',desc: 'Communicate with international clients and colleagues adhering to global professional standards.' },
+    ],
+    ctaLabel: 'Tingkatkan karir Anda?',
+    ctaTitle: 'Daftar Konsultasi Gratis',
+    ctaButton: 'Hubungi Kami',
+    features: [
+      { iconKey: 'monitor',   title: 'Customized Curriculum',  desc: 'Materials are carefully selected and tailored to your specific industry, whether it is Aviation, Engineering, Medicine, or Hospitality.', imageLeft: true,  image: imgESP3 },
+      { iconKey: 'pen',       title: 'Professional Documentation', desc: 'Learn to write precise and accurate reports, emails, and technical documentation required in your line of work.', imageLeft: false, image: imgESP4 },
+      { iconKey: 'trendingUp',title: 'Career Advancement',   desc: 'Equip yourself with the linguistic competence to seek promotions or international opportunities in your specialized field.', imageLeft: true,  image: imgESP5 },
+    ],
+    faqItems: [
+      { q: 'Bidang industri apa saja yang tersedia?', a: 'Kami melayani berbagai bidang termasuk IT, Medis, Hukum, Perhotelan, Penerbangan, dan Teknik. Anda bisa berkonsultasi untuk kebutuhan spesifik lainnya.' },
+      { q: 'Apakah ini kelas privat atau grup?', a: 'Tersedia pilihan kelas privat maupun in-house training untuk perusahaan (grup kecil dengan industri yang sama).' },
+      { q: 'Berapa lama durasi program ESP?', a: 'Durasi sangat fleksibel tergantung target dan kompleksitas materi, umumnya berkisar antara 3 hingga 6 bulan.' },
+      { q: 'Siapa pengajarnya?', a: 'Pengajar adalah instruktur bahasa Inggris profesional yang memiliki pemahaman atau latar belakang di industri terkait.' },
+    ],
+  },
+
+  'professional-business': {
+    levelLabel: 'PROFESSIONAL BUSINESS',
+    heroTitle: 'Executive English & Corporate Communication',
+    heroSubtitle: 'Communicate with authority. Master business negotiations, leadership phrasing, and executive presentations for the global corporate stage.',
+    heroCtaEnroll: 'Enroll Now',
+    heroImage: imgProf1,
+    detailTitle: 'Strategic Business Communication',
+    detailDesc: 'Designed for corporate leaders and professionals. This program goes beyond basic business English, focusing on diplomacy, strategic negotiations, and executive boardroom presence.',
+    detailImageCaption: 'Executive Level',
+    detailImageSub: 'Leadership & Diplomacy',
+    detailImage: imgProf2,
+    advantages: [
+      { iconKey: 'chart',    title: 'Business Negotiations', desc: 'Master the language of persuasion, compromise, and commercial diplomacy.' },
+      { iconKey: 'users',    title: 'Leadership Phrasing',   desc: 'Learn how to direct teams, resolve conflicts, and deliver feedback effectively.' },
+      { iconKey: 'mic',      title: 'Executive Pitching',    desc: 'Deliver compelling presentations and pitches to investors or global stakeholders.' },
+      { iconKey: 'globe',    title: 'Cross-Cultural Comm',   desc: 'Navigate international business etiquette and cultural nuances with ease.' },
+    ],
+    ctaLabel: 'Tingkatkan performa bisnis?',
+    ctaTitle: 'Daftar Konsultasi Gratis',
+    ctaButton: 'Hubungi Kami',
+    features: [
+      { iconKey: 'monitor',   title: 'Boardroom Simulations',  desc: 'Practice high-stakes meetings, crisis management, and strategic planning sessions in a simulated corporate environment.', imageLeft: true,  image: imgProf3 },
+      { iconKey: 'clipboard', title: 'Executive Summaries',    desc: 'Enhance your ability to write concise, impactful executive summaries, proposals, and official corporate correspondence.', imageLeft: false, image: imgProf4 },
+      { iconKey: 'award',     title: 'C-Level Proficiency',    desc: 'Reach CEFR C1/C2 levels of proficiency, ensuring your language skills match your professional expertise and ambition.', imageLeft: true,  image: imgProf5 },
+    ],
+    faqItems: [
+      { q: 'Apakah program ini cocok untuk fresh graduate?', a: 'Program ini lebih ditujukan bagi profesional madya hingga eksekutif yang sudah memiliki pengalaman kerja dan ingin meningkatkan level komunikasi bisnis mereka.' },
+      { q: 'Apakah bisa untuk training perusahaan (Corporate Training)?', a: 'Sangat bisa. Kami menyediakan paket B2B Corporate Training yang disesuaikan dengan tujuan strategis perusahaan Anda.' },
+      { q: 'Materi apa yang membedakan dengan ESP?', a: 'ESP fokus pada kosa kata teknis suatu industri (misal: medis/IT), sedangkan Professional Business fokus pada skill komunikasi manajerial, negosiasi, dan kepemimpinan lintas industri.' },
+      { q: 'Apakah jadwalnya fleksibel?', a: 'Ya, kami memahami kesibukan profesional, sehingga jadwal dapat disesuaikan dengan ketersediaan Anda.' },
     ],
   },
 }
@@ -246,9 +388,13 @@ const Icon = ({ name, className = '' }) => (
 const ProgramDetail = () => {
   const { level } = useParams()
   const navigate = useNavigate()
-  const data = levelData[level?.toLowerCase()]
+  const { t } = useLanguage()
 
-  if (!data) {
+  const levelKey = level?.toLowerCase()
+  const staticData = levelData[levelKey]
+  const textData = t.program_detail?.[levelKey]
+
+  if (!staticData || !textData) {
     return (
       <div className="pd-page">
         <Navbar />
@@ -263,8 +409,23 @@ const ProgramDetail = () => {
     )
   }
 
+  const data = {
+    ...staticData,
+    ...textData,
+    advantages: textData.advantages?.map((adv, i) => ({
+      ...adv,
+      iconKey: staticData.advantages[i]?.iconKey
+    })) || [],
+    features: textData.features?.map((feat, i) => ({
+      ...feat,
+      imageLeft: staticData.features[i]?.imageLeft,
+      image: staticData.features[i]?.image,
+      iconKey: staticData.features[i]?.iconKey
+    })) || []
+  }
+
   const handleWa = () => {
-    window.open('https://wa.me/6282289993655', '_blank')
+    window.open('https://api.whatsapp.com/send?phone=6287886180776', '_blank')
   }
 
   return (
@@ -275,10 +436,24 @@ const ProgramDetail = () => {
            Halaman detail program SD / SMP / SMA
            ============================================================ */
 
+        /* ── PAGE TRANSITION ANIMATION ── */
+        @keyframes pageFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(15px) scale(0.99);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
         .pd-page {
           width: 100%;
           min-height: 100vh;
           background: #ffffff;
+          animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          will-change: transform, opacity;
         }
 
         /* ── ICON ── */
@@ -396,6 +571,13 @@ const ProgramDetail = () => {
           color: var(--primary, #105647);
           opacity: 0.3;
         }
+        .pd-hero__img {
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 20px;
+          object-fit: cover;
+          display: block;
+        }
         .pd-hero__badge {
           position: absolute;
           bottom: -16px;
@@ -473,6 +655,13 @@ const ProgramDetail = () => {
           height: 72px;
           color: #fff;
           opacity: 0.25;
+        }
+        .pd-detail__img {
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 16px;
+          object-fit: cover;
+          display: block;
         }
         .pd-detail__img-caption {
           position: absolute;
@@ -613,6 +802,13 @@ const ProgramDetail = () => {
           height: 80px;
           color: #fff;
           opacity: 0.25;
+        }
+        .pd-feature__img {
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 16px;
+          object-fit: cover;
+          display: block;
         }
         .pd-feature__text {
           display: flex;
@@ -757,16 +953,13 @@ const ProgramDetail = () => {
             </div>
             <div className="pd-hero__visual">
               <div className="pd-hero__img-wrap">
-                <div className="pd-hero__img-placeholder">
-                  <Icon name="book" className="pd-hero__img-icon" />
-                </div>
-                <div className="pd-hero__badge">
-                  <Icon name="users" className="pd-hero__badge-svg" />
-                  <div>
-                    <div className="pd-hero__badge-num">2,000+</div>
-                    <div className="pd-hero__badge-sub">Students joined this year</div>
+                {data.heroImage ? (
+                  <img src={data.heroImage} alt={data.heroTitle} className="pd-hero__img" />
+                ) : (
+                  <div className="pd-hero__img-placeholder">
+                    <Icon name="book" className="pd-hero__img-icon" />
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -780,9 +973,13 @@ const ProgramDetail = () => {
               <h2 className="pd-detail__title">{data.detailTitle}</h2>
               <p className="pd-detail__desc">{data.detailDesc}</p>
               <div className="pd-detail__img-wrap">
-                <div className="pd-detail__img-placeholder">
-                  <Icon name="teacher" className="pd-detail__img-icon" />
-                </div>
+                {data.detailImage ? (
+                  <img src={data.detailImage} alt={data.detailTitle} className="pd-detail__img" />
+                ) : (
+                  <div className="pd-detail__img-placeholder">
+                    <Icon name="teacher" className="pd-detail__img-icon" />
+                  </div>
+                )}
                 <div className="pd-detail__img-caption">
                   <span className="pd-detail__caption-dot" />
                   <div>
@@ -828,9 +1025,13 @@ const ProgramDetail = () => {
                 className={`pd-feature ${feat.imageLeft ? 'pd-feature--img-left' : 'pd-feature--img-right'}`}
               >
                 <div className="pd-feature__img-wrap">
-                  <div className="pd-feature__img-placeholder">
-                    <Icon name={feat.iconKey} className="pd-feature__placeholder-icon" />
-                  </div>
+                  {feat.image ? (
+                    <img src={feat.image} alt={feat.title} className="pd-feature__img" />
+                  ) : (
+                    <div className="pd-feature__img-placeholder">
+                      <Icon name={feat.iconKey} className="pd-feature__placeholder-icon" />
+                    </div>
+                  )}
                 </div>
                 <div className="pd-feature__text">
                   <span className="pd-feature__icon-badge">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
+import { useLanguage } from '../context/LanguageContext'
 
 const API_URL = 'http://localhost:5000/api'
 
@@ -41,6 +42,7 @@ function SkeletonCard() {
 }
 
 const Blog = () => {
+  const { t } = useLanguage()
   const [activeCategory, setActiveCategory] = useState('All Stories')
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -50,7 +52,7 @@ const Blog = () => {
   useEffect(() => {
     fetch(`${API_URL}/blogs`)
       .then(r => {
-        if (!r.ok) throw new Error('Gagal mengambil data blog')
+        if (!r.ok) throw new Error(t.blog.error_fetch)
         return r.json()
       })
       .then(data => setPosts(Array.isArray(data) ? data : []))
@@ -324,14 +326,14 @@ const Blog = () => {
             <div className="blog-hero__overlay" />
             <div className="blog-hero__content">
               <span className="blog-hero__badge">
-                {featuredPost.featured ? 'Featured Story' : featuredPost.category || 'Article'}
+                {featuredPost.featured ? t.blog.featured_badge : featuredPost.category || 'Article'}
               </span>
               <h1 className="blog-hero__title">{featuredPost.title}</h1>
               <p className="blog-hero__desc">
                 {featuredPost.excerpt || featuredPost.content?.slice(0, 120) + '...'}
               </p>
               <button className="blog-hero__btn">
-                Read More <span>→</span>
+                {t.blog.read_more} <span>→</span>
               </button>
             </div>
           </section>
@@ -339,8 +341,8 @@ const Blog = () => {
           <section className="blog-hero blog-hero--empty">
             <div className="blog-hero__overlay" />
             <div className="blog-hero__content">
-              <h1 className="blog-hero__title" style={{ fontSize: '1.6rem' }}>Belum ada artikel</h1>
-              <p className="blog-hero__desc">Artikel akan segera hadir. Pantau terus!</p>
+              <h1 className="blog-hero__title" style={{ fontSize: '1.6rem' }}>{t.blog.empty_hero_title}</h1>
+              <p className="blog-hero__desc">{t.blog.empty_hero_desc}</p>
             </div>
           </section>
         )}
@@ -370,7 +372,7 @@ const Blog = () => {
                 </div>
               ) : filtered.length === 0 ? (
                 <div className="blog-empty">
-                  <p>Belum ada artikel dalam kategori ini.</p>
+                  <p>{t.blog.empty_grid}</p>
                 </div>
               ) : (
                 filtered.map((post, i) => (
@@ -394,7 +396,7 @@ const Blog = () => {
                         {post.excerpt || post.content?.slice(0, 120) + '...'}
                       </p>
                       <button className="blog-card__read">
-                        Read Article <span>→</span>
+                        {t.blog.read_article} <span>→</span>
                       </button>
                     </div>
                   </article>

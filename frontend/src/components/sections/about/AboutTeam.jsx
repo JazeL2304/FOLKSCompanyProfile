@@ -4,6 +4,7 @@ import foto1 from '../../../assets/fototeam1.jpg'
 import foto2 from '../../../assets/fototeam2.jpg'
 import foto3 from '../../../assets/fototeam3.jpg'
 import foto4 from '../../../assets/fototeam4.jpg'
+import { useLanguage } from '../../../context/LanguageContext'
 
 const teamMembers = [
   {
@@ -41,6 +42,7 @@ const teamMembers = [
 ]
 
 const AboutTeam = () => {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -94,7 +96,7 @@ const AboutTeam = () => {
 
         .about-team__subtitle {
           font-size: 14px;
-          color: #EF6D60;     /* ← ganti dari var(--text-muted) */
+          color: var(--primary);
         }
 
         /* ---- Grid ---- */
@@ -217,8 +219,8 @@ const AboutTeam = () => {
       <section className="about-team" ref={sectionRef}>
         <div className="about-team__container">
           <div className={`about-team__header ${isVisible ? 'at-visible' : ''}`}>
-            <h2 className="about-team__title">Meet Our <span style={{ color: '#EF6D60' }}>Tutor</span></h2>
-            <p className="about-team__subtitle">The Dynamic Minds Behind FOLKS</p>
+            <h2 className="about-team__title">{t.about_team.title_1} <span style={{ color: 'var(--primary)' }}>{t.about_team.title_2}</span> {t.about_team.title_3}</h2>
+            <p className="about-team__subtitle">{t.about_team.subtitle}</p>
           </div>
 
           <div className="about-team__grid">

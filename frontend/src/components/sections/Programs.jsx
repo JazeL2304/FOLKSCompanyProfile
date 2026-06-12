@@ -7,8 +7,9 @@ import sma1 from '../../assets/Program/sma/sma1.png'
 import bgProgram from '../../assets/background-program.png'
 
 import { BookOpen, GraduationCap, Award } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
-const programs = [
+const programsData = [
   {
     img: sd1,
     icon: <BookOpen size={13} />,
@@ -45,6 +46,7 @@ const programs = [
 ]
 
 const Programs = () => {
+  const { t } = useLanguage()
   const navigate = useNavigate()
   const sectionRef = useRef(null)
   const [triggered, setTriggered] = useState(false)
@@ -57,7 +59,7 @@ const Programs = () => {
       if (triggered) return
       if (window.scrollY + window.innerHeight * 0.7 > sectionTop + 200) {
         setTriggered(true)
-        programs.forEach((_, i) => {
+        programsData.forEach((_, i) => {
           setTimeout(() => {
             setCardVisible(prev => {
               const next = [...prev]
@@ -333,33 +335,33 @@ const Programs = () => {
         <div className="programs__inner">
 
           <div className={`programs__header ${triggered ? 'programs__header--visible' : ''}`}>
-            <h2 className="programs__title">PROGRAM UNGGULAN</h2>
+            <h2 className="programs__title">{t.programs.title}</h2>
             <p className="programs__subtitle">
-              Pilih program yang sesuai dengan kebutuhan dan tujuan belajar kamu
+              {t.programs.subtitle}
             </p>
           </div>
 
           <div className="programs__grid">
-            {programs.map((p, i) => (
+            {programsData.map((p, i) => (
               <div
                 key={i}
                 className={`programs__card ${cardVisible[i] ? 'programs__card--visible' : ''}`}
               >
                 <div className="programs__card-img-wrap">
-                  <img src={p.img} alt={p.title} className="programs__card-img" />
+                  <img src={p.img} alt={t.programs.cards[i].title} className="programs__card-img" />
                   <span className="programs__card-badge">
                     {p.icon} {p.badge}
                   </span>
                 </div>
                 <div className="programs__card-body">
-                  <h3 className="programs__card-title">{p.title}</h3>
-                  <p className="programs__card-desc">{p.desc}</p>
+                  <h3 className="programs__card-title">{t.programs.cards[i].title}</h3>
+                  <p className="programs__card-desc">{t.programs.cards[i].desc}</p>
 
                   <button
                     className="programs__card-btn"
-                    onClick={() => navigate('/program')}
+                    onClick={() => navigate(`/program/${p.level.toLowerCase()}`)}
                   >
-                    Pelajari Selengkapnya <span className="arrow">→</span>
+                    {t.programs.btn_detail} <span className="arrow">→</span>
                   </button>
                 </div>
               </div>
@@ -371,7 +373,7 @@ const Programs = () => {
               className="programs__cta-btn"
               onClick={() => navigate('/program')}
             >
-              Lihat Semua Program
+              {t.programs.btn_all}
             </button>
           </div>
 

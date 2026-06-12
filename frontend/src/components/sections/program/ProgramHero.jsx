@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import heroImg1 from '../../../assets/Program/fotoprogram.jpg'
 import heroImg2 from '../../../assets/Program/fotoprogram2.jpg'
-import heroImg3 from '../../../assets/Program/fotoprogram3.jpg'
+import { useLanguage } from '../../../context/LanguageContext'
 
-const slides = [heroImg1, heroImg2, heroImg3]
+const slides = [heroImg1, heroImg2]
 
 const ProgramHero = () => {
+  const { t } = useLanguage()
   const [current, setCurrent] = useState(0)
   const [transitioning, setTransitioning] = useState(false)
   const [direction, setDirection] = useState('next')
@@ -230,19 +231,18 @@ const ProgramHero = () => {
         <div className="program-hero__container">
           <div className="program-hero__left">
             <h1 className="program-hero__title">
-              Mastering<br />
-              English for{' '}
-              <span className="program-hero__title--accent">Global</span>
+              {t.program_hero.title_1}<br />
+              {t.program_hero.title_2}{' '}
+              <span className="program-hero__title--accent">{t.program_hero.title_3}</span>
               <br />
-              <span className="program-hero__title--accent">Success</span>
+              <span className="program-hero__title--accent">{t.program_hero.title_4}</span>
             </h1>
             <p className="program-hero__desc">
-              Step into a curated academic environment designed to transform your fluency.
-              Our bespoke programs blend prestige with creative modern pedagogy.
+              {t.program_hero.desc}
             </p>
             <div className="program-hero__actions">
-              <a href="#pathways" className="btn-primary program-hero__btn">Lihat Program</a>
-              <a href="#cta" className="program-hero__link">Hubungi Kami →</a>
+              <a href="#pathways" className="btn-primary program-hero__btn">{t.program_hero.btn_program}</a>
+              <a href="#cta" className="program-hero__link">{t.program_hero.btn_contact}</a>
             </div>
           </div>
 

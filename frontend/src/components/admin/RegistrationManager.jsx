@@ -98,10 +98,120 @@ function buildWAMessage(reg, action) {
 const emptyForm = {
   student_name: '',
   phone: '',
+  gender: '',
   program_id: '',
   notes: '',
   status: 'pending',
 }
+
+// ── Custom Select Component ────────────────────────────────
+function CustomSelect({ options, value, onChange, placeholder }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedOption = options.find(o => o.value === value);
+
+  // Group options if they have a `group` property
+  const groupedOptions = options.reduce((acc, opt) => {
+    const group = opt.group || '';
+    if (!acc[group]) acc[group] = [];
+    acc[group].push(opt);
+    return acc;
+  }, {});
+
+  const groups = Object.keys(groupedOptions);
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div 
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          padding: '10px 14px',
+          border: '1px solid var(--border, #e5e7eb)',
+          borderRadius: 8,
+          background: 'white',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: 14,
+        }}
+      >
+        <span style={{ color: selectedOption ? 'inherit' : 'var(--text-muted)' }}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      
+      {isOpen && (
+        <>
+          <div 
+            style={{ position: 'fixed', inset: 0, zIndex: 99 }} 
+            onClick={() => setIsOpen(false)}
+          />
+          <div style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            marginTop: 4,
+            background: 'white',
+            border: '1px solid var(--border, #e5e7eb)',
+            borderRadius: 8,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            maxHeight: 250,
+            overflowY: 'auto',
+            zIndex: 100,
+          }}>
+            {groups.map(group => (
+              <div key={group || 'ungrouped'}>
+                {group && (
+                  <div style={{
+                    padding: '8px 14px',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: 'var(--text-muted, #6b7280)',
+                    background: '#f3f4f6',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}>
+                    {group}
+                  </div>
+                )}
+                {groupedOptions[group].map(opt => (
+                  <div
+                    key={opt.value}
+                    onClick={() => {
+                      onChange(opt.value);
+                      setIsOpen(false);
+                    }}
+                    style={{
+                      padding: '10px 14px',
+                      cursor: 'pointer',
+                      fontSize: 14,
+                      background: value === opt.value ? 'rgba(16,86,71,0.08)' : 'transparent',
+                      color: value === opt.value ? 'var(--primary, #105647)' : 'inherit',
+                      transition: 'background 0.2s',
+                    }}
+                    onMouseEnter={e => {
+                      if (value !== opt.value) e.target.style.background = '#f9fafb';
+                    }}
+                    onMouseLeave={e => {
+                      if (value !== opt.value) e.target.style.background = 'transparent';
+                    }}
+                  >
+                    {opt.label}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 
 // ══════════════════════════════════════════════════════════
 export default function RegistrationManager() {
@@ -178,7 +288,7 @@ export default function RegistrationManager() {
       })
       await fetchRegistrations()
       window.open(
-        `https://wa.me/${reg.phone.replace(/^0/, '62')}?text=${buildWAMessage(reg, 'confirmed')}`,
+        `https://api.whatsapp.com/send?phone=${reg.phone.replace(/^0/, '62')}&text=${buildWAMessage(reg, 'confirmed')}`,
         '_blank'
       )
       setModal(null)
@@ -222,6 +332,7 @@ export default function RegistrationManager() {
         body: JSON.stringify({
           student_name: form.student_name,
           phone: form.phone,
+          gender: form.gender || null,
           program_id: form.program_id || null,
           notes: form.notes,
           status: form.status,
@@ -541,29 +652,40 @@ export default function RegistrationManager() {
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                   />
                 </div>
+                <div className="form-group">
+                  <label>Jenis Kelamin</label>
+                  <CustomSelect
+                    value={form.gender}
+                    onChange={val => setForm(f => ({ ...f, gender: val }))}
+                    placeholder="Pilih jenis kelamin..."
+                    options={[
+                      { value: 'Male', label: 'Laki-laki' },
+                      { value: 'Female', label: 'Perempuan' }
+                    ]}
+                  />
+                </div>
               </div>
               <div className="form-row">
                 <div className="form-group">
                   <label>Program</label>
-                  <select
+                  <CustomSelect
                     value={form.program_id}
-                    onChange={e => setForm(f => ({ ...f, program_id: e.target.value }))}
-                  >
-                    <option value="">Pilih program...</option>
-                    {programs.map(p => (
-                      <option key={p.id} value={p.id}>{p.title}</option>
-                    ))}
-                  </select>
+                    onChange={val => setForm(f => ({ ...f, program_id: val }))}
+                    placeholder="Pilih program..."
+                    options={programs.map(p => ({ value: p.id, label: p.title, group: p.category }))}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Status Awal</label>
-                  <select
+                  <CustomSelect
                     value={form.status}
-                    onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
-                  >
-                    <option value="pending">Pending</option>
-                    <option value="confirmed">Langsung Konfirmasi</option>
-                  </select>
+                    onChange={val => setForm(f => ({ ...f, status: val }))}
+                    placeholder="Pilih status..."
+                    options={[
+                      { value: 'pending', label: 'Pending' },
+                      { value: 'confirmed', label: 'Langsung Konfirmasi' }
+                    ]}
+                  />
                 </div>
               </div>
               <div className="form-group">
@@ -603,6 +725,7 @@ export default function RegistrationManager() {
               {[
                 { label: 'Nama', value: selectedReg.student_name },
                 { label: 'No. WhatsApp', value: selectedReg.phone },
+                { label: 'Jenis Kelamin', value: selectedReg.gender === 'Male' ? 'Laki-laki' : selectedReg.gender === 'Female' ? 'Perempuan' : 'Belum Diatur' },
                 { label: 'Program', value: getProgramName(selectedReg.program_id) },
                 { label: 'Status', value: selectedReg.status },
                 { label: 'Tanggal Daftar', value: formatDateLong(selectedReg.created_at) },

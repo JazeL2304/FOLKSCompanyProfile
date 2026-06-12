@@ -295,7 +295,7 @@ export default function AdminLogin() {
               <input
                 type="email"
                 name="email"
-                placeholder="admin@folks.id"
+                placeholder="Masukkan email Anda"
                 value={formData.email}
                 onChange={handleChange}
                 required

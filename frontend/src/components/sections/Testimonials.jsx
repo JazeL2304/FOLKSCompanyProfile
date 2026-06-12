@@ -3,16 +3,18 @@ import imgAndi from '../../assets/Andi.jpg'
 import imgSalsa from '../../assets/Salsa.jpg'
 import imgMaria from '../../assets/Maria.jpg'
 import { ChevronRight, ChevronLeft } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 
-const testimonials = [
-  { img: imgAndi,  name: 'Andi Pratama',    role: 'Mahasiswa',      rating: '4.9/5', text: 'Programnya sangat terstruktur dan mudah dipahami. Saya jadi lebih percaya diri saat presentasi dalam bahasa Inggris. Mentor juga responsif dan benar-benar membantu perkembangan saya.' },
-  { img: imgSalsa, name: 'Salsabila Rahma', role: 'Karyawan Swasta', rating: '4.9/5', text: 'Materinya praktis dan langsung bisa diterapkan di dunia kerja. Saya merasa kemampuan komunikasi saya meningkat signifikan dalam waktu yang relatif singkat.' },
-  { img: imgMaria, name: 'Maria Wijaya',    role: 'Orang Tua Murid', rating: '4.9/5', text: 'Saya melihat perkembangan yang sangat positif pada anak saya sejak bergabung di Intelligence Corp. Kemampuan bahasa Inggrisnya meningkat dan ia menjadi lebih percaya diri.' },
+const testimonialsData = [
+  { img: imgAndi,  name: 'Andi Pratama' },
+  { img: imgSalsa, name: 'Salsabila Rahma' },
+  { img: imgMaria, name: 'Maria Wijaya' },
 ]
 
-const n = testimonials.length
+const n = testimonialsData.length
 
 const Testimonials = () => {
+  const { t } = useLanguage()
   const [startIndex, setStartIndex] = useState(0)
   const [animClass, setAnimClass] = useState('')
   const lockRef = useRef(false)
@@ -30,11 +32,19 @@ const Testimonials = () => {
   }
 
   useEffect(() => {
-    const t = setInterval(() => slide('next'), 4000)
-    return () => clearInterval(t)
+    const timerId = setInterval(() => slide('next'), 4000)
+    return () => clearInterval(timerId)
   }, [])
 
-  const visible = [0, 1, 2].map(i => testimonials[(startIndex + i) % n])
+  const visible = [0, 1, 2].map(i => {
+    const idx = (startIndex + i) % n
+    return {
+      ...testimonialsData[idx],
+      role: t.testimonials.items[idx].role,
+      text: t.testimonials.items[idx].text,
+      rating: '4.9/5'
+    }
+  })
 
   return (
     <>
@@ -288,7 +298,7 @@ const Testimonials = () => {
         <div className="testimonials__deco-circle testimonials__deco-circle--br" />
 
         <div className="testimonials__inner">
-          <h2 className="testimonials__title">WHAT OUR LOVELY CLIENTS SAY ?</h2>
+          <h2 className="testimonials__title">{t.testimonials.title}</h2>
 
           <div className={`testimonials__grid ${animClass}`}>
             {visible.map((t, i) => (
@@ -311,7 +321,7 @@ const Testimonials = () => {
               <ChevronLeft size={18} />
             </button>
             <div className="testimonials__dots">
-              {testimonials.map((_, i) => (
+              {testimonialsData.map((_, i) => (
                 <button key={i}
                   className={`testimonials__dot ${i === startIndex ? 'testimonials__dot--active' : ''}`}
                   onClick={() => slide(i > startIndex ? 'next' : 'prev')} />

@@ -3,13 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
+import { useLanguage } from '../context/LanguageContext'
 
 const API_URL = 'http://localhost:5000/api'
 
 // ── Estimate read time ─────────────────────────────────────
-function estimateReadTime(content = '') {
+function estimateReadTime(content = '', t) {
   const words = content.trim().split(/\s+/).length
-  return Math.max(1, Math.ceil(words / 200)) + ' MIN READ'
+  return Math.max(1, Math.ceil(words / 200)) + ' ' + (t ? t.blog_post.read_time : 'MIN READ')
 }
 
 // ── Avatar initials ────────────────────────────────────────
@@ -45,6 +46,7 @@ function SkeletonPost() {
 }
 
 const BlogPost = () => {
+  const { t } = useLanguage()
   const { slug } = useParams()
   const navigate = useNavigate()
 
@@ -60,7 +62,7 @@ const BlogPost = () => {
     // Fetch artikel by slug + semua artikel untuk related & recent
     Promise.all([
       fetch(`${API_URL}/blogs/${slug}`).then(r => {
-        if (!r.ok) throw new Error('Artikel tidak ditemukan')
+        if (!r.ok) throw new Error(t.blog_post.not_found_title)
         return r.json()
       }),
       fetch(`${API_URL}/blogs`).then(r => r.json()),
@@ -92,7 +94,7 @@ const BlogPost = () => {
         <Navbar />
         <div style={{ textAlign: 'center', padding: '80px 5%' }}>
           <p style={{ fontSize: 48, marginBottom: 16 }}>📄</p>
-          <h2 style={{ color: 'var(--primary)', marginBottom: 8 }}>Artikel Tidak Ditemukan</h2>
+          <h2 style={{ color: 'var(--primary)', marginBottom: 8 }}>{t.blog_post.not_found_title}</h2>
           <p style={{ color: 'var(--text-muted)', marginBottom: 24 }}>{error}</p>
           <button
             onClick={() => navigate('/blog')}
@@ -102,7 +104,7 @@ const BlogPost = () => {
               fontFamily: 'Plus Jakarta Sans, sans-serif', fontWeight: 700,
             }}
           >
-            ← Kembali ke Blog
+            {t.blog_post.back_to_blog}
           </button>
         </div>
         <Footer />
@@ -110,7 +112,7 @@ const BlogPost = () => {
     </>
   )
 
-  const readTime = estimateReadTime(post.content)
+  const readTime = estimateReadTime(post.content, t)
   const publishedDate = post.published_at
     ? new Date(post.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
     : new Date(post.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -374,7 +376,7 @@ const BlogPost = () => {
 
             {/* Left: TOC — pakai paragraf pertama tiap section sebagai heading */}
             <aside className="blogpost-toc">
-              <p className="blogpost-toc__title">In This Article</p>
+              <p className="blogpost-toc__title">{t.blog_post.in_this_article}</p>
               <ul className="blogpost-toc__list">
                 {paragraphs.slice(0, 4).map((para, i) => (
                   <li key={i}>
@@ -408,7 +410,7 @@ const BlogPost = () => {
             <aside className="blogpost-sidebar">
               {related.length > 0 && (
                 <div className="blogpost-sidebar__recent">
-                  <p className="blogpost-sidebar__title">↗ Recent Posts</p>
+                  <p className="blogpost-sidebar__title">{t.blog_post.recent_posts}</p>
                   {related.map((rp, i) => (
                     <div key={i} className="blogpost-recent-item" onClick={() => navigate(`/blog/${rp.slug}`)}>
                       <span className="blogpost-recent-cat">{rp.category || 'Article'}</span>
@@ -422,15 +424,15 @@ const BlogPost = () => {
               )}
 
               <div className="blogpost-sidebar__subscribe">
-                <p className="blogpost-subscribe__title">Tetap Terhubung</p>
+                <p className="blogpost-subscribe__title">{t.blog_post.subscribe_title}</p>
                 <p className="blogpost-subscribe__desc">
-                  Tertarik bergabung dengan program FOLKS Institute? Chat dengan kami sekarang.
+                  {t.blog_post.subscribe_desc}
                 </p>
                 <button
                   className="blogpost-subscribe__btn"
-                  onClick={() => window.open('https://wa.me/6282289993655', '_blank')}
+                  onClick={() => window.open('https://api.whatsapp.com/send?phone=6287886180776', '_blank')}
                 >
-                  Chat via WhatsApp →
+                  {t.blog_post.subscribe_btn}
                 </button>
               </div>
             </aside>
@@ -442,14 +444,14 @@ const BlogPost = () => {
         <section className="blogpost-related">
           <div className="blogpost-related__inner">
             <div className="blogpost-related__header">
-              <h2 className="blogpost-related__title">Artikel Lainnya</h2>
+              <h2 className="blogpost-related__title">{t.blog_post.related_title}</h2>
               <button className="blogpost-related__view-all" onClick={() => navigate('/blog')}>
-                Lihat Semua →
+                {t.blog_post.view_all}
               </button>
             </div>
             <div className="blogpost-related__grid">
               {related.length === 0 ? (
-                <div className="blogpost-no-related">Belum ada artikel lain.</div>
+                <div className="blogpost-no-related">{t.blog_post.no_related}</div>
               ) : (
                 related.map((r, i) => (
                   <article key={i} className="blog-card" onClick={() => navigate(`/blog/${r.slug}`)}>
@@ -465,7 +467,7 @@ const BlogPost = () => {
                       <p className="blog-card__desc">
                         {r.excerpt || r.content?.slice(0, 100) + '...'}
                       </p>
-                      <button className="blog-card__read">Read Article <span>→</span></button>
+                      <button className="blog-card__read">{t.blog.read_article} <span>→</span></button>
                     </div>
                   </article>
                 ))

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Zap, GraduationCap, Users } from 'lucide-react'
+import { useLanguage } from '../../../context/LanguageContext'
 import teamPhoto1 from '../../../assets/TeamFOLKS.jpg'
 import teamPhoto2 from '../../../assets/TeamFOLKS2.jpg'
 import teamPhoto3 from '../../../assets/TeamFOLKS3.jpg'
@@ -7,13 +8,14 @@ import teamPhoto4 from '../../../assets/TeamFOLKS4.jpg'
 
 const photos = [teamPhoto1, teamPhoto2, teamPhoto3, teamPhoto4]
 
-const pillars = [
-  { Icon: Zap, text: 'Metode Interaktif' },
-  { Icon: GraduationCap, text: 'SD · SMP · SMA' },
-  { Icon: Users, text: 'Guru Berpengalaman' },
-]
-
 const AboutHero = () => {
+  const { t } = useLanguage()
+  
+  const pillars = [
+    { Icon: Zap, text: t.about_hero.pillars[0] },
+    { Icon: GraduationCap, text: t.about_hero.pillars[1] },
+    { Icon: Users, text: t.about_hero.pillars[2] },
+  ]
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
@@ -122,7 +124,7 @@ const AboutHero = () => {
         }
         .about-hero__title em {
           font-style: italic; font-weight: 800;
-          color: #EF6D60;
+          color: #105647;
         }
 
         .about-hero__divider {
@@ -214,25 +216,22 @@ const AboutHero = () => {
             <div className="ah-fade">
               <span className="about-hero__label">
                 <span className="about-hero__label-dot" />
-                KENAPA HARUS FOLKS?
+                {t.about_hero.label}
               </span>
             </div>
 
             <h1 className="about-hero__title ah-fade">
-              Belajar bahasa Inggris<br />
-              seharusnya <em>menyenangkan.</em>
+              {t.about_hero.title_1}<em>{t.about_hero.title_2}</em>{t.about_hero.title_3}
             </h1>
 
             <div className="about-hero__divider ah-fade" />
 
             <p className="about-hero__subtitle ah-fade">
-              FOLKS hadir untuk membuktikan bahwa setiap anak bisa fasih berbahasa Inggris.
+              {t.about_hero.subtitle}
             </p>
 
             <p className="about-hero__desc ah-fade">
-              Kami percaya bahwa lingkungan belajar yang tepat adalah kunci keberhasilan.
-              Dengan metode yang menyenangkan dan guru berpengalaman, FOLKS Institute
-              mendampingi setiap siswa untuk tumbuh percaya diri — dari SD hingga SMA.
+              {t.about_hero.desc}
             </p>
 
             <div className="about-hero__pillars">

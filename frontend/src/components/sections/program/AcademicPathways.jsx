@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../../../context/LanguageContext'
 
 // Import foto SD
 import sd1 from '../../../assets/Program/sd/sd1.png'
@@ -19,13 +20,14 @@ import sma3 from '../../../assets/Program/sma/sma3.png'
 const API_URL = 'http://localhost:5000/api'
 
 const TABS = ['General', 'Conversation', 'ESP', 'Professional Business']
-const LEVELS = ['SD', 'SMP', 'SMA']
+const LEVELS = ['SD', 'SMP', 'SMA', 'Profesional']
 
 // Foto lokal per level — fallback kalau program belum punya foto sendiri
 const levelPhotos = {
   SD: [sd1, sd2, sd3],
   SMP: [smp1, smp2, smp3],
   SMA: [sma1, sma2, sma3],
+  Profesional: [sma1, sma2, sma3], // fallback pakai foto SMA
 }
 
 const formatRupiah = (amount) => {
@@ -36,20 +38,30 @@ const formatRupiah = (amount) => {
 // =====================================================
 // PROGRAM CARD
 // =====================================================
-const ProgramCard = ({ program, photoIndex, level }) => {
+const ProgramCard = ({ program, photoIndex, level, t }) => {
   const navigate = useNavigate()
 
-  const photo = levelPhotos[level]?.[photoIndex % 3] || levelPhotos.SD[0]
+  const photos = levelPhotos[level] || levelPhotos.SMA
+  const photo = photos[photoIndex % 3]
 
   const handleKonsultasi = () => {
-    const waUrl = `https://wa.me/6282289993655?text=${encodeURIComponent(
+    const waUrl = `https://api.whatsapp.com/send?phone=6287886180776&text=${encodeURIComponent(
       `Halo, saya tertarik dengan program *${program.title}* (${level}) seharga ${formatRupiah(program.price)}. Boleh saya tahu info lebih lanjut?`
     )}`
     window.open(waUrl, '_blank')
   }
 
   const handleLearnMore = () => {
-    navigate(`/program/${level.toLowerCase()}`)
+    if (program.category === 'Conversation') {
+      navigate('/program/conversation')
+    } else if (program.category === 'ESP') {
+      navigate('/program/esp')
+    } else if (program.category === 'Professional Business') {
+      navigate('/program/professional-business')
+    } else {
+      const levelMap = { SD: 'sd', SMP: 'smp', SMA: 'sma', Profesional: 'sma' }
+      navigate(`/program/${levelMap[level] || 'sma'}`)
+    }
   }
 
   const features = Array.isArray(program.features) ? program.features : []
@@ -67,7 +79,7 @@ const ProgramCard = ({ program, photoIndex, level }) => {
             <span className="ap-card__price">{formatRupiah(program.price)}</span>
           </div>
           <button className="ap-card__btn-konsultasi" onClick={handleKonsultasi}>
-            Mulai Konsultasi
+            {t.academic_pathways.btn_consult}
           </button>
           {features.length > 0 && (
             <ul className="ap-card__features">
@@ -79,7 +91,7 @@ const ProgramCard = ({ program, photoIndex, level }) => {
               ))}
             </ul>
           )}
-          <button className="ap-card__btn-learn" onClick={handleLearnMore}>Learn More</button>
+          <button className="ap-card__btn-learn" onClick={handleLearnMore}>{t.academic_pathways.btn_learn}</button>
         </div>
       </div>
     </div>
@@ -89,7 +101,7 @@ const ProgramCard = ({ program, photoIndex, level }) => {
 // =====================================================
 // CAROUSEL PER LEVEL
 // =====================================================
-const LevelCarousel = ({ levelName, cards }) => {
+const LevelCarousel = ({ levelName, cards, t }) => {
   const [index, setIndex] = useState(0)
   const visibleCount = 3
   const maxIndex = Math.max(0, cards.length - visibleCount)
@@ -97,14 +109,8 @@ const LevelCarousel = ({ levelName, cards }) => {
   const prev = () => setIndex(i => Math.max(0, i - 1))
   const next = () => setIndex(i => Math.min(maxIndex, i + 1))
 
-  if (cards.length === 0) {
-    return (
-      <div className="ap-level">
-        <h3 className="ap-level__name">{levelName}</h3>
-        <p className="ap-level__empty">Program akan segera tersedia.</p>
-      </div>
-    )
-  }
+  // Reset index saat cards berubah
+  useEffect(() => { setIndex(0) }, [cards])
 
   return (
     <div className="ap-level">
@@ -125,7 +131,7 @@ const LevelCarousel = ({ levelName, cards }) => {
           >
             {cards.map((card, i) => (
               <div className="ap-carousel__slide" key={card.id || i}>
-                <ProgramCard program={card} photoIndex={i} level={levelName} />
+                <ProgramCard program={card} photoIndex={i} level={levelName} t={t} />
               </div>
             ))}
           </div>
@@ -147,6 +153,7 @@ const LevelCarousel = ({ levelName, cards }) => {
 // MAIN COMPONENT
 // =====================================================
 const AcademicPathways = () => {
+  const { t } = useLanguage()
   const [activeTab, setActiveTab] = useState('General')
   const [programs, setPrograms] = useState([])
   const [loading, setLoading] = useState(true)
@@ -158,7 +165,6 @@ const AcademicPathways = () => {
       try {
         const res = await fetch(`${API_URL}/programs`)
         const data = await res.json()
-        // Hanya tampilkan yang aktif
         setPrograms(data.filter(p => p.active))
       } catch (err) {
         console.error('Gagal fetch programs:', err)
@@ -182,12 +188,37 @@ const AcademicPathways = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Filter by tab (category) dan level
-  const getCards = (level) =>
-    programs.filter(p =>
+  const getCards = (level) => {
+    const filtered = programs.filter(p =>
       p.category === activeTab &&
-      p.level === level
+      (level ? p.level === level : true)
     )
+
+    const cefrOrder = ['A0', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+    const getCefrRank = (title) => {
+      const match = title.match(/\((A0|A1[-–]A2|A1|A2|B1|B2|C1[-–]C2|C1|C2)\)/i)
+      if (match) {
+        const key = match[1].replace(/[-–].*/, '').toUpperCase()
+        return cefrOrder.indexOf(key)
+      }
+      return 999
+    }
+
+    return filtered.sort((a, b) => getCefrRank(a.title) - getCefrRank(b.title))
+  }
+
+  // Data persiapan render
+  let renderItems = []
+  if (activeTab === 'Conversation') {
+    const allCards = getCards(null)
+    if (allCards.length > 0) {
+      renderItems = [{ levelName: 'GENERAL', cards: allCards }]
+    }
+  } else {
+    renderItems = LEVELS
+      .map(lvl => ({ levelName: lvl, cards: getCards(lvl) }))
+      .filter(item => item.cards.length > 0)
+  }
 
   return (
     <>
@@ -216,8 +247,13 @@ const AcademicPathways = () => {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 18px; font-weight: 800; color: #EF6D60;
           text-align: center; margin-bottom: 24px; letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
         .ap-level__empty { text-align: center; color: #6b7a99; font-size: 14px; padding: 40px 0; }
+        .ap-empty-tab {
+          text-align: center; padding: 80px 0; color: #6b7a99;
+          font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         .ap-carousel { display: flex; align-items: center; gap: 12px; position: relative; }
         .ap-carousel__viewport { flex: 1; overflow: hidden; }
         .ap-carousel__track {
@@ -310,7 +346,7 @@ const AcademicPathways = () => {
       <section className="academic-pathways" id="pathways" ref={sectionRef}>
         <div className="ap-container">
           <div className={`ap-header ${visible ? 'ap-visible' : ''}`}>
-            <h2 className="ap-title">Academic Pathways</h2>
+            <h2 className="ap-title">{t.academic_pathways.title}</h2>
           </div>
           <div className={`ap-tabs ${visible ? 'ap-visible' : ''}`}>
             {TABS.map(tab => (
@@ -325,14 +361,17 @@ const AcademicPathways = () => {
           </div>
 
           {loading ? (
-            <div className="ap-loading">Memuat program...</div>
+            <div className="ap-loading">{t.academic_pathways.loading}</div>
+          ) : renderItems.length === 0 ? (
+            <div className="ap-empty-tab">Program untuk kategori ini akan segera tersedia.</div>
           ) : (
             <div className="ap-levels">
-              {LEVELS.map(level => (
+              {renderItems.map(item => (
                 <LevelCarousel
-                  key={`${activeTab}-${level}`}
-                  levelName={level}
-                  cards={getCards(level)}
+                  key={`${activeTab}-${item.levelName}`}
+                  levelName={item.levelName}
+                  cards={item.cards}
+                  t={t}
                 />
               ))}
             </div>

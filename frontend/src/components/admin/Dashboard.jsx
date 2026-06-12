@@ -370,6 +370,14 @@ export default function Dashboard({ onNavigate }) {
   // ── Derived Stats ────────────────────────────────────────
   const totalPendaftar = registrations.length
   const pendingKonfirmasi = registrations.filter(r => r.status === 'pending').length
+  const maleCount = registrations.filter(r => r.gender === 'Male').length
+  const femaleCount = registrations.filter(r => r.gender === 'Female').length
+  const unknownCount = totalPendaftar - maleCount - femaleCount
+
+  const malePct = totalPendaftar > 0 ? Math.round((maleCount / totalPendaftar) * 100) : 0
+  const femalePct = totalPendaftar > 0 ? Math.round((femaleCount / totalPendaftar) * 100) : 0
+  const unknownPct = totalPendaftar > 0 ? (100 - malePct - femalePct) : 0
+
   const programAktif = programs.filter(p => p.active).length
   const artikelPublished = blogs.filter(b => b.status === 'published').length
   const artikelDraft = blogs.filter(b => b.status === 'draft').length
@@ -636,11 +644,12 @@ export default function Dashboard({ onNavigate }) {
             <div><h2>Distribusi Gender</h2></div>
           </div>
           <div className="dash-gender-body">
-            <DonutChart laki={58} perempuan={42} total={totalPendaftar} />
+            <DonutChart laki={malePct} perempuan={femalePct} total={totalPendaftar} />
             <div className="dash-gender-legend">
               {[
-                { label: 'Male', pct: 58, color: 'var(--primary)' },
-                { label: 'Female', pct: 42, color: 'var(--accent)' },
+                { label: 'Male', pct: malePct, color: 'var(--primary)' },
+                { label: 'Female', pct: femalePct, color: 'var(--accent)' },
+                { label: 'Belum Diatur', pct: unknownPct, color: 'var(--border)' },
               ].map(g => (
                 <div key={g.label} className="dash-gender-row">
                   <span className="dash-gender-dot" style={{ background: g.color }} />

@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useLanguage } from '../context/LanguageContext'
+import { Globe } from 'lucide-react'
 import logo from '../assets/FOLKS Institute Logo No Background.png'
 
-const navLinks = [
-  { label: 'Beranda', path: '/' },
-  { label: 'Tentang', path: '/tentang' },
-  { label: 'Program', path: '/program' },
-  { label: 'Blog', path: '/blog' },
-]
-
 const Navbar = () => {
+  const { lang, toggleLang, t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+
+  const navLinks = [
+    { label: t.nav.home, path: '/' },
+    { label: t.nav.about, path: '/tentang' },
+    { label: t.nav.program, path: '/program' },
+    { label: t.nav.blog, path: '/blog' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -198,6 +201,25 @@ const Navbar = () => {
           z-index: 999;
         }
 
+        .lang-toggle {
+          background: transparent;
+          border: 1.5px solid var(--primary);
+          color: var(--primary);
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .lang-toggle:hover {
+          background: var(--primary);
+          color: white;
+        }
+
         /* ================================
            RESPONSIVE
         ================================ */
@@ -310,12 +332,16 @@ const Navbar = () => {
               </li>
             ))}
             <li className="navbar__login-mobile">
-              <Link to="/login" className="btn-primary">Login</Link>
+              <Link to="/login" className="btn-primary">{t.nav.login}</Link>
             </li>
           </ul>
 
           <div className="navbar__right">
-            <Link to="/login" className="btn-primary navbar__login">Login</Link>
+            <button onClick={toggleLang} className="lang-toggle">
+              <Globe size={16} style={{ marginRight: '6px' }} />
+              {lang === 'id' ? 'ID (Indonesia)' : 'EN (English)'}
+            </button>
+            <Link to="/login" className="btn-primary navbar__login">{t.nav.login}</Link>
             <button
               className={`navbar__hamburger ${menuOpen ? 'navbar__hamburger--open' : ''}`}
               onClick={() => setMenuOpen(!menuOpen)}

@@ -8,7 +8,7 @@ const formatRupiah = (amount) => {
 }
 
 const CATEGORIES = ['General', 'Conversation', 'ESP', 'Professional Business']
-const LEVELS = ['SD', 'SMP', 'SMA']
+const LEVELS = ['SD', 'SMP', 'SMA', 'Profesional']
 
 const emptyForm = {
   title: '',
@@ -25,6 +25,7 @@ export default function ProgramManager() {
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState(null)
   const [editId, setEditId] = useState(null)
+  const [deleteId, setDeleteId] = useState(null)
   const [formData, setFormData] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
 
@@ -127,16 +128,24 @@ export default function ProgramManager() {
     }
   }
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Yakin hapus program ini?')) return
+  const openDelete = (id) => {
+    setDeleteId(id)
+    setModal('delete')
+  }
+
+  const confirmDelete = async () => {
     try {
-      await fetch(`${API_URL}/programs/${id}`, {
+      setSaving(true)
+      await fetch(`${API_URL}/programs/${deleteId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${getToken()}` }
       })
       await fetchPrograms()
+      setModal(null)
     } catch (err) {
       alert('Gagal menghapus program')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -209,10 +218,17 @@ export default function ProgramManager() {
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
                   <span style={{
                     fontSize: 12, padding: '4px 10px',
-                    background: 'var(--bg)', border: '1px solid var(--border)',
-                    borderRadius: 20, color: 'var(--text-muted)'
+                    background: prog.level === 'Profesional'
+                      ? 'rgba(239,109,96,0.1)'
+                      : 'var(--bg)',
+                    border: prog.level === 'Profesional'
+                      ? '1px solid rgba(239,109,96,0.3)'
+                      : '1px solid var(--border)',
+                    borderRadius: 20,
+                    color: prog.level === 'Profesional' ? 'var(--accent)' : 'var(--text-muted)',
+                    fontWeight: prog.level === 'Profesional' ? 600 : 400
                   }}>
-                    🎓 {prog.level}
+                    {prog.level === 'Profesional' ? '💼' : '🎓'} {prog.level}
                   </span>
                   <span style={{
                     fontSize: 12, padding: '4px 10px',
@@ -247,11 +263,9 @@ export default function ProgramManager() {
                     </svg>
                     Edit
                   </button>
-                  <button className="btn btn-ghost btn-sm" style={{ color: '#ef4444' }} onClick={() => handleDelete(prog.id)}>
+                  <button className="btn btn-ghost btn-sm" style={{ color: '#ef4444' }} onClick={() => openDelete(prog.id)}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="3 6 5 6 21 6" />
-                      <path d="M19 6l-1 14H6L5 6" />
-                      <path d="M10 11v6M14 11v6" />
+                      <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
                     </svg>
                     Hapus
                   </button>
@@ -341,6 +355,32 @@ export default function ProgramManager() {
               <button className="btn btn-ghost" onClick={() => setModal(null)}>Batal</button>
               <button className="btn btn-accent" onClick={handleSave} disabled={saving}>
                 {saving ? 'Menyimpan...' : modal === 'create' ? 'Tambah Program' : 'Simpan Perubahan'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Delete */}
+      {modal === 'delete' && (
+        <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setModal(null)}>
+          <div className="modal-box" style={{ maxWidth: 400, textAlign: 'center', padding: '32px 24px' }}>
+            <div style={{
+              width: 56, height: 56, borderRadius: '50%', background: '#fee2e2', color: '#ef4444',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px'
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
+              </svg>
+            </div>
+            <h3 style={{ fontSize: 20, color: 'var(--text-main)', marginBottom: 8 }}>Hapus Program?</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 24, lineHeight: 1.5 }}>
+              Tindakan ini tidak dapat dibatalkan. Program yang dihapus akan hilang secara permanen.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button className="btn btn-ghost" onClick={() => setModal(null)} style={{ flex: 1 }}>Batal</button>
+              <button className="btn" onClick={confirmDelete} disabled={saving} style={{ flex: 1, background: '#ef4444', color: '#fff', border: 'none' }}>
+                {saving ? 'Menghapus...' : 'Ya, Hapus'}
               </button>
             </div>
           </div>

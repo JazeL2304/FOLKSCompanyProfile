@@ -2,31 +2,18 @@ import { useEffect, useRef, useState } from 'react'
 import bulbIcon from '../../../assets/Bulb.png'
 import excellenceIcon from '../../../assets/Excellence.png'
 import integrityIcon from '../../../assets/Integrity.png'
-
-const missions = [
-  {
-    icon: bulbIcon,
-    title: 'Innovation',
-    desc: 'We are committed to pioneering cutting-edge solutions that drive business growth and set new industry standards.',
-    bg: '#fff8f0',
-  },
-  {
-    icon: excellenceIcon,  // ← ganti dari magnifierIcon
-    title: 'Excellence',
-    desc: 'Our pursuit of quality and performance ensures exceptional results for our clients.',
-    bg: '#fff8f0',
-  },
-  {
-    icon: integrityIcon,   // ← ganti dari shieldIcon
-    title: 'Integrity',
-    desc: 'We uphold the highest standards of transparency, honesty, and ethical conduct in all our endeavors.',
-    bg: '#f0f5ff',
-  },
-]
+import { useLanguage } from '../../../context/LanguageContext'
 
 const AboutMission = () => {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+
+  const missions = [
+    { icon: bulbIcon, bg: '#fff8f0', ...t.about_mission.missions[0] },
+    { icon: excellenceIcon, bg: '#fff8f0', ...t.about_mission.missions[1] },
+    { icon: integrityIcon, bg: '#f0f5ff', ...t.about_mission.missions[2] },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,8 +148,8 @@ const AboutMission = () => {
       <section className="about-mission" ref={sectionRef}>
         <div className="about-mission__container">
           <div className={`about-mission__header ${isVisible ? 'am-visible' : ''}`}>
-            <h2 className="about-mission__title">Our Mission & Values</h2>
-            <p className="about-mission__subtitle">Driving Impact Through Technology & Integrity</p>
+            <h2 className="about-mission__title">{t.about_mission.title}</h2>
+            <p className="about-mission__subtitle">{t.about_mission.subtitle}</p>
           </div>
 
           <div className="about-mission__grid">

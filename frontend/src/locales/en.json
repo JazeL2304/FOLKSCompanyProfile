@@ -1,0 +1,561 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "program": "Program",
+    "blog": "Blog",
+    "login": "Login"
+  },
+  "footer": {
+    "country": "INDONESIA",
+    "nav_heading": "Navigation",
+    "contact_heading": "Contact Us",
+    "rights": "© 2025 FOLKS. All Rights Reserved."
+  },
+  "hero": {
+    "title_1": "Master English",
+    "title_2": "in",
+    "title_3": "30 days",
+    "desc": "Best Online English Course & Programs - Learn English from zero, structured with professional & friendly tutors",
+    "checks": [
+      "30-Day Intensive Program",
+      "Certified Tutors",
+      "Live Sessions & Recordings"
+    ],
+    "btn_register": "Register Now",
+    "btn_program": "View Programs"
+  },
+  "programs": {
+    "title": "OUR PROGRAMS",
+    "subtitle": "Choose the program that fits your needs and learning goals",
+    "cards": [
+      {
+        "title": "ENGLISH FOR KIDS",
+        "desc": "Helping elementary students master English reading, writing, listening, and speaking in a fun and effective way."
+      },
+      {
+        "title": "ACADEMIC ENGLISH",
+        "desc": "Focuses on improving English skills to support the academic achievements of junior high students at school."
+      },
+      {
+        "title": "PROFESSIONAL ENGLISH",
+        "desc": "Provides English training for high school students preparing to enter the workforce and university."
+      }
+    ],
+    "btn_detail": "Learn More",
+    "btn_all": "View All Programs"
+  },
+  "whyus": {
+    "title_1": "WHY",
+    "title_2": "FOLKS",
+    "title_3": "?",
+    "subtitle": "Learning and development solutions based on modern methods and global standards",
+    "cards": [
+      {
+        "title": "INNOVATIVE METHOD",
+        "desc": "Structured learning methods designed to effectively improve literacy, communication, and critical thinking."
+      },
+      {
+        "title": "RESEARCH & DATA DRIVEN",
+        "desc": "Developed based on years of research and experience with tested and measurable approaches."
+      },
+      {
+        "title": "TRUSTED & GROWING",
+        "desc": "Trusted by hundreds of participants and constantly growing into a modern learning institution with international standards."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "WHAT OUR LOVELY CLIENTS SAY ?",
+    "items": [
+      {
+        "role": "University Student",
+        "text": "The program is very structured and easy to understand. I feel more confident during English presentations. The mentors are also responsive and truly help my progress."
+      },
+      {
+        "role": "Private Employee",
+        "text": "The material is practical and can be directly applied in the workplace. I feel my communication skills have improved significantly in a relatively short time."
+      },
+      {
+        "role": "Parent",
+        "text": "I have seen very positive progress in my child since joining FOLKS Institute. Their English skills have improved and they have become more confident."
+      }
+    ]
+  },
+  "about_hero": {
+    "title_1": "Empowering Your Global ",
+    "title_2": "Journey",
+    "title_3": "",
+    "label": "WHY CHOOSE FOLKS?",
+    "subtitle": "FOLKS is here to prove that every child can be fluent in English.",
+    "desc": "We believe that the right learning environment is the key to success. With fun methods and experienced teachers, FOLKS Institute guides every student to grow in confidence — from elementary to high school.",
+    "pillars": [
+      "Interactive Methods",
+      "SD · SMP · SMA",
+      "Experienced Teachers"
+    ]
+  },
+  "about_story": {
+    "eyebrow": "About Us",
+    "title": "Our Story",
+    "highlight": "FOLKS Institute was born from a simple vision: to make English no longer a barrier, but a bridge to your academic and professional dreams. We realize that every individual has a different starting line and goal, from just wanting to be fluent and confident in daily conversation, to the ambition of entering global universities and institutions with high IELTS, TOEFL, or TOEIC scores.",
+    "desc": "Therefore, we design a comprehensive learning ecosystem. We don't just focus on rigid grammar theory, but on real practice, test strategy breakdown, and intensive simulations. Supported by experienced teachers, FOLKS Institute is committed to continuing to accompany your every step — turning doubt into fluency, and target scores into reality.",
+    "checklist_title": "What makes us different",
+    "checklist": [
+      "International standard curriculum",
+      "Expert and experienced tutors",
+      "Special strategies to conquer tests (TOEFL/IELTS/TOEIC)",
+      "Interactive & practical learning methods",
+      "Periodic evaluations & exam simulations",
+      "Supportive learning environment"
+    ]
+  },
+  "about_mission": {
+    "title": "Our Mission & Values",
+    "subtitle": "Driving Impact Through Education & Integrity",
+    "missions": [
+      {
+        "title": "Innovation",
+        "desc": "We are committed to pioneering cutting-edge solutions that drive learning growth and set new industry standards."
+      },
+      {
+        "title": "Excellence",
+        "desc": "Our pursuit of quality and performance ensures exceptional results for our students."
+      },
+      {
+        "title": "Integrity",
+        "desc": "We uphold the highest standards of transparency, honesty, and ethical conduct in all our endeavors."
+      }
+    ]
+  },
+  "about_team": {
+    "title_1": "Meet Our",
+    "title_2": "Tutors",
+    "title_3": "",
+    "subtitle": "The Dynamic Minds Behind FOLKS"
+  },
+  "program_hero": {
+    "title_1": "Mastering",
+    "title_2": "English for ",
+    "title_3": "Global",
+    "title_4": "Success",
+    "desc": "Step into a highly interactive learning environment designed to transform your fluency. Our comprehensive programs blend international academic standards with modern, results-driven teaching methods—empowering you to excel in everyday conversations and global proficiency tests.",
+    "btn_program": "View Programs",
+    "btn_contact": "Contact Us →"
+  },
+  "academic_pathways": {
+    "title": "Academic Pathways",
+    "empty": "Programs will be available soon.",
+    "loading": "Loading programs...",
+    "btn_consult": "Start Consultation",
+    "btn_learn": "Learn More"
+  },
+  "program_cta": {
+    "title": "Ready to Start Your Journey?",
+    "desc": "Join hundreds of professionals and students who have redefined their future through English fluency at FOLKS Academic.",
+    "btn_contact": "Contact Us",
+    "trust_label": "Trusted by many students"
+  },
+  "blog": {
+    "error_fetch": "Failed to fetch blog data",
+    "empty_hero_title": "No articles yet",
+    "empty_hero_desc": "Articles are coming soon. Stay tuned!",
+    "empty_grid": "No articles in this category yet.",
+    "read_more": "Read More",
+    "read_article": "Read Article",
+    "featured_badge": "Featured Story"
+  },
+  "blog_post": {
+    "not_found_title": "Article Not Found",
+    "back_to_blog": "← Back to Blog",
+    "in_this_article": "In This Article",
+    "recent_posts": "↗ Recent Posts",
+    "subscribe_title": "Stay Connected",
+    "subscribe_desc": "Interested in joining FOLKS Institute programs? Chat with us now.",
+    "subscribe_btn": "Chat via WhatsApp →",
+    "related_title": "Related Articles",
+    "view_all": "View All →",
+    "no_related": "No other articles yet.",
+    "read_time": "MIN READ"
+  },
+  "program_detail": {
+    "sd": {
+      "levelLabel": "KIDS PROGRAM",
+      "heroTitle": "English Program for Kids",
+      "heroSubtitle": "Fun and interactive learning for the next generation. Join our joyful classes where every lesson is an adventure.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "Learning That Feels Like Play",
+      "detailDesc": "We believe that children learn best when they're having fun. Our curriculum blends engaging storytelling, interactive games, and guided play to make mastering English a joyful journey rather than a chore.",
+      "detailImageCaption": "Learning is Fun",
+      "detailImageSub": "Interactive & Joyful Methods",
+      "advantages": [
+        {
+          "title": "Play-based Learning",
+          "desc": "Interactive games that teach without feeling like lessons."
+        },
+        {
+          "title": "Storytelling & Songs",
+          "desc": "Memorable adventures and catchy tunes for natural language acquisition."
+        },
+        {
+          "title": "Friendly Teachers",
+          "desc": "Patient, encouraging guides who celebrate every small victory."
+        },
+        {
+          "title": "Progress Stars",
+          "desc": "Reward systems that motivate and build unshakeable confidence."
+        }
+      ],
+      "ctaLabel": "Ready to start?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Live Online Classes",
+          "desc": "Fun sessions with friends and teachers. Our small group sizes ensure every child gets the attention they need to speak up confidently."
+        },
+        {
+          "title": "Fun Learning Activities",
+          "desc": "Quizzes, games, and storytelling adventures. Learning vocabulary and grammar happens naturally while completing exciting missions."
+        },
+        {
+          "title": "Cheerful Support",
+          "desc": "Friendly teachers who help you every step of the way. We focus on building self-esteem alongside language skills."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "How do I enroll my child?",
+          "a": "Registration can be done directly via the 'Enroll Now' button on our website or by visiting the nearest branch for a free consultation."
+        },
+        {
+          "q": "What teaching method is used?",
+          "a": "We use the 'Interactive Narrative' method where children learn through stories involving Folks characters in an active two-way environment."
+        },
+        {
+          "q": "Is there a placement test before joining?",
+          "a": "Yes, we provide a fun trial session and short assessment to ensure children are placed in a class that suits their abilities."
+        },
+        {
+          "q": "What is the maximum number of students in a class?",
+          "a": "To maintain interaction quality, each class is limited to a maximum of 8-10 students."
+        }
+      ]
+    },
+    "smp": {
+      "levelLabel": "MIDDLE SCHOOL (SMP)",
+      "heroTitle": "Academic English for SMP Students",
+      "heroSubtitle": "Bridge the gap to academic excellence. Master communication, grammar, and critical thinking with our comprehensive English program designed specifically for middle schoolers.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "Interactive Academic English",
+      "detailDesc": "Our methodology shifts the focus from basic literacy to advanced comprehension and expression, equipping SMP students with the linguistic tools they need for academic success.",
+      "detailImageCaption": "Learning is Fun",
+      "detailImageSub": "Immersive & Methodology",
+      "advantages": [
+        {
+          "title": "Communication",
+          "desc": "Develop fluent speaking and active listening skills essential for academic discussions."
+        },
+        {
+          "title": "Grammar Mastery",
+          "desc": "Solidify structural understanding through practical application rather than rote memorization."
+        },
+        {
+          "title": "Critical Thinking",
+          "desc": "Analyze texts and formulate reasoned arguments, preparing for high school rigor."
+        },
+        {
+          "title": "Measurable Results",
+          "desc": "Regular assessments and progress tracking to ensure consistent academic growth."
+        }
+      ],
+      "ctaLabel": "Ready to start?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Live Online Classes",
+          "desc": "Join dynamic, real-time video sessions where students actively collaborate. Participate in lively group discussions, debates, and breakout rooms that mirror the energy of a physical classroom."
+        },
+        {
+          "title": "Interactive Activities",
+          "desc": "Learning doesn't stop at lectures. Engage with digital quizzes, collaborative online games, and interactive exercises designed specifically to keep teenagers focused and motivated while mastering English."
+        },
+        {
+          "title": "Progress & Feedback",
+          "desc": "Stay on track with our intuitive digital dashboard that monitors performance. Receive direct, personalized guidance from experienced teachers to target areas for improvement and celebrate academic wins."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "How do I enroll my child?",
+          "a": "Registration can be done directly via the 'Enroll Now' button on our website or by visiting the nearest branch for a free consultation."
+        },
+        {
+          "q": "What teaching method is used?",
+          "a": "We use the 'Interactive Narrative' method where children learn through stories involving Folks characters in an active two-way environment."
+        },
+        {
+          "q": "Is there a placement test before joining?",
+          "a": "Yes, we provide a fun trial session and short assessment to ensure children are placed in a class that suits their abilities."
+        },
+        {
+          "q": "What is the maximum number of students in a class?",
+          "a": "To maintain interaction quality, each class is limited to a maximum of 8-10 students."
+        }
+      ]
+    },
+    "sma": {
+      "levelLabel": "HIGH SCHOOL (SMA)",
+      "heroTitle": "Advanced English for SMA Students",
+      "heroSubtitle": "Prepare for university, international exams, and global opportunities. Our advanced English program builds the skills you need to stand out.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "University-Ready English",
+      "detailDesc": "Our SMA program focuses on advanced academic writing, critical analysis, and presentation skills — everything needed to excel in national exams, scholarship applications, and international settings.",
+      "detailImageCaption": "Learning is Fun",
+      "detailImageSub": "Academic & Career-Ready",
+      "advantages": [
+        {
+          "title": "Academic Writing",
+          "desc": "Master essay structures, argumentative writing, and research paper techniques for university entrance."
+        },
+        {
+          "title": "Public Speaking",
+          "desc": "Build confidence to present ideas clearly in English, from class presentations to debate competitions."
+        },
+        {
+          "title": "Global Readiness",
+          "desc": "Prepare for IELTS, TOEFL, and international scholarships with targeted test-preparation modules."
+        },
+        {
+          "title": "Critical Analysis",
+          "desc": "Develop higher-order thinking to evaluate, synthesize, and articulate complex ideas in English."
+        }
+      ],
+      "ctaLabel": "Ready to start?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Live Online Classes",
+          "desc": "Intensive live sessions focused on discussion, debate, and collaborative problem-solving. Real academic scenarios prepare you for university-level discourse."
+        },
+        {
+          "title": "Exam Preparation",
+          "desc": "Structured modules for IELTS, TOEFL, and SNBT. Practice under exam conditions with timed drills and detailed feedback from expert instructors."
+        },
+        {
+          "title": "Achievement Tracking",
+          "desc": "Detailed progress reports every month, personalized study plans, and 1-on-1 coaching sessions to ensure you hit your target scores and goals."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "How do I enroll my child?",
+          "a": "Registration can be done directly via the 'Enroll Now' button on our website or by visiting the nearest branch for a free consultation."
+        },
+        {
+          "q": "What teaching method is used?",
+          "a": "We use the 'Interactive Narrative' method where children learn through stories involving Folks characters in an active two-way environment."
+        },
+        {
+          "q": "Is there a placement test before joining?",
+          "a": "Yes, we provide a fun trial session and short assessment to ensure children are placed in a class that suits their abilities."
+        },
+        {
+          "q": "What is the maximum number of students in a class?",
+          "a": "To maintain interaction quality, each class is limited to a maximum of 8-10 students."
+        }
+      ]
+    },
+    "conversation": {
+      "levelLabel": "CONVERSATION",
+      "heroTitle": "Master Spoken English with Confidence",
+      "heroSubtitle": "Speak naturally, fluently, and confidently in any situation. From casual small talk to deep philosophical discussions, express yourself without hesitation.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "Fluent, Dynamic & Expressive",
+      "detailDesc": "Our Conversation program focuses on practical speaking skills, idioms, and cultural nuances. You will engage in storytelling, debates, and role-plays designed to mirror real-life interactions.",
+      "detailImageCaption": "Speak Up",
+      "detailImageSub": "Interactive Dialogue Sessions",
+      "advantages": [
+        {
+          "title": "Impromptu Speaking",
+          "desc": "Learn to think on your feet and articulate thoughts clearly without preparation."
+        },
+        {
+          "title": "Group Discussions",
+          "desc": "Participate in lively debates and roundtable discussions on popular topics."
+        },
+        {
+          "title": "Idioms & Slang",
+          "desc": "Master the informal expressions and vocabulary native speakers actually use."
+        },
+        {
+          "title": "Accent & Pronunciation",
+          "desc": "Refine your intonation and understand various global English accents."
+        }
+      ],
+      "ctaLabel": "Ready to speak?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Live Speaking Practice",
+          "desc": "Interactive sessions focusing 80% on student speaking time. Overcome the fear of making mistakes in a supportive environment."
+        },
+        {
+          "title": "Podcast & Film Analysis",
+          "desc": "Learn conversational context by analyzing popular media, improving both listening comprehension and conversational responses."
+        },
+        {
+          "title": "CEFR Aligned Progress",
+          "desc": "Structured progression from CEFR B1 (Intermediate) up to C2 (Mastery), ensuring your fluency constantly evolves."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "Is this program suitable for beginners?",
+          "a": "This program is recommended for participants who already have a basic understanding of English (minimum A2/B1 level) and want to focus on speaking fluency."
+        },
+        {
+          "q": "How many students are in a Conversation class?",
+          "a": "To maximize speaking time for each participant, classes are limited to a maximum of 6-8 people."
+        },
+        {
+          "q": "Is grammar taught too?",
+          "a": "Grammar is taught contextually through direct feedback while practicing speaking, rather than through written theory."
+        },
+        {
+          "q": "How do I know my current speaking level?",
+          "a": "We will conduct a short speaking assessment at the beginning to place you in the most appropriate class."
+        }
+      ]
+    },
+    "esp": {
+      "levelLabel": "ENGLISH FOR SPECIFIC PURPOSES (ESP)",
+      "heroTitle": "English Tailored for Your Industry",
+      "heroSubtitle": "Accelerate your career with industry-specific English. Whether you are in IT, Medical, Legal, or Hospitality, master the exact vocabulary you need.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "Industry-Focused Language Mastery",
+      "detailDesc": "General English is often not enough in professional specialized fields. Our ESP program provides targeted language training based on your specific occupational needs and jargon.",
+      "detailImageCaption": "Career Booster",
+      "detailImageSub": "Specialized Vocabulary",
+      "advantages": [
+        {
+          "title": "Industry Jargon",
+          "desc": "Learn the exact terminologies and phrasing used by professionals in your specific field."
+        },
+        {
+          "title": "Case Studies",
+          "desc": "Analyze real-world scenarios, documents, and reports relevant to your profession."
+        },
+        {
+          "title": "Role-Play Scenarios",
+          "desc": "Simulate workplace situations like patient consultations, client meetings, or technical support."
+        },
+        {
+          "title": "Professional Standards",
+          "desc": "Communicate with international clients and colleagues adhering to global professional standards."
+        }
+      ],
+      "ctaLabel": "Boost your career?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Customized Curriculum",
+          "desc": "Materials are carefully selected and tailored to your specific industry, whether it is Aviation, Engineering, Medicine, or Hospitality."
+        },
+        {
+          "title": "Professional Documentation",
+          "desc": "Learn to write precise and accurate reports, emails, and technical documentation required in your line of work."
+        },
+        {
+          "title": "Career Advancement",
+          "desc": "Equip yourself with the linguistic competence to seek promotions or international opportunities in your specialized field."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "What industries are available?",
+          "a": "We cater to various fields including IT, Medical, Legal, Hospitality, Aviation, and Engineering. You can consult for other specific needs."
+        },
+        {
+          "q": "Is this a private or group class?",
+          "a": "We offer private classes as well as in-house training for companies (small groups from the same industry)."
+        },
+        {
+          "q": "How long is the ESP program?",
+          "a": "The duration is highly flexible depending on your goals and the complexity of the material, typically ranging from 3 to 6 months."
+        },
+        {
+          "q": "Who are the instructors?",
+          "a": "The instructors are professional English teachers with understanding or background in the relevant industry."
+        }
+      ]
+    },
+    "professional-business": {
+      "levelLabel": "PROFESSIONAL BUSINESS",
+      "heroTitle": "Executive English & Corporate Communication",
+      "heroSubtitle": "Communicate with authority. Master business negotiations, leadership phrasing, and executive presentations for the global corporate stage.",
+      "heroCtaEnroll": "Enroll Now",
+      "detailTitle": "Strategic Business Communication",
+      "detailDesc": "Designed for corporate leaders and professionals. This program goes beyond basic business English, focusing on diplomacy, strategic negotiations, and executive boardroom presence.",
+      "detailImageCaption": "Executive Level",
+      "detailImageSub": "Leadership & Diplomacy",
+      "advantages": [
+        {
+          "title": "Business Negotiations",
+          "desc": "Master the language of persuasion, compromise, and commercial diplomacy."
+        },
+        {
+          "title": "Leadership Phrasing",
+          "desc": "Learn how to direct teams, resolve conflicts, and deliver feedback effectively."
+        },
+        {
+          "title": "Executive Pitching",
+          "desc": "Deliver compelling presentations and pitches to investors or global stakeholders."
+        },
+        {
+          "title": "Cross-Cultural Comm",
+          "desc": "Navigate international business etiquette and cultural nuances with ease."
+        }
+      ],
+      "ctaLabel": "Improve business performance?",
+      "ctaTitle": "Free Consultation",
+      "ctaButton": "Contact Us",
+      "features": [
+        {
+          "title": "Boardroom Simulations",
+          "desc": "Practice high-stakes meetings, crisis management, and strategic planning sessions in a simulated corporate environment."
+        },
+        {
+          "title": "Executive Summaries",
+          "desc": "Enhance your ability to write concise, impactful executive summaries, proposals, and official corporate correspondence."
+        },
+        {
+          "title": "C-Level Proficiency",
+          "desc": "Reach CEFR C1/C2 levels of proficiency, ensuring your language skills match your professional expertise and ambition."
+        }
+      ],
+      "faqItems": [
+        {
+          "q": "Is this program suitable for fresh graduates?",
+          "a": "This program is more aimed at mid-level professionals to executives who already have work experience and want to elevate their business communication level."
+        },
+        {
+          "q": "Is it available for corporate training?",
+          "a": "Absolutely. We provide B2B Corporate Training packages tailored to your company's strategic goals."
+        },
+        {
+          "q": "How does the material differ from ESP?",
+          "a": "ESP focuses on technical vocabulary for a specific industry (e.g., medical/IT), while Professional Business focuses on managerial communication, negotiation, and cross-industry leadership skills."
+        },
+        {
+          "q": "Is the schedule flexible?",
+          "a": "Yes, we understand the busy lives of professionals, so schedules can be adjusted to your availability."
+        }
+      ]
+    }
+  }
+}
