@@ -17,7 +17,7 @@ import sma1 from '../../../assets/Program/sma/sma1.png'
 import sma2 from '../../../assets/Program/sma/sma2.png'
 import sma3 from '../../../assets/Program/sma/sma3.png'
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = `${import.meta.env.VITE_API_URL}/api`
 
 const TABS = ['General', 'Conversation', 'ESP', 'Professional Business']
 const LEVELS = ['SD', 'SMP', 'SMA', 'Profesional']

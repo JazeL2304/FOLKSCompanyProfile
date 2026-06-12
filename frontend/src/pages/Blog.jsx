@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
 import { useLanguage } from '../context/LanguageContext'
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = `${import.meta.env.VITE_API_URL}/api`
 
 const categories = [
   'All Stories',

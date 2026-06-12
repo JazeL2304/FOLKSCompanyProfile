@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = `${import.meta.env.VITE_API_URL}/api`
 const getToken = () => sessionStorage.getItem('admin_token')
 
 // Supabase client untuk upload Storage langsung dari frontend
