@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { useLanguage } from '../../../context/LanguageContext'
 
 // Import foto SD
-import sd1 from '../../../assets/Program/sd/sd1.png'
-import sd2 from '../../../assets/Program/sd/sd2.png'
-import sd3 from '../../../assets/Program/sd/sd3.png'
+import sd1 from '../../../assets/Program/sd/sd1.webp'
+import sd2 from '../../../assets/Program/sd/sd2.webp'
+import sd3 from '../../../assets/Program/sd/sd3.webp'
 
 // Import foto SMP
-import smp1 from '../../../assets/Program/smp/smp1.png'
-import smp2 from '../../../assets/Program/smp/smp2.png'
-import smp3 from '../../../assets/Program/smp/smp3.png'
+import smp1 from '../../../assets/Program/smp/smp1.webp'
+import smp2 from '../../../assets/Program/smp/smp2.webp'
+import smp3 from '../../../assets/Program/smp/smp3.webp'
 
 // Import foto SMA
-import sma1 from '../../../assets/Program/sma/sma1.png'
-import sma2 from '../../../assets/Program/sma/sma2.png'
-import sma3 from '../../../assets/Program/sma/sma3.png'
+import sma1 from '../../../assets/Program/sma/sma1.webp'
+import sma2 from '../../../assets/Program/sma/sma2.webp'
+import sma3 from '../../../assets/Program/sma/sma3.webp'
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api`
 

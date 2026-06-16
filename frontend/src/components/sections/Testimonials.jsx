@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import imgAndi from '../../assets/Andi.jpg'
-import imgSalsa from '../../assets/Salsa.jpg'
-import imgMaria from '../../assets/Maria.jpg'
+import imgAndi from '../../assets/Andi.webp'
+import imgSalsa from '../../assets/Salsa.webp'
+import imgMaria from '../../assets/Maria.webp'
 import { ChevronRight, ChevronLeft } from 'lucide-react'
 import { useLanguage } from '../../context/LanguageContext'
 
@@ -74,7 +74,7 @@ const Testimonials = () => {
 
         .testimonials__title {
           text-align: center;
-          color: white;
+          color: #451a17;
           font-weight: 900;
           font-size: clamp(1.6rem, 3.5vw, 2.4rem);
           letter-spacing: 1px;
@@ -154,20 +154,20 @@ const Testimonials = () => {
 
         .testimonials__role {
           font-size: 11px;
-          color: var(--text-muted);
+          color: #475569;
           margin-bottom: 4px;
         }
 
         .testimonials__rating {
           font-weight: 800;
           font-size: 13px;
-          color: var(--accent);
+          color: #c23a2b;
           margin-bottom: 10px;
         }
 
         .testimonials__text {
           font-size: 12px;
-          color: var(--text-muted);
+          color: #334155;
           line-height: 1.7;
         }
 
@@ -317,17 +317,18 @@ const Testimonials = () => {
           </div>
 
           <div className="testimonials__controls">
-            <button className="testimonials__arrow" onClick={() => slide('prev')}>
+            <button className="testimonials__arrow" aria-label="Testimoni sebelumnya" onClick={() => slide('prev')}>
               <ChevronLeft size={18} />
             </button>
             <div className="testimonials__dots">
               {testimonialsData.map((_, i) => (
                 <button key={i}
+                  aria-label={`Pilih testimoni ${i + 1}`}
                   className={`testimonials__dot ${i === startIndex ? 'testimonials__dot--active' : ''}`}
                   onClick={() => slide(i > startIndex ? 'next' : 'prev')} />
               ))}
             </div>
-            <button className="testimonials__arrow" onClick={() => slide('next')}>
+            <button className="testimonials__arrow" aria-label="Testimoni selanjutnya" onClick={() => slide('next')}>
               <ChevronRight size={18} />
             </button>
           </div>

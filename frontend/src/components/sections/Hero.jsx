@@ -1,8 +1,8 @@
-import backgroundHero from '../../assets/background-hero.png'
-import heroStudent from '../../assets/hero-student.png'
-import iconStar from '../../assets/icon-star.png'
+import backgroundHero from '../../assets/background-hero.webp'
+import heroStudent from '../../assets/hero-student.webp'
+import iconStar from '../../assets/icon-star.webp'
 import iconBook from '../../assets/icon-book.png'
-import iconMic from '../../assets/icon-mic.png'
+import iconMic from '../../assets/icon-mic.webp'
 import iconCap from '../../assets/icon-cap.png'
 import { useLanguage } from '../../context/LanguageContext'
 

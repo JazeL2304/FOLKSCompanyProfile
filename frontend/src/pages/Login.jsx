@@ -410,7 +410,7 @@ const Login = () => {
         {/* Left Panel */}
         <div className="auth-left">
           <div className="auth-logo">
-            <img src="/src/assets/FOLKS Institute Logo No Background.png" alt="FOLKS Institute" />
+            <img src="/src/assets/FOLKS Institute Logo No Background.webp" alt="FOLKS Institute" />
           </div>
 
           <div className="auth-form-wrapper">

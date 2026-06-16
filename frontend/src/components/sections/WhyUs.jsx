@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import iconLightbulb from '../../assets/Lightbulb.png'
-import iconMagnifier from '../../assets/Magnifier.png'
-import iconShield from '../../assets/Shield.png'
+import iconLightbulb from '../../assets/Lightbulb.webp'
+import iconMagnifier from '../../assets/Magnifier.webp'
+import iconShield from '../../assets/Shield.webp'
 import { useLanguage } from '../../context/LanguageContext'
 
 const featuresData = [

@@ -65,7 +65,7 @@ a {
 ================================ */
 .btn-primary {
   background: var(--accent);
-  color: white;
+  color: #3f1d19;
   padding: 12px 28px;
   border-radius: 50px;
   font-weight: 700;

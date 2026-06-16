@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import folksLogo from '../assets/FOLKS Institute Logo No Background.png'
+import folksLogo from '../assets/FOLKS Institute Logo No Background.webp'
 
 export default function AdminLogin() {
   const [formData, setFormData] = useState({ email: '', password: '' })

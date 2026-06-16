@@ -1,4 +1,4 @@
-import logo from '../assets/FOLKS Institute Logo Word Only No Background.png'
+import logo from '../assets/FOLKS Institute Logo Word Only No Background.webp'
 import worldpic from '../assets/worldpicture.png'
 import { Mail, Phone, MapPin, Instagram, Linkedin, Facebook, MessageCircle } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
@@ -47,7 +47,7 @@ const Footer = () => {
 
         .footer__address {
           font-size: 13px;
-          color: var(--text-muted);
+          color: #475569;
           line-height: 1.8;
           margin-bottom: 24px;
         }
@@ -224,7 +224,7 @@ const Footer = () => {
 
           {/* CENTER - Navigasi */}
           <div className="footer__nav">
-            <h4 className="footer__heading">{t.footer.nav_heading}</h4>
+            <h3 className="footer__heading">{t.footer.nav_heading}</h3>
             <ul className="footer__links">
               <li><a href="/">{t.nav.home}</a></li>
               <li><a href="/tentang">{t.nav.about}</a></li>
@@ -235,7 +235,7 @@ const Footer = () => {
 
           {/* RIGHT - Hubungi Kami */}
           <div className="footer__contact">
-            <h4 className="footer__heading">{t.footer.contact_heading}</h4>
+            <h3 className="footer__heading">{t.footer.contact_heading}</h3>
             <ul className="footer__contact-list">
               <li>
                 <span className="footer__contact-icon"><Mail size={16} /></span>

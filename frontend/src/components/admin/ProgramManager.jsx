@@ -28,6 +28,11 @@ export default function ProgramManager() {
   const [deleteId, setDeleteId] = useState(null)
   const [formData, setFormData] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
+  const [alertModal, setAlertModal] = useState({ show: false, title: '', message: '', type: 'info' })
+
+  const showAlert = (title, message, type = 'info') => {
+    setAlertModal({ show: true, title, message, type })
+  }
 
   const fetchPrograms = async () => {
     try {
@@ -64,9 +69,9 @@ export default function ProgramManager() {
   }
 
   const handleSave = async () => {
-    if (!formData.title.trim()) return alert('Nama program wajib diisi')
-    if (!formData.level) return alert('Level wajib dipilih')
-    if (!formData.category) return alert('Kategori wajib dipilih')
+    if (!formData.title.trim()) return showAlert('Peringatan', 'Nama program wajib diisi', 'warning')
+    if (!formData.level) return showAlert('Peringatan', 'Level wajib dipilih', 'warning')
+    if (!formData.category) return showAlert('Peringatan', 'Kategori wajib dipilih', 'warning')
     setSaving(true)
 
     let featuresArr = []
@@ -108,8 +113,9 @@ export default function ProgramManager() {
       }
       await fetchPrograms()
       setModal(null)
+      showAlert('Berhasil!', modal === 'create' ? 'Program berhasil ditambahkan.' : 'Perubahan berhasil disimpan.', 'success')
     } catch (err) {
-      alert('Gagal menyimpan: ' + err.message)
+      showAlert('Error', 'Gagal menyimpan: ' + err.message, 'error')
     } finally {
       setSaving(false)
     }
@@ -123,8 +129,9 @@ export default function ProgramManager() {
         body: JSON.stringify({ ...prog, active: !prog.active })
       })
       await fetchPrograms()
+      showAlert('Berhasil!', 'Status program berhasil diperbarui.', 'success')
     } catch (err) {
-      alert('Gagal update status')
+      showAlert('Error', 'Gagal update status', 'error')
     }
   }
 
@@ -142,8 +149,9 @@ export default function ProgramManager() {
       })
       await fetchPrograms()
       setModal(null)
+      showAlert('Berhasil!', 'Program berhasil dihapus.', 'success')
     } catch (err) {
-      alert('Gagal menghapus program')
+      showAlert('Error', 'Gagal menghapus program', 'error')
     } finally {
       setSaving(false)
     }
@@ -383,6 +391,36 @@ export default function ProgramManager() {
                 {saving ? 'Menghapus...' : 'Ya, Hapus'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Alert (Success/Warning/Error) */}
+      {alertModal.show && (
+        <div className="modal-overlay" onClick={() => setAlertModal({ ...alertModal, show: false })} style={{ zIndex: 9999 }}>
+          <div className="modal-box" style={{ maxWidth: 400, textAlign: 'center', padding: '32px 24px' }}>
+            {alertModal.type === 'success' && (
+              <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#dcfce7', color: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+            )}
+            {alertModal.type === 'warning' && (
+              <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#fef3c7', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              </div>
+            )}
+            {alertModal.type === 'error' && (
+              <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#fee2e2', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </div>
+            )}
+            <h3 style={{ fontSize: 20, color: 'var(--text-main)', marginBottom: 8 }}>{alertModal.title}</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: 14, marginBottom: 24, lineHeight: 1.5 }}>
+              {alertModal.message}
+            </p>
+            <button className="btn btn-accent" onClick={() => setAlertModal({ ...alertModal, show: false })} style={{ width: '100%', justifyContent: 'center' }}>
+              Tutup
+            </button>
           </div>
         </div>
       )}

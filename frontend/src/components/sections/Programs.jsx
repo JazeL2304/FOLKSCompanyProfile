@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import sd1 from '../../assets/Program/sd/sd1.png'
-import smp1 from '../../assets/Program/smp/smp1.png'
-import sma1 from '../../assets/Program/sma/sma1.png'
-import bgProgram from '../../assets/background-program.png'
+import sd1 from '../../assets/Program/sd/sd1.webp'
+import smp1 from '../../assets/Program/smp/smp1.webp'
+import sma1 from '../../assets/Program/sma/sma1.webp'
+import bgProgram from '../../assets/background-program.webp'
 
 import { BookOpen, GraduationCap, Award } from 'lucide-react'
 import { useLanguage } from '../../context/LanguageContext'
@@ -250,7 +250,7 @@ const Programs = () => {
 
         .programs__cta-btn {
           background: var(--accent);
-          color: white;
+          color: #3f1d19;
           border: none;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-weight: 700;

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import valuePage from '../../assets/ValuePage.png'
+import valuePage from '../../assets/ValuePage.webp'
 
 const ValueStats = () => {
   const sectionRef = useRef(null)

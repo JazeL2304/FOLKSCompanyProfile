@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { Globe } from 'lucide-react'
-import logo from '../assets/FOLKS Institute Logo No Background.png'
+import logo from '../assets/FOLKS Institute Logo No Background.webp'
 
 const Navbar = () => {
   const { lang, toggleLang, t } = useLanguage()
