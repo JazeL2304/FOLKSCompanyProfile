@@ -74,7 +74,7 @@ const Testimonials = () => {
 
         .testimonials__title {
           text-align: center;
-          color: #451a17;
+          color: white;
           font-weight: 900;
           font-size: clamp(1.6rem, 3.5vw, 2.4rem);
           letter-spacing: 1px;

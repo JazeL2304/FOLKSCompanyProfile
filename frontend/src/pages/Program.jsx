@@ -15,11 +15,9 @@ const Program = () => {
         @keyframes pageFadeIn {
           0% {
             opacity: 0;
-            transform: translateY(15px) scale(0.99);
           }
           100% {
             opacity: 1;
-            transform: translateY(0) scale(1);
           }
         }
 
@@ -27,7 +25,6 @@ const Program = () => {
           width: 100%;
           min-height: 100vh;
           animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          will-change: transform, opacity;
         }
       `}</style>
       <div className="program-page">

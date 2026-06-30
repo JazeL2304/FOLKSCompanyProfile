@@ -227,6 +227,11 @@ export default function RegistrationManager() {
   const [form, setForm] = useState(emptyForm)
   const [deleteTarget, setDeleteTarget] = useState(null)
   const [saving, setSaving] = useState(false)
+  const [alertModal, setAlertModal] = useState({ show: false, title: '', message: '', type: 'info' })
+
+  const showAlert = (title, message, type = 'info') => {
+    setAlertModal({ show: true, title, message, type })
+  }
 
   // ── Fetch Data ───────────────────────────────────────────
   const fetchRegistrations = async () => {
@@ -287,13 +292,14 @@ export default function RegistrationManager() {
         body: JSON.stringify({ status: 'confirmed' }),
       })
       await fetchRegistrations()
+      showAlert('Berhasil!', 'Pendaftaran berhasil dikonfirmasi.', 'success')
       window.open(
         `https://api.whatsapp.com/send?phone=${reg.phone.replace(/^0/, '62')}&text=${buildWAMessage(reg, 'confirmed')}`,
         '_blank'
       )
       setModal(null)
     } catch (err) {
-      alert('Gagal konfirmasi pendaftaran')
+      showAlert('Gagal!', 'Gagal konfirmasi pendaftaran', 'error')
     }
   }
 
@@ -308,6 +314,7 @@ export default function RegistrationManager() {
         body: JSON.stringify({ status: 'rejected', notes: rejectNote }),
       })
       await fetchRegistrations()
+      showAlert('Berhasil!', 'Pendaftaran berhasil ditolak.', 'success')
       window.open(
         `https://wa.me/${selectedReg.phone.replace(/^0/, '62')}?text=${buildWAMessage(selectedReg, 'rejected')}`,
         '_blank'
@@ -315,12 +322,15 @@ export default function RegistrationManager() {
       setModal(null)
       setRejectNote('')
     } catch (err) {
-      alert('Gagal menolak pendaftaran')
+      showAlert('Gagal!', 'Gagal menolak pendaftaran', 'error')
     }
   }
 
   const handleAddSubmit = async () => {
-    if (!form.student_name || !form.phone) return
+    if (!form.student_name || !form.phone) {
+      showAlert('Validasi', 'Nama dan No WhatsApp wajib diisi.', 'warning')
+      return
+    }
     setSaving(true)
     try {
       const res = await fetch(`${API_URL}/registrations`, {
@@ -341,10 +351,11 @@ export default function RegistrationManager() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || 'Gagal menyimpan')
       await fetchRegistrations()
+      showAlert('Berhasil!', 'Pendaftar berhasil ditambahkan.', 'success')
       setForm(emptyForm)
       setModal(null)
     } catch (err) {
-      alert('Gagal menyimpan: ' + err.message)
+      showAlert('Gagal!', 'Gagal menyimpan: ' + err.message, 'error')
     } finally {
       setSaving(false)
     }
@@ -357,9 +368,10 @@ export default function RegistrationManager() {
         headers: { Authorization: `Bearer ${getToken()}` },
       })
       await fetchRegistrations()
+      showAlert('Berhasil!', 'Pendaftar berhasil dihapus.', 'success')
       setDeleteTarget(null)
     } catch (err) {
-      alert('Gagal menghapus pendaftar')
+      showAlert('Gagal!', 'Gagal menghapus pendaftar', 'error')
     }
   }
 
@@ -836,6 +848,36 @@ export default function RegistrationManager() {
                 <IconTrash /> Hapus Sekarang
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ════ MODAL — Alert ════ */}
+      {alertModal.show && (
+        <div className="modal-overlay" onClick={() => setAlertModal({ ...alertModal, show: false })} style={{ zIndex: 9999 }}>
+          <div className="modal-box" style={{ maxWidth: 360, textAlign: 'center', padding: '32px 24px' }}>
+            {alertModal.type === 'success' && (
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <IconCheck />
+              </div>
+            )}
+            {alertModal.type === 'warning' && (
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+              </div>
+            )}
+            {alertModal.type === 'error' && (
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <IconX />
+              </div>
+            )}
+            <h3 style={{ fontSize: 20, color: 'var(--text-main)', marginBottom: 8 }}>{alertModal.title}</h3>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 24, lineHeight: 1.6 }}>
+              {alertModal.message}
+            </p>
+            <button className="btn btn-accent" onClick={() => setAlertModal({ ...alertModal, show: false })} style={{ width: '100%', justifyContent: 'center' }}>
+              Tutup
+            </button>
           </div>
         </div>
       )}

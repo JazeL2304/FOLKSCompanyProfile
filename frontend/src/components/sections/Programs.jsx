@@ -250,7 +250,7 @@ const Programs = () => {
 
         .programs__cta-btn {
           background: var(--accent);
-          color: #3f1d19;
+          color: var(--white);
           border: none;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-weight: 700;
@@ -259,13 +259,13 @@ const Programs = () => {
           border-radius: 50px;
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 6px 20px rgba(231, 99, 30, 0.35);
+          box-shadow: 0 6px 20px rgba(239, 109, 96, 0.35);
         }
 
         .programs__cta-btn:hover {
-          background: #d45a15;
+          background: var(--accent-hover);
           transform: translateY(-2px);
-          box-shadow: 0 10px 28px rgba(231, 99, 30, 0.45);
+          box-shadow: 0 10px 28px rgba(239, 109, 96, 0.45);
         }
 
         /* Scroll animations */

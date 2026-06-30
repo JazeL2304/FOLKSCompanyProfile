@@ -1640,9 +1640,16 @@ export default function Admin() {
 
         {/* SIDEBAR */}
         <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
-          <div className="sidebar-logo">
+          <a 
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            className="sidebar-logo"
+            style={{ cursor: 'pointer', textDecoration: 'none' }}
+            title="Lihat Website"
+          >
             <img src={folksLogo} alt="FOLKS Institute" className="sidebar-logo-img" />
-          </div>
+          </a>
 
           <nav className="sidebar-nav">
             {NAV.map(section => (
