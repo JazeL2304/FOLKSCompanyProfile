@@ -24,6 +24,12 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
     const { title, slug, content, cover_image, author, category, status, featured, excerpt } = req.body
+    
+    // Pastikan hanya 1 artikel yang featured
+    if (featured) {
+        await supabase.from('blog_posts').update({ featured: false }).eq('featured', true)
+    }
+
     const { data, error } = await supabase
         .from('blog_posts')
         .insert([{
@@ -47,6 +53,12 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     const { id } = req.params
     const { title, slug, content, cover_image, author, category, status, featured, excerpt } = req.body
+    
+    // Pastikan hanya 1 artikel yang featured
+    if (featured) {
+        await supabase.from('blog_posts').update({ featured: false }).eq('featured', true).neq('id', id)
+    }
+
     const { data, error } = await supabase
         .from('blog_posts')
         .update({

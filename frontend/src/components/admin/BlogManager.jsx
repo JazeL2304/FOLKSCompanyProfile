@@ -195,6 +195,21 @@ export default function BlogManager() {
     }
 
     try {
+      // Jika set featured: true, matikan yang lain dulu (karena backend Railway tidak otomatis)
+      if (payload.featured) {
+        const others = articles.filter(a => a.featured && a.id !== editId)
+        await Promise.all(others.map(a => 
+          fetch(`${API_URL}/blogs/${a.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${getToken()}`
+            },
+            body: JSON.stringify({ ...a, featured: false })
+          })
+        ))
+      }
+
       if (modal === 'create') {
         const res = await fetch(`${API_URL}/blogs`, {
           method: 'POST',
@@ -264,16 +279,29 @@ export default function BlogManager() {
 
   const toggleFeatured = async (article) => {
     try {
-      await Promise.all(articles.map(a =>
-        fetch(`${API_URL}/blogs/${a.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getToken()}`
-          },
-          body: JSON.stringify({ ...a, featured: a.id === article.id ? !article.featured : false })
-        })
-      ))
+      // Jika akan dinyalakan, matikan yang lain dulu
+      if (!article.featured) {
+        const others = articles.filter(a => a.featured && a.id !== article.id)
+        await Promise.all(others.map(a => 
+          fetch(`${API_URL}/blogs/${a.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${getToken()}`
+            },
+            body: JSON.stringify({ ...a, featured: false })
+          })
+        ))
+      }
+
+      await fetch(`${API_URL}/blogs/${article.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({ ...article, featured: !article.featured })
+      })
       await fetchArticles()
       showAlert('Berhasil!', 'Status featured berhasil diupdate.', 'success')
     } catch (err) {

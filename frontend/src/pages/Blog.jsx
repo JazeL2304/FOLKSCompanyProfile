@@ -64,11 +64,10 @@ const Blog = () => {
   const publishedPosts = posts.filter(p => p.status === 'published')
   const featuredPost = publishedPosts.find(p => p.featured) || publishedPosts[0] || null
 
-  const filtered = activeCategory === 'All Stories'
+  const filtered = (activeCategory === 'All Stories'
     ? publishedPosts
-    : publishedPosts.filter(p =>
-      p.category?.toLowerCase() === activeCategory.toLowerCase()
-    )
+    : publishedPosts.filter(p => p.category?.toLowerCase() === activeCategory.toLowerCase())
+  ).filter(p => p.id !== featuredPost?.id)
 
   const dynamicCategories = ['All Stories', ...Array.from(
     new Set(publishedPosts.map(p => p.category).filter(Boolean))
@@ -87,11 +86,11 @@ const Blog = () => {
         /* ---- Hero Featured ---- */
         .blog-hero {
           position: relative;
-          height: 420px;
+          min-height: 480px;
           background: linear-gradient(160deg, #0f2535 0%, #1a3d52 50%, #2d6a80 100%);
           display: flex;
-          align-items: flex-end;
-          padding: 48px 5%;
+          align-items: center;
+          padding: 80px 5% 60px;
           cursor: pointer;
           overflow: hidden;
           border-radius: 0 0 24px 24px;
